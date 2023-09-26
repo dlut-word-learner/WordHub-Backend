@@ -14,8 +14,8 @@ import org.hibernate.validator.constraints.Length;
 @Getter
 @ToString
 public class UserLoginVo {
-    @NotBlank(message = "用户名不能为空")
-    @Length(min = 3, max = 20, message = "{UserLoginVo.username}")
+    @NotBlank(message = "{UserLoginVo.username}")
+    @Length(min = 3, max = 20, message = "{UserLoginVo.username_should_not_be_too_long_or_too_short}")
     String username;
     @NotBlank(message = "{UserLoginVo.password}")
     String password;
