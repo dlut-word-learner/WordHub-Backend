@@ -1,0 +1,24 @@
+# port
+server:
+  port: 25564
+sa-token:
+  ############## Sa-Token config (doc: https://sa-token.cc) ##############
+  # token name(cookie name)
+  token-name: satoken
+  # token Validity period(seconds) Default: 30 days. -1 for permanent
+  timeout: 2592000
+  # login in different devices at the same time
+  is-concurrent: true
+  # login the same account in different devices with shared token
+  is-share: true
+  token-style=: uuid
+  is-log: true
+  jwt-secret-key: ohyzwymzyyqzdcj
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+
+
