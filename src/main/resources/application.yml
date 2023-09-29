@@ -14,11 +14,15 @@ sa-token:
   token-style=: uuid
   is-log: true
   jwt-secret-key: ohyzwymzyyqzdcj
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
     username: root
     password: 123456
 
+mybatis:
+  mapper-locations: classpath:mappers/*.xml
+  type-aliases-package: com.demo.wordhub.Mappers
 
