@@ -1,5 +1,8 @@
 package com.demo.wordhub.Utils;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,15 +17,20 @@ import java.util.Arrays;
  * @version 1.0
  */
 public class FileUploadUtils {
-    private static boolean assertAllowed(String extension, String[] allowedExtension){
+    private static boolean extensionAllowed(String extension, String[] allowedExtension){
         return Arrays.asList(allowedExtension).contains(extension);
     }
     public static String upload(MultipartFile file, String pathName, String[] allowedExtension) throws IOException {
         String extension = StringUtils.getFilenameExtension(file.getOriginalFilename());
-        if(allowedExtension!=null&&!assertAllowed(extension,allowedExtension)){
+        if(allowedExtension!=null&&!extensionAllowed(extension,allowedExtension)){
             return null;
         }
-        File dest= new File(pathName+extension);
+        File dest= new File(pathName);
+        File fileParent = dest.getParentFile();
+        if(!fileParent.exists()){
+            fileParent.mkdirs();
+        }
+        dest.createNewFile();
         file.transferTo(dest);
         return dest.getAbsolutePath();
     }
