@@ -32,5 +32,5 @@ mybatis:
   type-aliases-package: com.demo.wordhub.Mappers
 
 urls:
-  base: "C:/Users/11131/Documents/WordHub/"
-  avatar: "${urls.base}/avatars"
+  base: ${user.home}/WordHub
+  avatar: ${urls.base}/avatars/
