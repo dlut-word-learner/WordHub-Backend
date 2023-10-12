@@ -14,9 +14,10 @@ import org.hibernate.validator.constraints.Length;
 @Getter
 @ToString
 public class UserLoginVo {
-    @NotBlank(message = "{UserLoginVo.username}")
-    @Length(min = 3, max = 20, message = "{UserLoginVo.username_should_not_be_too_long_or_too_short}")
+    @NotBlank(message = "{UserLoginVo.username_not_empty}")
+    @Length(min = 3, max = 20, message = "{UserLoginVo.username_len}")
     String username;
-    @NotBlank(message = "{UserLoginVo.password}")
+    @NotBlank(message = "{UserLoginVo.password_not_empty}")
+    @Length(min = 3, max = 20, message = "{UserLoginVo.password_len}")
     String password;
 }
