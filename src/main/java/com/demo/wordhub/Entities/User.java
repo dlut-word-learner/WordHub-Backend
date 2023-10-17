@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.io.File;
+
 /**
  * TODO
  *
@@ -20,4 +22,8 @@ public class User {
     private Long id;
     private String username;
     private String password;
+    private String email;
+    private String avatarPath;
+    private Long score;
+    private Short role;
 }
