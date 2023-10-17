@@ -3,6 +3,7 @@ package com.demo.wordhub.Vos;
 import jakarta.annotation.Generated;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 import lombok.Getter;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,10 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
  * @author OuOu
  * @version 1.0
  */
-@Getter
+@Data
 public class UserRegisterVo {
-
-    private Long id;
     @NotBlank(message = "{UserLoginVo.username_not_empty}")
     @Length(min = 3, max = 20, message = "{UserLoginVo.username_len}")
     private String username;

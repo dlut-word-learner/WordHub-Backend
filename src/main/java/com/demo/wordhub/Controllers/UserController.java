@@ -3,11 +3,13 @@ package com.demo.wordhub.Controllers;
 import com.demo.wordhub.Entities.User;
 import com.demo.wordhub.Services.UserService;
 import com.demo.wordhub.Vos.UserLoginVo;
+import com.demo.wordhub.Vos.UserRegisterVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -29,10 +31,17 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> register(@Validated @RequestBody UserLoginVo user){
-        log.info("Register"+user.toString());
-        userService.register(user);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<User> register(@Validated UserRegisterVo user){
+        log.info("Registering " +user.toString());
+        try{
+            User new_user = userService.register(user);
+            log.info("Register succeeded");
+            return ResponseEntity.ok(new_user);
+        }
+        catch (Exception e){
+            log.error("Register failed: " + e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
 //        if(Objects.equals(user.getUsername(), "abcd") && user.getPassword().equals("123456"))return ResponseEntity.ok().build();
 //        else return ResponseEntity.badRequest().body("账户或密码错误");
     }
@@ -43,7 +52,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable("id") int id){
+    public ResponseEntity<User> getUserById(@PathVariable("id") Long id){
         return ResponseEntity.ok(userService.getUserById(id));
     }
 }
