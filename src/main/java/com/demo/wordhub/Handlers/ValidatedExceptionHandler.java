@@ -1,14 +1,11 @@
 package com.demo.wordhub.Handlers;
 
-import com.demo.wordhub.Vos.ResponseVo;
-import jakarta.validation.ValidationException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -24,7 +21,7 @@ import java.util.List;
 @RestControllerAdvice
 public class ValidatedExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseVo exceptionHandler(MethodArgumentNotValidException exception){
+    public ResponseEntity<String> exceptionHandler(MethodArgumentNotValidException exception){
         BindingResult result = exception.getBindingResult();
         StringBuilder stringBuilder = new StringBuilder();
         if (result.hasErrors()) {
@@ -36,6 +33,6 @@ public class ValidatedExceptionHandler {
             });
         }
         else stringBuilder.append("未知错误");
-        return new ResponseVo(HttpStatus.BAD_REQUEST.value(),stringBuilder.toString());
+        return ResponseEntity.badRequest().body(stringBuilder.toString());
     }
 }
