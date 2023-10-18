@@ -13,8 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 @Data
 public class Card {
     private Long id;
-    private Long word_id;
-    private Long user_id;
+    private Long wordId;
+    private Long userId;
     private String content;
-    private boolean is_public;
+    private boolean isPublic;
 }
