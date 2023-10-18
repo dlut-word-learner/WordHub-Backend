@@ -35,4 +35,8 @@ public interface UserMapper {
     @Select("select * from user where user_id = #{id}")
     @ResultMap("UserMap")
     User getUserById(Long id);
+
+    @Delete("delete from user where user_id = #{id}")
+    @ResultMap("UserMap")
+    int deleteUser(User user);
 }
