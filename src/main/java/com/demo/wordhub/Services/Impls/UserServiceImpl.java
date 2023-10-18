@@ -23,13 +23,22 @@ import java.util.List;
 @Service
 @Slf4j
 public class UserServiceImpl implements UserService {
-    private final UserMapper usermapper;
+    private UserMapper usermapper;
 
     @Value("${urls.avatar}")
     private String avatarPath;
+
+
+    public UserServiceImpl() {}
+
     @Autowired
     public UserServiceImpl(UserMapper userMapper) {
         this.usermapper=userMapper;
+    }
+
+    @Autowired
+    public void setUserMapper(UserMapper u){
+        usermapper=u;
     }
 
     /**
