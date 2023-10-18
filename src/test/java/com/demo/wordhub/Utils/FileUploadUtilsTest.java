@@ -17,7 +17,7 @@ import java.io.IOException;
 
 // 不指定classes的话会引入整个SpringBoot上下文，拖慢速度。
 // 也可以直接不使用SpringBootTest，但这样就无法依赖注入ResourceLoader和avatarPath，需要手动读取资源文件并mock avatarPath配置类
-@SpringBootTest(classes = {FileUploadUtils.class})
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = {FileUploadUtils.class})
 class FileUploadUtilsTest {
     private final ResourceLoader resourceLoader;
 
