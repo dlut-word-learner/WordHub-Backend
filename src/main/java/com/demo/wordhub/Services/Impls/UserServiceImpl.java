@@ -32,9 +32,15 @@ public class UserServiceImpl implements UserService {
         this.usermapper=userMapper;
     }
 
+    /**
+     * TODO
+     *
+     * @param user
+     * @return
+     */
     @Override
     public boolean login(UserLoginVo user) {
-        return usermapper.login(user)!=null;
+        return true;
     }
 
     @Override
@@ -49,7 +55,7 @@ public class UserServiceImpl implements UserService {
             FileUploadUtils.upload(user.getAvatar(), u.getAvatarPath());
         }
 
-        Long id = usermapper.addUser(u);
+        int id = usermapper.addUser(u);
         log.info("User created, id: " + u.getId());
         return usermapper.getUserById(u.getId());
     }

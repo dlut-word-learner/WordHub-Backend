@@ -14,7 +14,8 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.List;
 
-@Service
+// 注解在实现类上
+// @Service
 public interface UserService {
     boolean login(UserLoginVo user);
 

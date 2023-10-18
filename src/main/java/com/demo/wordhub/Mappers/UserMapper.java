@@ -30,13 +30,9 @@ public interface UserMapper {
     @Insert("insert into user(user_name,user_password, user_email, user_avatar_path) values (#{username}, #{password}, #{email}, #{avatarPath})")
     // 使用自增长主键，并返回到成员id里
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    Long addUser(User user);
+    int addUser(User user);
 
     @Select("select * from user where user_id = #{id}")
     @ResultMap("UserMap")
     User getUserById(Long id);
-
-    @Select("select * from user where user_name=#{username} and user_password=#{password}")
-    @ResultMap("UserMap")
-    User login(UserLoginVo user);
 }
