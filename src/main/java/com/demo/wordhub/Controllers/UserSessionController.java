@@ -1,17 +1,14 @@
 package com.demo.wordhub.Controllers;
 
-import cn.dev33.satoken.util.SaResult;
-import com.demo.wordhub.Vos.ResponseVo;
+import com.demo.wordhub.Services.UserService;
 import com.demo.wordhub.Vos.UserLoginVo;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Objects;
 
 /**
  * TODO
@@ -24,11 +21,19 @@ import java.util.Objects;
 @Slf4j
 @Validated
 public class UserSessionController {
+    private final UserService userService;
+
+    @Autowired
+    public UserSessionController(UserService userService){
+        this.userService=userService;
+    }
     @PostMapping
-    public ResponseVo login(@Validated @RequestBody UserLoginVo user){
+    public ResponseEntity<Object> login(@Validated UserLoginVo user){
         log.info(user.toString());
-        if(Objects.equals(user.getUsername(), "abcd") && user.getPassword().equals("123456"))return new ResponseVo(HttpStatus.OK);
-        else return new ResponseVo(HttpStatus.BAD_REQUEST.value(),"账户或密码错误");
+        if(userService.login(user))return ResponseEntity.ok().build();
+        else return ResponseEntity.badRequest().body("账户或密码错误");
+//        if(Objects.equals(user.getUsername(), "abcd") && user.getPassword().equals("123456"))return ResponseEntity.ok().build();
+//        else return ResponseEntity.badRequest().body("账户或密码错误");
     }
 
 }
