@@ -6,7 +6,6 @@
  */
 package cn.dlut.conspirer.wordhub.Mappers;
 
-import cn.dlut.conspirer.wordhub.Entities.Dict;
 import cn.dlut.conspirer.wordhub.Entities.Word;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -15,20 +14,50 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
+/**
+ * Mapper related to words.
+ *
+ * @author OuOu2021
+ * @version 1.0
+ */
 @Mapper
 public interface WordMapper {
+    /**
+     * Add a word without its meanings(translations) to a dict.
+     *
+     * @param word to be added
+     * @return 1 if succeeded, 0 if failed
+     */
     @Insert("insert into word(word_name, dict_id) values(#{name}, #{dictId})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "word_id")
     int addWord(Word word);
 
+    /**
+     * Add a translation for a word.
+     *
+     * @param word to add translations
+     * @param trans translation to be added
+     * @return 1 if succeeded, 0 if failed
+     */
     @Insert("insert into word_trans(word_id, trans) values (#{word.id}, #{trans})")
     int addTransForWord(Word word, String trans);
 
+    /**
+     * Add a translation for a word.
+     *
+     * @param id the id of the word to add translations
+     * @param trans translation to be added
+     * @return 1 if succeeded, 0 if failed
+     */
     @Insert("insert into word_trans(word_id, trans) values (#{id}, #{trans})")
     int addTransByWordId(Long id, String trans);
 
-    int addWords(Dict dict, List<Word> words);
-
+    /**
+     * Get translations of a word by its id.
+     *
+     * @param id the id of the word
+     * @return the meanings(translations) of the word
+     */
     @Select("select trans from word_trans where word_id = #{id}")
     List<String> getTranslationsByWordId(Long id);
 }
