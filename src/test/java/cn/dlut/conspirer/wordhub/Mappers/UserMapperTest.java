@@ -70,8 +70,7 @@ class UserMapperTest {
 
         // then
         assertEquals(1, lines);
-        // Make the test fail to check GitHub CI
-        assertNull(user.getId());
+        assertNotNull(user.getId());
     }
 
     @Test
