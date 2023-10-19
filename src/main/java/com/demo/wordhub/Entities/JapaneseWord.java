@@ -1,6 +1,7 @@
 package com.demo.wordhub.Entities;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-public class JapaneseWord {
+@EqualsAndHashCode(callSuper = true)
+public class JapaneseWord extends Word{
     String notation;
 }
