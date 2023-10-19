@@ -1,6 +1,7 @@
 package com.demo.wordhub.Entities;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * @version 1.0
  */
 @Data
+@NoArgsConstructor
 public class Word {
     Long id;
     String name;
