@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
@@ -15,7 +16,9 @@ import static org.junit.jupiter.api.Assertions.*;
 // 网上说没这句可能导致无法成功注入，但实测是没问题的
 //@RunWith(SpringRunner.class)
 @MybatisTest
-// MybatisTest默认使用内存（嵌入式）数据库，而不是真实数据库，所以需要手动配置这里来使用MySQL进行测试（会自动回滚）
+// 优先启用application-test.yml
+@ActiveProfiles("test")
+// MybatisTest默认使用H2数据库并固定了一些配置选项，所以需要手动配置这里来调用yml配置中的数据库url进行测试，以启用自定义的设置
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class UserMapperTest {
     @Autowired

@@ -13,7 +13,7 @@ import java.util.List;
 
 @Mapper
 public interface UserMapper {
-    @Select("select * from user")
+    @Select("select * from \"user\"")
     @Results(id = "UserMap", value = {
             @Result(column = "user_id", property = "id"),
             @Result(column = "user_name", property = "username"),
@@ -25,16 +25,16 @@ public interface UserMapper {
     })
     List<User> getAll();
 
-    @Insert("insert into user(user_name,user_password, user_email, user_avatar_path) values (#{username}, #{password}, #{email}, #{avatarPath})")
+    @Insert("insert into \"user\"(user_name,user_password, user_email, user_avatar_path) values (#{username}, #{password}, #{email}, #{avatarPath})")
     // 使用自增长主键，并返回到成员id里
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int addUser(User user);
 
-    @Select("select * from user where user_id = #{id}")
+    @Select("select * from \"user\" where user_id = #{id}")
     @ResultMap("UserMap")
     User getUserById(Long id);
 
-    @Delete("delete from user where user_id = #{id}")
+    @Delete("delete from \"user\" where user_id = #{id}")
     @ResultMap("UserMap")
     int deleteUser(User user);
 }

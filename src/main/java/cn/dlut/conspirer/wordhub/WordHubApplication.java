@@ -8,7 +8,6 @@ import org.springframework.context.annotation.PropertySource;
 
 @Slf4j
 @SpringBootApplication
-@PropertySource(value = {"classpath:application.yml", "classpath:application-secret.yml"}, encoding = "UTF-8")
 public class WordHubApplication {
 
     public static void main(String[] args) {
