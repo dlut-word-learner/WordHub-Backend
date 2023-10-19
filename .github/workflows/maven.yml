@@ -35,4 +35,4 @@ jobs:
     - name: Update dependency graph
       uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
       with:
-        github-token: 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
+        token: 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
