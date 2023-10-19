@@ -9,7 +9,8 @@ import java.io.IOException;
 import java.util.Arrays;
 
 /**
- * 负责将上传的文件存储到对应位置
+ * TODO
+ * 负责检查上传文件的宽高比，转为固定大小的jpg并存储到对应位置
  *
  * @author OuOu
  * @version 1.0

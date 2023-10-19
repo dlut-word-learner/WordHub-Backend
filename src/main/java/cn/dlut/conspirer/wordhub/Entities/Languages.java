@@ -1,6 +1,9 @@
 package cn.dlut.conspirer.wordhub.Entities;
 
 
+import lombok.Getter;
+
+@Getter
 public enum Languages {
     Test(0),
     English(1),
@@ -11,7 +14,4 @@ public enum Languages {
         this.value = value;
     }
 
-    public int getValue() {
-        return value;
-    }
 }

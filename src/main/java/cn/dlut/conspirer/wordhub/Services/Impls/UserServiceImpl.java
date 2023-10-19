@@ -45,8 +45,6 @@ public class UserServiceImpl implements UserService {
     /**
      * TODO
      *
-     * @param user
-     * @return
      */
     @Override
     public boolean login(UserLoginVo user) {
