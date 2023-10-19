@@ -13,8 +13,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-// 网上说没这句可能导致无法成功注入，但实测是没问题的
-//@RunWith(SpringRunner.class)
 @MybatisTest
 // 优先启用application-test.yml
 @ActiveProfiles("test")
@@ -72,7 +70,8 @@ class UserMapperTest {
 
         // then
         assertEquals(1, lines);
-        assertNotNull(user.getId());
+        // Make the test fail to check GitHub CI
+        assertNull(user.getId());
     }
 
     @Test
