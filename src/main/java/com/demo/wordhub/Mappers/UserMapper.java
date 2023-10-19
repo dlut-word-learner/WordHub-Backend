@@ -7,8 +7,6 @@
 package com.demo.wordhub.Mappers;
 
 import com.demo.wordhub.Entities.User;
-import com.demo.wordhub.Vos.UserLoginVo;
-import com.demo.wordhub.Vos.UserRegisterVo;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -16,7 +14,7 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
     @Select("select * from user")
-    @Results(id="UserMap", value={
+    @Results(id = "UserMap", value = {
             @Result(column = "user_id", property = "id"),
             @Result(column = "user_name", property = "username"),
             @Result(column = "user_password", property = "password"),

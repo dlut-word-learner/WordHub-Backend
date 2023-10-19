@@ -7,9 +7,11 @@ public enum Languages {
     Japanese(2);
     private final int value;
 
-    Languages(int value){
-        this.value=value;
+    Languages(int value) {
+        this.value = value;
     }
 
-    public int getValue(){return value;}
+    public int getValue() {
+        return value;
+    }
 }

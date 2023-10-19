@@ -2,7 +2,10 @@ package com.demo.wordhub.Handlers;
 
 import com.demo.wordhub.Entities.Languages;
 import lombok.NoArgsConstructor;
-import org.apache.ibatis.type.*;
+import org.apache.ibatis.type.BaseTypeHandler;
+import org.apache.ibatis.type.JdbcType;
+import org.apache.ibatis.type.MappedJdbcTypes;
+import org.apache.ibatis.type.MappedTypes;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;

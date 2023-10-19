@@ -24,13 +24,14 @@ public class UserSessionController {
     private final UserService userService;
 
     @Autowired
-    public UserSessionController(UserService userService){
-        this.userService=userService;
+    public UserSessionController(UserService userService) {
+        this.userService = userService;
     }
+
     @PostMapping
-    public ResponseEntity<Object> login(@Validated UserLoginVo user){
+    public ResponseEntity<Object> login(@Validated UserLoginVo user) {
         log.info(user.toString());
-        if(userService.login(user))return ResponseEntity.ok().build();
+        if (userService.login(user)) return ResponseEntity.ok().build();
         else return ResponseEntity.badRequest().body("账户或密码错误");
 //        if(Objects.equals(user.getUsername(), "abcd") && user.getPassword().equals("123456"))return ResponseEntity.ok().build();
 //        else return ResponseEntity.badRequest().body("账户或密码错误");

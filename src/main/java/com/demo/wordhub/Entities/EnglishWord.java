@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class EnglishWord extends Word{
+public class EnglishWord extends Word {
     String ukPhone;
     String usPhone;
 }

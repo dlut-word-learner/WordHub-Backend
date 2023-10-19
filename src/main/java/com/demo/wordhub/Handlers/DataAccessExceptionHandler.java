@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Slf4j
 public class DataAccessExceptionHandler {
     @ExceptionHandler(DataAccessException.class)
-    public ResponseEntity<Object> exceptionHandler(DataAccessException e){
+    public ResponseEntity<Object> exceptionHandler(DataAccessException e) {
         log.error(e.getMessage());
         return ResponseEntity.badRequest().body(e.getMessage());
     }

@@ -1,12 +1,9 @@
 package com.demo.wordhub.Entities;
 
-import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
-import java.io.File;
 
 /**
  * TODO

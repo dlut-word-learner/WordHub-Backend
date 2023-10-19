@@ -21,18 +21,17 @@ import java.util.List;
 @RestControllerAdvice
 public class ValidatedExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<String> exceptionHandler(MethodArgumentNotValidException exception){
+    public ResponseEntity<String> exceptionHandler(MethodArgumentNotValidException exception) {
         BindingResult result = exception.getBindingResult();
         StringBuilder stringBuilder = new StringBuilder();
         if (result.hasErrors()) {
             List<ObjectError> errors = result.getAllErrors();
             errors.forEach(p -> {
                 FieldError fieldError = (FieldError) p;
-                log.warn("Bad Request Parameters: vo entity [{}],field [{}],message [{}]",fieldError.getObjectName(), fieldError.getField(), fieldError.getDefaultMessage());
+                log.warn("Bad Request Parameters: vo entity [{}],field [{}],message [{}]", fieldError.getObjectName(), fieldError.getField(), fieldError.getDefaultMessage());
                 stringBuilder.append(fieldError.getDefaultMessage());
             });
-        }
-        else stringBuilder.append("未知错误");
+        } else stringBuilder.append("未知错误");
         return ResponseEntity.badRequest().body(stringBuilder.toString());
     }
 }

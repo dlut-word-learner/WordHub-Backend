@@ -13,6 +13,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class JapaneseWord extends Word{
+public class JapaneseWord extends Word {
     String notation;
 }

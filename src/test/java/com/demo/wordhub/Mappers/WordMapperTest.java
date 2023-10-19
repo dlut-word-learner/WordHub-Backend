@@ -2,7 +2,6 @@ package com.demo.wordhub.Mappers;
 
 import com.demo.wordhub.Entities.Word;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @MybatisTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -20,7 +19,7 @@ class WordMapperTest {
     WordMapper wordMapper;
 
     @Test
-    void testGetTrans(){
+    void testGetTrans() {
         Word w = new Word();
         w.setName("test");
         w.setDictId(0L);

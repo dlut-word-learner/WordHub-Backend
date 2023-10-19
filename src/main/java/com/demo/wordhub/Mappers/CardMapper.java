@@ -17,7 +17,7 @@ public interface CardMapper {
     int addCard(Card card);
 
     @Select("select * from card where user_id = #{user_id}")
-    @Results(id="CardsMap", value={
+    @Results(id = "CardsMap", value = {
             @Result(column = "card_id", property = "id"),
             @Result(column = "user_id", property = "userId"),
             @Result(column = "word_id", property = "wordId"),

@@ -27,7 +27,7 @@ public interface WordMapper {
     @Insert("insert into word_trans(word_id, trans) values (#{id}, #{trans})")
     int addTransByWordId(Long id, String trans);
 
-    int addWords(Dict dict,List<Word> words);
+    int addWords(Dict dict, List<Word> words);
 
     @Select("select trans from word_trans where word_id = #{id}")
     List<String> getTranslationsByWordId(Long id);

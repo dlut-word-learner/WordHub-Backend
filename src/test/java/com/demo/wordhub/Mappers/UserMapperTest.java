@@ -6,10 +6,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
@@ -24,7 +21,7 @@ class UserMapperTest {
     @Autowired
     private UserMapper userMapper;
 
-    User getTestUser(){
+    User getTestUser() {
         User user = new User();
         user.setUsername("test_abc");
         user.setEmail("test@te.st");
@@ -62,7 +59,7 @@ class UserMapperTest {
 
     @Test
     @Order(3)
-    void deleteUser(){
+    void deleteUser() {
         // given
         User user = getTestUser();
         userMapper.addUser(user);
@@ -85,7 +82,7 @@ class UserMapperTest {
     }
 
     @Test
-    void testCRUD(){
+    void testCRUD() {
         // given
         User user = getTestUser();
 

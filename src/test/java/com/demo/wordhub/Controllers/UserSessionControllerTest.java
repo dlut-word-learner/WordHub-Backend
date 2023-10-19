@@ -1,9 +1,6 @@
 package com.demo.wordhub.Controllers;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(
         // 不加载servlet服务，可以加速

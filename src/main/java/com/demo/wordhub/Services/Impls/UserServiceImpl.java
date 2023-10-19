@@ -29,16 +29,17 @@ public class UserServiceImpl implements UserService {
     private String avatarPath;
 
 
-    public UserServiceImpl() {}
-
-    @Autowired
-    public UserServiceImpl(UserMapper userMapper) {
-        this.usermapper=userMapper;
+    public UserServiceImpl() {
     }
 
     @Autowired
-    public void setUserMapper(UserMapper u){
-        usermapper=u;
+    public UserServiceImpl(UserMapper userMapper) {
+        this.usermapper = userMapper;
+    }
+
+    @Autowired
+    public void setUserMapper(UserMapper u) {
+        usermapper = u;
     }
 
     /**
@@ -59,8 +60,8 @@ public class UserServiceImpl implements UserService {
         u.setPassword(user.getPassword());
         u.setEmail(user.getEmail());
 
-        u.setAvatarPath(avatarPath+user.getUsername());
-        if(user.getAvatar()!=null){
+        u.setAvatarPath(avatarPath + user.getUsername());
+        if (user.getAvatar() != null) {
             FileUploadUtils.upload(user.getAvatar(), u.getAvatarPath());
         }
 
