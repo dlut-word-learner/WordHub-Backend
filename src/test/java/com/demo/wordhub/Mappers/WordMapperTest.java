@@ -23,7 +23,7 @@ class WordMapperTest {
     void testGetTrans(){
         Word w = new Word();
         w.setName("test");
-        w.setDictId(3L);
+        w.setDictId(0L);
         w.setTranslations(Arrays.stream(new String[]{"When you test something, you test something(", "test是测试的意思"}).toList());
 
         int lines = wordMapper.addWord(w);
