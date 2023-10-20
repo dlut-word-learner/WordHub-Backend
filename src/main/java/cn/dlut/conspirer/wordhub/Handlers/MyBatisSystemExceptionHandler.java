@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Slf4j
 public class MyBatisSystemExceptionHandler {
     @ExceptionHandler(MyBatisSystemException.class)
-    public ResponseEntity<Object> exceptionHandler(Exception e) {
+    public ResponseEntity<String> exceptionHandler(MyBatisSystemException e) {
         log.error("mybatis error: " + e.getMessage());
         return ResponseEntity.badRequest().body(e.getMessage());
     }

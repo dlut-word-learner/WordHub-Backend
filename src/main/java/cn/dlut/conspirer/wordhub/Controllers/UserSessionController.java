@@ -1,5 +1,9 @@
 package cn.dlut.conspirer.wordhub.Controllers;
 
+import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.stp.StpUtil;
+import cn.dev33.satoken.util.SaResult;
+import cn.dlut.conspirer.wordhub.Entities.User;
 import cn.dlut.conspirer.wordhub.Services.UserService;
 import cn.dlut.conspirer.wordhub.Vos.UserLoginVo;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 1.0
  */
 @RestController
-@RequestMapping("/session")
+@RequestMapping("/sessions")
 @Slf4j
 @Validated
 public class UserSessionController {
@@ -28,13 +32,29 @@ public class UserSessionController {
         this.userService = userService;
     }
 
+    /**
+     * user login api
+     *
+     * @param userLoginVo username and password to login
+     * @return user info if succeeded, message if failed
+     */
     @PostMapping
-    public ResponseEntity<Object> login(@Validated UserLoginVo user) {
-        log.info(user.toString());
-        if (userService.login(user)) return ResponseEntity.ok().build();
+    public ResponseEntity<Object> login(@Validated UserLoginVo userLoginVo) {
+        log.info(userLoginVo.toString());
+        User user = userService.login(userLoginVo);
+        if (user!=null){
+            StpUtil.login(user.getId());
+            return ResponseEntity.ok(user);
+        }
         else return ResponseEntity.badRequest().body("账户或密码错误");
-//        if(Objects.equals(user.getUsername(), "abcd") && user.getPassword().equals("123456"))return ResponseEntity.ok().build();
-//        else return ResponseEntity.badRequest().body("账户或密码错误");
+    }
+
+    /**
+     * Stateless JWT token does not need to logout on backend.
+     */
+    @SaCheckLogin
+    public ResponseEntity<String> logout(){
+        return ResponseEntity.ok("注销成功");
     }
 
 }
