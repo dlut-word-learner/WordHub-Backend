@@ -16,7 +16,7 @@ import java.util.List;
 // 注解在实现类上
 // @Service
 public interface UserService {
-    boolean login(UserLoginVo user);
+    User login(UserLoginVo user);
 
 
     /**

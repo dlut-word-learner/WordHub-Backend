@@ -47,8 +47,9 @@ public class UserServiceImpl implements UserService {
      *
      */
     @Override
-    public boolean login(UserLoginVo user) {
-        return true;
+    public User login(UserLoginVo userLoginVo) {
+        User user = usermapper.getUserByUsernameAndPassword(userLoginVo.getUsername(), userLoginVo.getPassword());
+        return user;
     }
 
     @Override
