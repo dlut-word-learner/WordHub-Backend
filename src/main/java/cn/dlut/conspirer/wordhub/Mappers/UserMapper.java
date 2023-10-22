@@ -41,4 +41,12 @@ public interface UserMapper {
     @Delete("delete from \"user\" where user_id = #{id}")
     @ResultMap("UserMap")
     int deleteUser(User user);
+
+    @Update("update \"user\" " +
+            "set user_name = #{username}, " +
+            "    user_email = #{email}, " +
+            "    user_password = #{password} " +
+            "where user_id = #{id}")
+    @ResultMap("UserMap")
+    int updateUser(User user);
 }

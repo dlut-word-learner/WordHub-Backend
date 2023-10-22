@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * TODO
+ * Handles all requests related to the User entity.
+ * It provides endpoints for user registration, retrieval, listing, searching, data update and account deletion.
  *
  * @author OuOu
  * @version 1.0
@@ -52,5 +53,11 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(userService.getUserById(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable("id") Long id, @RequestBody User user){
+        userService.updateUser(user);
+        return ResponseEntity.ok(user);
     }
 }

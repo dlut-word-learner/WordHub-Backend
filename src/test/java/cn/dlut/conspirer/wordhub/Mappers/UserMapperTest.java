@@ -83,6 +83,24 @@ class UserMapperTest {
     }
 
     @Test
+    void updateUser() {
+        // when
+        User user = getTestUser();
+        userMapper.addUser(user);
+        String newName = "test_cde";
+        String newEmail = "test_cde@te.st";
+        String newPassword = "Test456";
+        user.setUsername(newName);
+        user.setEmail(newEmail);
+        user.setPassword(newPassword);
+        userMapper.updateUser(user);
+        user = userMapper.getUserById(user.getId());
+        assertEquals(user.getEmail(), newEmail);
+        assertEquals(user.getUsername(), newName);
+        assertEquals(user.getPassword(), newPassword);
+    }
+
+    @Test
     void testCRUD() {
         // given
         User user = getTestUser();

@@ -1,5 +1,6 @@
 package cn.dlut.conspirer.wordhub.Services;
 
+import cn.dlut.conspirer.wordhub.Entities.User;
 import cn.dlut.conspirer.wordhub.Mappers.UserMapper;
 import cn.dlut.conspirer.wordhub.Services.Impls.UserServiceImpl;
 import cn.dlut.conspirer.wordhub.Vos.UserRegisterVo;
@@ -61,5 +62,19 @@ class UserServiceTest {
         // then
         // 验证userMapper的getUserById方法被调用且参数为1L
         verify(userMapper).getUserById(eq(1L));
+    }
+
+    @Test
+    void updateUser() throws IOException {
+        // given
+
+        User user = new User();
+        user.setEmail("test1@te.st");
+        user.setUsername("test_456");
+        user.setPassword("Test456");
+        userService.updateUser(user);
+
+        // then
+        verify(userMapper).updateUser(user);
     }
 }
