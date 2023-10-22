@@ -13,7 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * TODO
+ * Handle Login and Logout
  *
  * @author OuOu
  * @version 1.0
