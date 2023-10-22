@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 负责Controller方法参数校验异常处理的全局异常处理类
@@ -23,13 +24,14 @@ public class ValidatedExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<String> exceptionHandler(MethodArgumentNotValidException exception) {
         BindingResult result = exception.getBindingResult();
+        log.info(result.getTarget().toString());
         StringBuilder stringBuilder = new StringBuilder();
         if (result.hasErrors()) {
             List<ObjectError> errors = result.getAllErrors();
             errors.forEach(p -> {
                 FieldError fieldError = (FieldError) p;
-                log.warn("Bad Request Parameters: vo entity [{}],field [{}],message [{}]", fieldError.getObjectName(), fieldError.getField(), fieldError.getDefaultMessage());
-                stringBuilder.append(fieldError.getDefaultMessage());
+                log.warn("Bad Request Parameters: VO Entity [{}],field [{}],message [{}]", fieldError.getObjectName(), fieldError.getField(), fieldError.getDefaultMessage());
+                stringBuilder.append(fieldError.getDefaultMessage()).append("; ");
             });
         } else stringBuilder.append("未知错误");
         return ResponseEntity.badRequest().body(stringBuilder.toString());
