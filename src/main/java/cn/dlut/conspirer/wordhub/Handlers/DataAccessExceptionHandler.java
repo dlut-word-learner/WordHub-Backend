@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class DataAccessExceptionHandler {
     @ExceptionHandler(DataAccessException.class)
     public ResponseEntity<Object> exceptionHandler(DataAccessException e) {
-        log.error(e.getMessage());
-        return ResponseEntity.badRequest().body(e.getMessage());
+        log.error("DataAccessException: " + e.getMessage());
+        return ResponseEntity.internalServerError().body(e.getMessage());
     }
 }
