@@ -1,9 +1,7 @@
 package cn.dlut.conspirer.wordhub.Vos;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 /**
@@ -12,8 +10,9 @@ import org.hibernate.validator.constraints.Length;
  * @author OuOu
  * @version 1.0
  */
-@Getter
+@Data
 @ToString
+@NoArgsConstructor
 @AllArgsConstructor
 public class UserLoginVo {
     @NotBlank(message = "{UserLoginVo.username_not_empty}")

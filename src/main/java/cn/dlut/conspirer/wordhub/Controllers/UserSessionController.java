@@ -10,9 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * TODO
@@ -39,7 +37,7 @@ public class UserSessionController {
      * @return user info if succeeded, message if failed
      */
     @PostMapping
-    public ResponseEntity<Object> login(@Validated UserLoginVo userLoginVo) {
+    public ResponseEntity<Object> login(@Validated @RequestBody UserLoginVo userLoginVo) {
         log.info(userLoginVo.toString());
         User user = userService.login(userLoginVo);
         if (user!=null){
@@ -53,6 +51,7 @@ public class UserSessionController {
      * Stateless JWT token does not need to logout on backend.
      */
     @SaCheckLogin
+    @DeleteMapping
     public ResponseEntity<String> logout(){
         return ResponseEntity.ok("注销成功");
     }
