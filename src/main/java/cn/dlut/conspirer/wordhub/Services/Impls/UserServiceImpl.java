@@ -9,6 +9,7 @@ import cn.dlut.conspirer.wordhub.Vos.UserRegisterVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -82,5 +83,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUser(User user) {
         usermapper.updateUser(user);
+    }
+
+    @Override
+    public Long addExp(Long id, Long expToAdd){
+        User user = getUserById(id);
+        if(user != null){
+            user.setScore(user.getScore() + expToAdd);
+            updateUser(user);
+            return user.getScore();
+        }
+        return null;
     }
 }

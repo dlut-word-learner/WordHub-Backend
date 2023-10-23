@@ -67,11 +67,12 @@ class UserServiceTest {
     @Test
     void updateUser() throws IOException {
         // given
-
         User user = new User();
         user.setEmail("test1@te.st");
         user.setUsername("test_456");
         user.setPassword("Test456");
+        user.setScore(0L);
+        user.setScore(user.getScore()+5L);
         userService.updateUser(user);
 
         // then

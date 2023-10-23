@@ -87,6 +87,7 @@ class UserMapperTest {
         // when
         User user = getTestUser();
         userMapper.addUser(user);
+        user = userMapper.getUserById(user.getId());
         String newName = "test_cde";
         String newEmail = "test_cde@te.st";
         String newPassword = "Test456";

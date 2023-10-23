@@ -33,4 +33,6 @@ public interface UserService {
     User getUserById(Long id);
 
     void updateUser(User user);
+
+    Long addExp(Long userId, Long expToAdd);
 }

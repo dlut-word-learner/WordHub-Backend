@@ -45,7 +45,10 @@ public interface UserMapper {
     @Update("update \"user\" " +
             "set user_name = #{username}, " +
             "    user_email = #{email}, " +
-            "    user_password = #{password} " +
+            "    user_password = #{password}, " +
+            "    user_score = #{score}, " +
+            "    user_avatar_path = #{avatarPath}, " +
+            "    user_role = #{role} " +
             "where user_id = #{id}")
     @ResultMap("UserMap")
     int updateUser(User user);
