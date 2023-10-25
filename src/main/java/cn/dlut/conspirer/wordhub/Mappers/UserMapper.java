@@ -52,4 +52,15 @@ public interface UserMapper {
             "where user_id = #{id}")
     @ResultMap("UserMap")
     int updateUser(User user);
+
+    /**
+     * Add a study(learn or review) record.
+     *
+     * @param wordId the word studied
+     * @param userId the user who studied
+     * @param studyCount the count that the user finished the study this time.
+     * @return 1 if succeeded, 0 if failed
+     */
+    @Insert("insert into study_rec(word_id, user_id, study_count) values (#{wordId}, #{userId}, #{studyCount})")
+    int addStudyRecord(Long wordId, Long userId, Long studyCount);
 }

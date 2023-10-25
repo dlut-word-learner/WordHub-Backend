@@ -95,4 +95,10 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    @Override
+    public Boolean learnOrReviewWord(Long userId, Long wordId, Long studyCount) {
+        int count = usermapper.addStudyRecord(wordId, userId, studyCount);
+        return count == 1;
+    }
 }

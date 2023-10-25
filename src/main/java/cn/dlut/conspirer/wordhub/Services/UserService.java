@@ -35,4 +35,6 @@ public interface UserService {
     void updateUser(User user);
 
     Long addExp(Long userId, Long expToAdd);
+
+    Boolean learnOrReviewWord(Long userId, Long wordId, Long studyCount);
 }
