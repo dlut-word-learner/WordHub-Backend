@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
  * @version 1.0
  */
 @RestController
-@RequestMapping("/sessions")
+@RequestMapping("/session")
 @Slf4j
 @Validated
 public class UserSessionController {
