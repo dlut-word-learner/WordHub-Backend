@@ -17,7 +17,6 @@ public class UserVo {
     private Long id;
     private String username;
     private String email;
-    private String avatarPath;
     private Long score;
     private Short role;
 }

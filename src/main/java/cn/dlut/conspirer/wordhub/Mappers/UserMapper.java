@@ -38,6 +38,10 @@ public interface UserMapper {
     @ResultMap("UserMap")
     User getUserByUsernameAndPassword(String username, String password);
 
+    @Select("select * from \"user\" where user_id = #{id} and user_password = #{password}")
+    @ResultMap("UserMap")
+    User getUserByIdAndPassword(Long id, String password);
+
     @Delete("delete from \"user\" where user_id = #{id}")
     @ResultMap("UserMap")
     int deleteUser(User user);

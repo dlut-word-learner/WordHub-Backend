@@ -16,8 +16,8 @@ import java.util.List;
 // 注解在实现类上
 // @Service
 public interface UserService {
-    User login(UserLoginVo user);
-
+    User checkLogin(String username, String password);
+   User checkLogin(Long id, String password);
 
     /**
      * Register long.

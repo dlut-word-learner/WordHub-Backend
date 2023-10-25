@@ -42,12 +42,15 @@ public class UserServiceImpl implements UserService {
         usermapper = u;
     }
 
-    /**
-     * TODO
-     */
     @Override
-    public User login(UserLoginVo userLoginVo) {
-        User user = usermapper.getUserByUsernameAndPassword(userLoginVo.getUsername(), userLoginVo.getPassword());
+    public User checkLogin(String username, String password) {
+        User user = usermapper.getUserByUsernameAndPassword(username, password);
+        return user;
+    }
+
+    @Override
+    public User checkLogin(Long id, String password) {
+        User user = usermapper.getUserByIdAndPassword(id, password);
         return user;
     }
 

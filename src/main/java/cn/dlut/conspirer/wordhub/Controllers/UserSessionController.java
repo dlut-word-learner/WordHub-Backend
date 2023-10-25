@@ -38,11 +38,22 @@ public class UserSessionController {
     @PostMapping
     public ResponseEntity<Object> login(@Validated @RequestBody UserLoginVo userLoginVo) {
         log.info(userLoginVo.toString());
-        User user = userService.login(userLoginVo);
+        User user = userService.checkLogin(userLoginVo.getUsername(), userLoginVo.getPassword());
         if (user != null) {
             StpUtil.login(user.getId());
             return ResponseEntity.ok(user);
         } else return ResponseEntity.badRequest().body("账户或密码错误");
+    }
+
+    @PostMapping("/openSafe")
+    @SaCheckLogin
+    public ResponseEntity<?> openSafe(@RequestBody String password) {
+        User user = userService.checkLogin(StpUtil.getLoginIdAsLong(), password);
+        if(user != null){
+            StpUtil.openSafe(120);
+            return ResponseEntity.ok("二级认证通过");
+        }
+        else return ResponseEntity.badRequest().body("密码错误");
     }
 
     /**
