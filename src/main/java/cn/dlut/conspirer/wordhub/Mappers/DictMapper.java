@@ -34,8 +34,14 @@ public interface DictMapper {
             @Result(property = "id", column = "dict_id"),
             @Result(property = "language", column = "lang_id", jdbcType = JdbcType.INTEGER, typeHandler = LanguagesTypeHandler.class),
             @Result(property = "name", column = "dict_name"),
-            @Result(property = "wordList", column = "dict_id",
-                    many = @Many(select = "cn.dlut.conspirer.wordhub.Mappers.DictMapper.getWordsByDictId")),
     })
     Dict getDictByName(String name);
+
+    @Select("select * from dict where dict_id=#{id}")
+    @ResultMap("dictMap")
+    Dict getDictById(Long id);
+
+    @Select("select * from dict")
+    @ResultMap("dictMap")
+    List<Dict> getDicts();
 }
