@@ -35,7 +35,7 @@ public interface WordMapper {
     /**
      * Add a translation for a word.
      *
-     * @param word to add translations
+     * @param word  to add translations
      * @param trans translation to be added
      * @return 1 if succeeded, 0 if failed
      */
@@ -45,7 +45,7 @@ public interface WordMapper {
     /**
      * Add a translation for a word.
      *
-     * @param id the id of the word to add translations
+     * @param id    the id of the word to add translations
      * @param trans translation to be added
      * @return 1 if succeeded, 0 if failed
      */

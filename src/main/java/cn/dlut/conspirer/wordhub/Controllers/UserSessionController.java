@@ -2,7 +2,6 @@ package cn.dlut.conspirer.wordhub.Controllers;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.dev33.satoken.stp.StpUtil;
-import cn.dev33.satoken.util.SaResult;
 import cn.dlut.conspirer.wordhub.Entities.User;
 import cn.dlut.conspirer.wordhub.Services.UserService;
 import cn.dlut.conspirer.wordhub.Vos.UserLoginVo;
@@ -40,11 +39,10 @@ public class UserSessionController {
     public ResponseEntity<Object> login(@Validated @RequestBody UserLoginVo userLoginVo) {
         log.info(userLoginVo.toString());
         User user = userService.login(userLoginVo);
-        if (user!=null){
+        if (user != null) {
             StpUtil.login(user.getId());
             return ResponseEntity.ok(user);
-        }
-        else return ResponseEntity.badRequest().body("账户或密码错误");
+        } else return ResponseEntity.badRequest().body("账户或密码错误");
     }
 
     /**
@@ -52,7 +50,7 @@ public class UserSessionController {
      */
     @SaCheckLogin
     @DeleteMapping
-    public ResponseEntity<String> logout(){
+    public ResponseEntity<String> logout() {
         return ResponseEntity.ok("注销成功");
     }
 

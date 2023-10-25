@@ -56,8 +56,8 @@ public interface UserMapper {
     /**
      * Add a study(learn or review) record.
      *
-     * @param wordId the word studied
-     * @param userId the user who studied
+     * @param wordId     the word studied
+     * @param userId     the user who studied
      * @param studyCount the count that the user finished the study this time.
      * @return 1 if succeeded, 0 if failed
      */

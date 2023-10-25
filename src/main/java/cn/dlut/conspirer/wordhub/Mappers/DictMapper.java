@@ -6,9 +6,9 @@
  */
 package cn.dlut.conspirer.wordhub.Mappers;
 
-import cn.dlut.conspirer.wordhub.Handlers.LanguagesTypeHandler;
 import cn.dlut.conspirer.wordhub.Entities.Dict;
 import cn.dlut.conspirer.wordhub.Entities.Word;
+import cn.dlut.conspirer.wordhub.Handlers.LanguagesTypeHandler;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
 

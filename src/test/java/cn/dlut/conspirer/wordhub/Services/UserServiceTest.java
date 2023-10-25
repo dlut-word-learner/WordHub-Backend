@@ -72,7 +72,7 @@ class UserServiceTest {
         user.setUsername("test_456");
         user.setPassword("Test456");
         user.setScore(0L);
-        user.setScore(user.getScore()+5L);
+        user.setScore(user.getScore() + 5L);
         userService.updateUser(user);
 
         // then

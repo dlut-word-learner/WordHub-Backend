@@ -13,7 +13,7 @@ VALUES (0, 0, 'Test'),
        (7, 1, 'TOEIC');
 
 INSERT INTO "user"
-VALUES (1000013, 'test_1', '123456', '123@abc.cn', 'C:/Users/11131/WordHub/avatars/test_1'
+VALUES ( 1000013, 'test_1', '123456', '123@abc.cn', 'C:/Users/11131/WordHub/avatars/test_1'
        , 0, 0);
 
 INSERT INTO "word"

@@ -26,10 +26,11 @@ public class SaTokenConfigure implements WebMvcConfigurer {
 
     /**
      * 注册 Sa-Token 拦截器，打开注解式鉴权功能
+     *
      * @param registry to be added
      */
     @Override
-    public void addInterceptors(InterceptorRegistry registry){
+    public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new SaInterceptor()).addPathPatterns("/**");
     }
 }

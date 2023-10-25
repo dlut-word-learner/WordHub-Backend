@@ -72,30 +72,29 @@ public class UserController {
     @PutMapping("/{id}")
     // 登录校验--只有登录之后才能进入该方法。
     @SaCheckLogin
-    public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @RequestBody User user){
+    public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @RequestBody User user) {
         // 只能修改自己的信息，不能修改别人的
-        if(StpUtil.getLoginIdAsLong() != id){
+        if (StpUtil.getLoginIdAsLong() != id) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("无权修改该用户的信息");
         }
         User oldUser = userService.getUserById(id);
-        if(oldUser != null){
-            if(!oldUser.getId().equals(user.getId())){
+        if (oldUser != null) {
+            if (!oldUser.getId().equals(user.getId())) {
                 return ResponseEntity.badRequest().body("用户id不可修改");
             }
             userService.updateUser(user);
             return ResponseEntity.ok(user);
-        }
-        else return ResponseEntity.badRequest().body("用户不存在");
+        } else return ResponseEntity.badRequest().body("用户不存在");
     }
 
     @PatchMapping("/{id}/exp")
     @SaCheckLogin
-    public ResponseEntity<?> addExp(@PathVariable("id") Long id, @RequestBody Long expToAdd){
-        if(StpUtil.getLoginIdAsLong() != id){
+    public ResponseEntity<?> addExp(@PathVariable("id") Long id, @RequestBody Long expToAdd) {
+        if (StpUtil.getLoginIdAsLong() != id) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("无权修改该用户的经验");
         }
         Long exp = userService.addExp(id, expToAdd);
-        if(exp!=null)return ResponseEntity.ok(exp);
+        if (exp != null) return ResponseEntity.ok(exp);
         else return ResponseEntity.badRequest().body("用户不存在");
     }
 }

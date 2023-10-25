@@ -1,7 +1,7 @@
 package cn.dlut.conspirer.wordhub.Services.Impls;
 
-import cn.dlut.conspirer.wordhub.Mappers.UserMapper;
 import cn.dlut.conspirer.wordhub.Entities.User;
+import cn.dlut.conspirer.wordhub.Mappers.UserMapper;
 import cn.dlut.conspirer.wordhub.Services.UserService;
 import cn.dlut.conspirer.wordhub.Utils.FileUploadUtils;
 import cn.dlut.conspirer.wordhub.Vos.UserLoginVo;
@@ -9,7 +9,6 @@ import cn.dlut.conspirer.wordhub.Vos.UserRegisterVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -45,7 +44,6 @@ public class UserServiceImpl implements UserService {
 
     /**
      * TODO
-     *
      */
     @Override
     public User login(UserLoginVo userLoginVo) {
@@ -86,9 +84,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Long addExp(Long id, Long expToAdd){
+    public Long addExp(Long id, Long expToAdd) {
         User user = getUserById(id);
-        if(user != null){
+        if (user != null) {
             user.setScore(user.getScore() + expToAdd);
             updateUser(user);
             return user.getScore();

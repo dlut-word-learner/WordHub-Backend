@@ -17,8 +17,9 @@ import java.util.List;
 @Service
 public class DictServiceImpl implements DictService {
     DictMapper dictMapper;
+
     @Autowired
-    DictServiceImpl(DictMapper dictMapper){
+    DictServiceImpl(DictMapper dictMapper) {
         this.dictMapper = dictMapper;
     }
 
