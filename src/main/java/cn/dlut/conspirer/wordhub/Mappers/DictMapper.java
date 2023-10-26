@@ -7,6 +7,7 @@
 package cn.dlut.conspirer.wordhub.Mappers;
 
 import cn.dlut.conspirer.wordhub.Entities.Dict;
+import cn.dlut.conspirer.wordhub.Entities.Languages;
 import cn.dlut.conspirer.wordhub.Entities.Word;
 import cn.dlut.conspirer.wordhub.Handlers.LanguagesTypeHandler;
 import org.apache.ibatis.annotations.*;
@@ -44,4 +45,13 @@ public interface DictMapper {
     @Select("select * from dict")
     @ResultMap("dictMap")
     List<Dict> getDicts();
+
+    @Select("select * from word " +
+    "left join (select distinct word_id from study_rec " +
+    "where user_id = #{userId}) as sr " +
+    "on word.word_id = sr.word_id " +
+    "where word.dict_id = #{dictId} and sr.word_id is null " +
+    "limit #{num}")
+    @ResultMap("wordMap")
+    List<Word> getWordsToLearn(Long dictId, Long userId, Long num);
 }

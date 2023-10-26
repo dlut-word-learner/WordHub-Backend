@@ -1,14 +1,16 @@
 package cn.dlut.conspirer.wordhub.Controllers;
 
+import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.stp.StpUtil;
 import cn.dlut.conspirer.wordhub.Entities.Dict;
+import cn.dlut.conspirer.wordhub.Entities.Languages;
+import cn.dlut.conspirer.wordhub.Entities.Word;
 import cn.dlut.conspirer.wordhub.Services.DictService;
 import cn.dlut.conspirer.wordhub.Vos.DictVo;
+import cn.dlut.conspirer.wordhub.Vos.WordListVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,5 +48,18 @@ public class DictController {
         return dictVo;
     }
 
-
+    /**
+     *
+     * @param dictId
+     * @param num
+     * @return num words to learn
+     */
+    @GetMapping("/{id}/toLearn")
+    @SaCheckLogin
+    public WordListVo getWordsToLearn(@PathVariable("id") Long dictId, @RequestParam Long num) {
+        Long userId = StpUtil.getLoginIdAsLong();
+        // Languages lang = dictService.getLanguageByDictId(dictId);
+        List<Word> wordList = dictService.getWordsToLearn(dictId, userId, num);
+        return new WordListVo(wordList);
+    }
 }
