@@ -55,7 +55,7 @@ class UserSessionControllerTest {
         when(userService.checkLogin(anyLong(), anyString())).thenReturn(new User(1L, "test", "123456", "1@a.cn", "1.png", 0L, (short) 0));
         when(userService.checkLogin(anyString(), anyString())).thenReturn(new User(1L, "test", "123456", "1@a.cn", "1.png", 0L, (short) 0));
         String s = objectMapper.writeValueAsString(userLoginVo);
-        mvc.perform(MockMvcRequestBuilders.post("/sessions").contentType(MediaType.APPLICATION_JSON).content(s)).andExpect(status().isOk());
+        mvc.perform(MockMvcRequestBuilders.post("/session").contentType(MediaType.APPLICATION_JSON).content(s)).andExpect(status().isOk());
         verify(userService).checkLogin(userLoginVo.getUsername(), userLoginVo.getPassword());
     }
 }
