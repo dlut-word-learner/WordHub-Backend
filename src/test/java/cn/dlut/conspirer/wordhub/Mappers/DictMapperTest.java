@@ -8,9 +8,12 @@ import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
 
+import java.util.Arrays;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Slf4j
@@ -39,5 +42,17 @@ class DictMapperTest {
         Dict dict = dictMapper.getDictByName("Test");
         log.info(dict.toString());
         assertNotNull(dict);
+    }
+
+    @Test
+    @Sql("/data-testGetWordsToLearn.sql")
+    void testGetWordsToLearn(){
+        List<Word > wordList = dictMapper.getWordsToLearn(1001L, 1L, 5L);
+
+        assertThat(wordList).extracting(Word::getName).containsExactlyInAnyOrder("word5","word6");
+
+        wordList = dictMapper.getWordsToLearn(1001L, 1L, 1L);
+
+        assertThat(wordList).extracting(Word::getName).containsAnyOf("word5","word6");
     }
 }
