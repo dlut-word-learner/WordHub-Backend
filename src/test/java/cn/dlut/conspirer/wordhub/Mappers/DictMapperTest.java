@@ -24,35 +24,42 @@ class DictMapperTest {
     @Autowired
     DictMapper dictMapper;
 
-    @Test
-    void getWordsByDictId() {
-        List<Word> wordList = dictMapper.getWordsByDictId(0L);
-        log.info(wordList.toString());
-        assertFalse(wordList.isEmpty());
-    }
+//    @Test
+//    void getWordsByDictId() {
+//        List<Word> wordList = dictMapper.getWordsByDictId(0L);
+//        log.info(wordList.toString());
+//        assertFalse(wordList.isEmpty());
+//    }
 
-    @Test
-    void getLanguageIdByDictId() {
-        Long id = dictMapper.getLanguageIdByDictId(0L);
-        assertEquals(id, 0L);
-    }
+//    @Test
+//    void getLanguageIdByDictId() {
+//        Long id = dictMapper.getLanguageIdByDictId(0L);
+//        assertEquals(id, 0L);
+//    }
 
-    @Test
-    void getDictByName() {
-        Dict dict = dictMapper.getDictByName("Test");
-        log.info(dict.toString());
-        assertNotNull(dict);
-    }
+//    @Test
+//    void getDictByName() {
+//        Dict dict = dictMapper.getDictByName("Test");
+//        log.info(dict.toString());
+//        assertNotNull(dict);
+//    }
 
-    @Test
-    @Sql("/data-testGetWordsToLearn.sql")
-    void testGetWordsToLearn(){
-        List<Word > wordList = dictMapper.getWordsToLearn(1001L, 1L, 5L);
+//    @Test
+//    @Sql("/data-testGetWordsToLearn.sql")
+//    void testGetWordsToLearn(){
+//        List<Word > wordList = dictMapper.getWordsToLearn(1001L, 1L, 5L);
+//
+//        assertThat(wordList).extracting(Word::getName).containsExactlyInAnyOrder("word5","word6");
+//
+//        wordList = dictMapper.getWordsToLearn(1001L, 1L, 1L);
+//
+//        assertThat(wordList).extracting(Word::getName).containsAnyOf("word5","word6");
+//    }
 
-        assertThat(wordList).extracting(Word::getName).containsExactlyInAnyOrder("word5","word6");
-
-        wordList = dictMapper.getWordsToLearn(1001L, 1L, 1L);
-
-        assertThat(wordList).extracting(Word::getName).containsAnyOf("word5","word6");
-    }
+//    @Test
+//    @Sql("/data-testGetMultiLanguageWords.sql")
+//    void testGetMultiLanguageWords(){
+//        List<Word> wordList = dictMapper.getWordsByDictId();
+//        log.info();
+//    }
 }

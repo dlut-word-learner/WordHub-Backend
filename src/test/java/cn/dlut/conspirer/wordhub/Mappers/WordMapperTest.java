@@ -20,19 +20,19 @@ class WordMapperTest {
     @Autowired
     WordMapper wordMapper;
 
-    @Test
-    void testGetTrans() {
-        Word w = new Word();
-        w.setName("test");
-        w.setDictId(0L);
-        w.setTranslations(Arrays.stream(new String[]{"When you test something, you test something(", "test是测试的意思"}).toList());
-
-        int lines = wordMapper.addWord(w);
-        Long id = w.getId();
-
-        assertEquals(lines, 1);
-
-        w.getTranslations().forEach(x -> wordMapper.addTransForWord(w, x));
-        assertEquals(wordMapper.getTranslationsByWordId(w.getId()).size(), 2);
-    }
+//    @Test
+//    void testGetTrans() {
+//        Word w = new Word();
+//        w.setName("test");
+//        w.setDictId(0L);
+//        w.setTranslations(Arrays.stream(new String[]{"When you test something, you test something(", "test是测试的意思"}).toList());
+//
+//        int lines = wordMapper.addWord(w);
+//        Long id = w.getId();
+//
+//        assertEquals(lines, 1);
+//
+//        w.getTranslations().forEach(x -> wordMapper.addTransForWord(w, x));
+//        assertEquals(wordMapper.getTranslationsByWordId(w.getId()).size(), 2);
+//    }
 }

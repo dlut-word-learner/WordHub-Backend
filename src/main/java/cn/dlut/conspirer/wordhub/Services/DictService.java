@@ -17,7 +17,5 @@ public interface DictService {
 
     Dict getDictionaryById(Long id);
 
-    Languages getLanguageByDictId(Long id);
-
     List<Word> getWordsToLearn(Long dictId, Long userId, Long num);
 }

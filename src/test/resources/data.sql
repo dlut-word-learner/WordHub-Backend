@@ -1,22 +1,39 @@
 INSERT INTO "language"
-VALUES (1, 'English'),
-       (2, 'Japanese'),
-       (0, 'Test');
+VALUES ('English'),
+       ('Japanese'),
+       ('Test');
 
 INSERT INTO "dict"
-VALUES (0, 0, 'Test'),
-       (2, 1, 'CET-4'),
-       (3, 1, 'CET-6'),
-       (4, 1, 'GaoKao-3500'),
-       (5, 1, 'IELTS_disorder'),
-       (6, 1, 'TOEFL'),
-       (7, 1, 'TOEIC');
+VALUES (0, 'Test', 'Test'),
+       (2, 'English', 'CET-4'),
+       (3, 'English', 'CET-6'),
+       (4, 'English', 'GaoKao-3500'),
+       (5, 'English', 'IELTS_disorder'),
+       (6, 'English', 'TOEFL'),
+       (7, 'English', 'TOEIC');
 
 INSERT INTO "user"
-VALUES ( 1000013, 'test_1', '123456', '123@abc.cn', 'C:/Users/11131/WordHub/avatars/test_1'
+VALUES ( 1000001, 'test_1', '123456', '123@abc.cn', 'C:/Users/11131/WordHub/avatars/test_1'
        , 0, 0);
 
 INSERT INTO "word"
-VALUES (9, 'test_123', 0),
-       (10, 'test_456', 0),
-       (11, 'test_789', 0);
+VALUES (1000001, 'sing', 0, '{"name": "sing",
+  "usphone": "sɪŋ",
+  "ukphone": "sɪŋ",
+  "trans": [
+    "唱歌"
+  ]}'),
+       (1000002, 'check', 0, '{"name": "check",
+         "usphone": "tʃek",
+         "ukphone": "tʃek",
+         "trans": [
+           "检查，核对"
+         ]}'),
+       (1000003, 'evening', 0, '{
+         "name": "evening",
+         "usphone": "ˈiːvnɪŋ",
+         "ukphone": "ˈiːvnɪŋ",
+         "trans": [
+           "晚上"
+         ]
+       }');

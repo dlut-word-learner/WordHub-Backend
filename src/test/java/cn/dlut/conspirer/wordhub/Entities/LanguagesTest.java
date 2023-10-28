@@ -8,7 +8,7 @@ class LanguagesTest {
     @Test
     void test_lang() {
         Languages lang = Languages.Test;
-        assertEquals(lang.getValue(), 0);
+        assertEquals(lang.name(), "Test");
         assertEquals(Languages.valueOf("Test"), lang);
     }
 }

@@ -36,12 +36,6 @@ public class DictServiceImpl implements DictService {
     }
 
     @Override
-    public Languages getLanguageByDictId(Long id){
-        Long langId = dictMapper.getLanguageIdByDictId(id);
-        return Languages.values()[langId.intValue()];
-    }
-
-    @Override
     public List<Word> getWordsToLearn(Long dictId, Long userId, Long num) {
         return dictMapper.getWordsToLearn(dictId, userId, num);
     }
