@@ -19,6 +19,6 @@ public class SaTokenExceptionHandler {
     @ExceptionHandler(NotLoginException.class)
     public ResponseEntity<String> notLoginExceptionHandler(NotLoginException e) {
         log.info(e.getMessage());
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("后端权限系统错误");
     }
 }

@@ -18,6 +18,6 @@ public class DataAccessExceptionHandler {
     @ExceptionHandler(DataAccessException.class)
     public ResponseEntity<Object> exceptionHandler(DataAccessException e) {
         log.error("DataAccessException: " + e.getMessage());
-        return ResponseEntity.internalServerError().body(e.getMessage());
+        return ResponseEntity.internalServerError().body("后端数据库读取错误");
     }
 }

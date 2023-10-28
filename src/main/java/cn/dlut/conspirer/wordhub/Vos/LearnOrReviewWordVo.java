@@ -1,5 +1,6 @@
 package cn.dlut.conspirer.wordhub.Vos;
 
+import cn.dlut.conspirer.wordhub.Entities.SchedulingStates;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class LearnOrReviewWordVo {
     Long wordId;
-    // 通过几次做题完成学习
-    Long studyCount;
+    SchedulingStates schedulingState;
 }

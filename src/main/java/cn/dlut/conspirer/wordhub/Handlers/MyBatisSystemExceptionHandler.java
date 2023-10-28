@@ -18,6 +18,6 @@ public class MyBatisSystemExceptionHandler {
     @ExceptionHandler(MyBatisSystemException.class)
     public ResponseEntity<String> exceptionHandler(MyBatisSystemException e) {
         log.error("mybatis error: " + e.getMessage());
-        return ResponseEntity.internalServerError().body(e.getMessage());
+        return ResponseEntity.internalServerError().body("数据库错误");
     }
 }
