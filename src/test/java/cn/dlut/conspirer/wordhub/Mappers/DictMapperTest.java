@@ -1,7 +1,11 @@
 package cn.dlut.conspirer.wordhub.Mappers;
 
 import cn.dlut.conspirer.wordhub.Entities.Dict;
+import cn.dlut.conspirer.wordhub.Entities.Languages;
 import cn.dlut.conspirer.wordhub.Entities.Word;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
@@ -23,6 +27,29 @@ import static org.junit.jupiter.api.Assertions.*;
 class DictMapperTest {
     @Autowired
     DictMapper dictMapper;
+
+    @Test
+    @Sql("/data-testGetWordsByDictId.sql")
+    void testGetWordsByDictId(){
+         List<Word> wordList = dictMapper.getWordsByDictId(1001L);
+         assertFalse(wordList.isEmpty());
+         JsonNode extension;
+        try {
+            extension = new ObjectMapper().readTree("{\"ukphone\": \"uk\", \"usphone\": \"us\"}");
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        Word word1 = Word.builder().id(101L).name("word1").dictId(1001L).extension(extension).build();
+         assertThat(wordList).hasSize(6).contains(word1);
+    }
+
+    @Test
+    @Sql("/data-testGetLanguageByDictId.sql")
+    void testGetLanguageByDictId(){
+        Languages id = dictMapper.getLanguageByDictId(101L);
+        Languages test = Languages.Test;
+        assertEquals(id,test);
+    }
 
 //    @Test
 //    void getWordsByDictId() {
