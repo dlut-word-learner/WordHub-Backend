@@ -11,6 +11,7 @@ import cn.dlut.conspirer.wordhub.Vos.UserRegisterVo;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 // 注解在实现类上
@@ -36,7 +37,7 @@ public interface UserService {
 
     void updateUserPassword(Long id, String password);
 
-    void updateUserAvatar(Long id, MultipartFile avatar) throws IOException;
+    void updateUserAvatar(Long id, byte[] avatar) throws IOException;
 
     Long addExp(Long userId, Long expToAdd);
 

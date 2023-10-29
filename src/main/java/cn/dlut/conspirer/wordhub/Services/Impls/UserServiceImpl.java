@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.List;
 
@@ -92,8 +93,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUserAvatar(Long id, MultipartFile avatar) throws IOException {
-        FileUploadUtils.upload(avatar, avatarPath + id, new String[]{"png"});
+    public void updateUserAvatar(Long id, byte[] avatar) throws IOException {
+        FileUploadUtils.upload(avatar, avatarPath + id, "png");
     }
 
     @Override
