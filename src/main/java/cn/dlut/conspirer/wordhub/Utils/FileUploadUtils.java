@@ -9,11 +9,10 @@ import java.io.IOException;
 import java.util.Arrays;
 
 /**
- * TODO
- * 负责检查上传文件的宽高比，转为固定大小的jpg并存储到对应位置
+ * 将文件存入指定资源路径的工具类
  *
  * @author OuOu
- * @version 1.0
+ * @version 1.1
  */
 @Slf4j
 public class FileUploadUtils {
@@ -22,12 +21,23 @@ public class FileUploadUtils {
     }
 
     public static String upload(MultipartFile file, String pathName, String[] allowedExtension) throws IOException {
-        log.info(pathName);
         String extension = StringUtils.getFilenameExtension(file.getOriginalFilename());
+        log.info("OriginalName: {}, ArgName: {}, ContentType: {}", file.getOriginalFilename(), file.getName(), file.getContentType());
+        if(extension == null){
+            String type = file.getContentType();
+            if(type!=null)
+                extension = switch (type) {
+                    case "image/png" -> "png";
+                    case "image/jpeg" -> "jpeg";
+                    case "image/jpg" -> "jpg";
+                    case "image/gif" -> "gif";
+                    default -> extension;
+                };
+        }
         if (allowedExtension != null && !extensionAllowed(extension, allowedExtension)) {
             return null;
         }
-        File dest = new File(pathName);
+        File dest = new File(pathName+'.'+extension);
         File fileParent = dest.getParentFile();
         if (!fileParent.exists()) {
             fileParent.mkdirs();
