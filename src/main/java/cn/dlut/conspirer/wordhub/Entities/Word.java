@@ -1,6 +1,8 @@
 package cn.dlut.conspirer.wordhub.Entities;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,7 +22,9 @@ import java.util.List;
  * @version 1.1
  */
 @Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class Word {
     Long id;
     String name;
