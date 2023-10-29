@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
 /**
@@ -101,6 +103,16 @@ public class UserServiceImpl implements UserService {
             user.setScore(user.getScore() + expToAdd);
             updateUserProfile(user);
             return user.getScore();
+        }
+        return null;
+    }
+
+    @Override
+    public byte[] getAvatarById(Long id) throws IOException {
+        User user = getUserById(id);
+        if (user != null) {
+            File avatar = new File(avatarPath + id + ".png");
+            return Files.readAllBytes(avatar.toPath());
         }
         return null;
     }

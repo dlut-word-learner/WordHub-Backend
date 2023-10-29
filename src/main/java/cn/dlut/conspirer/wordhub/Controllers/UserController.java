@@ -1,6 +1,7 @@
 package cn.dlut.conspirer.wordhub.Controllers;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.annotation.SaIgnore;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dlut.conspirer.wordhub.Entities.User;
 import cn.dlut.conspirer.wordhub.Services.UserService;
@@ -11,10 +12,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -70,7 +74,7 @@ public class UserController {
         return ResponseEntity.ok(userVo);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}/profile")
     // 登录校验--只有登录之后才能进入该方法。
     @SaCheckLogin
     public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @RequestBody UserProfileUpdateVo userVo) {
@@ -85,6 +89,17 @@ public class UserController {
             userService.updateUserProfile(user);
             return ResponseEntity.ok(userService.getUserById(id));
         } else return ResponseEntity.badRequest().body("用户不存在");
+    }
+
+    @GetMapping("/{id}/avatar")
+    @SaIgnore
+    public ResponseEntity<?> getAvatar(@PathVariable("id") Long id){
+        try {
+            return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(userService.getAvatarById(id));
+        } catch (IOException e) {
+            log.error("GetAvatar failed: " + e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @PatchMapping("/{id}/exp")

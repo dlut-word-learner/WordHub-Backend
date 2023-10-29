@@ -40,5 +40,7 @@ public interface UserService {
 
     Long addExp(Long userId, Long expToAdd);
 
+    byte[] getAvatarById(Long id) throws IOException;
+
 //    Boolean learnOrReviewWord(Long userId, Long wordId, Long studyCount);
 }
