@@ -1,6 +1,7 @@
 package cn.dlut.conspirer.wordhub.Mappers;
 
 import cn.dlut.conspirer.wordhub.Entities.Dict;
+import cn.dlut.conspirer.wordhub.Entities.Languages;
 import cn.dlut.conspirer.wordhub.Entities.Word;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -40,6 +41,14 @@ class DictMapperTest {
         }
         Word word1 = Word.builder().id(101L).name("word1").dictId(1001L).extension(extension).build();
          assertThat(wordList).hasSize(6).contains(word1);
+    }
+
+    @Test
+    @Sql("/data-testGetLanguageByDictId.sql")
+    void testGetLanguageByDictId(){
+        Languages id = dictMapper.getLanguageByDictId(101L);
+        Languages test = Languages.Test;
+        assertEquals(id,test);
     }
 
 //    @Test
