@@ -18,7 +18,8 @@ public class UserRegisterVo {
     @Length(min = 3, max = 20, message = "{UserLoginVo.username_len}")
     private String username;
     @NotBlank(message = "{UserLoginVo.password_not_empty}")
-    @Length(min = 3, max = 20, message = "{UserLoginVo.password_len}")
+    // 后端接收的密码已经经过哈希，不需要判断长短
+//    @Length(min = 3, max = 20, message = "{UserLoginVo.password_len}")
     private String password;
     @Email
     private String email;
