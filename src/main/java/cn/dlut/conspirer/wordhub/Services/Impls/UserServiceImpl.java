@@ -4,12 +4,12 @@ import cn.dlut.conspirer.wordhub.Entities.User;
 import cn.dlut.conspirer.wordhub.Mappers.UserMapper;
 import cn.dlut.conspirer.wordhub.Services.UserService;
 import cn.dlut.conspirer.wordhub.Utils.FileUploadUtils;
-import cn.dlut.conspirer.wordhub.Vos.UserLoginVo;
 import cn.dlut.conspirer.wordhub.Vos.UserRegisterVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -61,13 +61,11 @@ public class UserServiceImpl implements UserService {
         u.setPassword(user.getPassword());
         u.setEmail(user.getEmail());
 
-        u.setAvatarPath(avatarPath + user.getUsername());
-        if (user.getAvatar() != null) {
-            FileUploadUtils.upload(user.getAvatar(), u.getAvatarPath());
-        }
-
         int id = usermapper.addUser(u);
         log.info("User created, id: " + u.getId());
+        if (user.getAvatar() != null) {
+            FileUploadUtils.upload(user.getAvatar(), avatarPath + u.getId(), new String[]{"png"});
+        }
         return usermapper.getUserById(u.getId());
     }
 
@@ -82,8 +80,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(User user) {
-        usermapper.updateUser(user);
+    public void updateUserProfile(User user) {
+        usermapper.updateUserProfile(user);
+    }
+
+    @Override
+    public void updateUserPassword(Long id, String password) {
+        usermapper.updateUserPassword(id, password);
+    }
+
+    @Override
+    public void updateUserAvatar(Long id, MultipartFile avatar) throws IOException {
+        FileUploadUtils.upload(avatar, avatarPath + id, new String[]{"png"});
     }
 
     @Override
@@ -91,7 +99,7 @@ public class UserServiceImpl implements UserService {
         User user = getUserById(id);
         if (user != null) {
             user.setScore(user.getScore() + expToAdd);
-            updateUser(user);
+            updateUserProfile(user);
             return user.getScore();
         }
         return null;

@@ -20,7 +20,6 @@ public class User {
     private String username;
     private String password;
     private String email;
-    private String avatarPath;
     private Long score;
     private Short role;
 }

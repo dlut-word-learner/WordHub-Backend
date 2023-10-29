@@ -90,15 +90,12 @@ class UserMapperTest {
         user = userMapper.getUserById(user.getId());
         String newName = "test_cde";
         String newEmail = "test_cde@te.st";
-        String newPassword = "Test456";
         user.setUsername(newName);
         user.setEmail(newEmail);
-        user.setPassword(newPassword);
-        userMapper.updateUser(user);
+        userMapper.updateUserProfile(user);
         user = userMapper.getUserById(user.getId());
         assertEquals(user.getEmail(), newEmail);
         assertEquals(user.getUsername(), newName);
-        assertEquals(user.getPassword(), newPassword);
     }
 
     @Test
@@ -119,7 +116,6 @@ class UserMapperTest {
         // then
         assertNotNull(user_created);
         assertEquals(user.getUsername(), user_created.getUsername());
-        assertNull(user_created.getAvatarPath());
         assertEquals(user_created.getScore(), 0);
 
         // when search all

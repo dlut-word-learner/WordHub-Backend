@@ -7,8 +7,8 @@
 package cn.dlut.conspirer.wordhub.Services;
 
 import cn.dlut.conspirer.wordhub.Entities.User;
-import cn.dlut.conspirer.wordhub.Vos.UserLoginVo;
 import cn.dlut.conspirer.wordhub.Vos.UserRegisterVo;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.List;
 // @Service
 public interface UserService {
     User checkLogin(String username, String password);
-   User checkLogin(Long id, String password);
+    User checkLogin(Long id, String password);
 
     /**
      * Register long.
@@ -32,7 +32,11 @@ public interface UserService {
 
     User getUserById(Long id);
 
-    void updateUser(User user);
+    void updateUserProfile(User user);
+
+    void updateUserPassword(Long id, String password);
+
+    void updateUserAvatar(Long id, MultipartFile avatar) throws IOException;
 
     Long addExp(Long userId, Long expToAdd);
 

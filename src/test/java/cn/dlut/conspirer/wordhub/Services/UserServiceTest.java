@@ -73,9 +73,9 @@ class UserServiceTest {
         user.setPassword("Test456");
         user.setScore(0L);
         user.setScore(user.getScore() + 5L);
-        userService.updateUser(user);
+        userService.updateUserProfile(user);
 
         // then
-        verify(userMapper).updateUser(user);
+        verify(userMapper).updateUserProfile(user);
     }
 }
