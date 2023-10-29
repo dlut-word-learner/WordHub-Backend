@@ -38,7 +38,7 @@ public class UserSessionController {
      * @return user info if succeeded, message if failed
      */
     @PostMapping
-    public ResponseEntity<Object> login(@Validated @RequestBody UserLoginVo userLoginVo) {
+    public ResponseEntity<?> login(@Validated @RequestBody UserLoginVo userLoginVo) {
         log.info(userLoginVo.toString());
 
         User user = userService.checkLogin(userLoginVo.getUsername(), userLoginVo.getPassword());

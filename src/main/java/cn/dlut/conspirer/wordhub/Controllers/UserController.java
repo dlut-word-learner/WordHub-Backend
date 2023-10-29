@@ -16,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
@@ -66,6 +67,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
+    @SaIgnore
     public ResponseEntity<UserVo> getUserById(@PathVariable("id") Long id) {
         User user = userService.getUserById(id);
         UserVo userVo = new UserVo();
@@ -98,6 +100,21 @@ public class UserController {
             return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(userService.getAvatarById(id));
         } catch (IOException e) {
             log.error("GetAvatar failed: " + e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @PostMapping("/{id}/avatar")
+    @SaCheckLogin
+    public ResponseEntity<?> updateAvatar(@PathVariable("id") Long id, MultipartFile avatar){
+        if (StpUtil.getLoginIdAsLong() != id) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("无权修改该用户的头像");
+        }
+        try {
+            userService.updateUserAvatar(id, avatar);
+            return ResponseEntity.ok().build();
+        } catch (IOException e) {
+            log.error("UpdateAvatar failed: " + e.getMessage());
             return ResponseEntity.badRequest().build();
         }
     }
