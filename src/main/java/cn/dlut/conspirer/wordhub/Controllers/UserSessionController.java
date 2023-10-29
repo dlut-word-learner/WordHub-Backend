@@ -5,7 +5,9 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.dlut.conspirer.wordhub.Entities.User;
 import cn.dlut.conspirer.wordhub.Services.UserService;
 import cn.dlut.conspirer.wordhub.Vos.UserLoginVo;
+import cn.dlut.conspirer.wordhub.Vos.UserVo;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -38,10 +40,14 @@ public class UserSessionController {
     @PostMapping
     public ResponseEntity<Object> login(@Validated @RequestBody UserLoginVo userLoginVo) {
         log.info(userLoginVo.toString());
+
         User user = userService.checkLogin(userLoginVo.getUsername(), userLoginVo.getPassword());
+
         if (user != null) {
             StpUtil.login(user.getId());
-            return ResponseEntity.ok(user);
+            UserVo userVo = new UserVo();
+            BeanUtils.copyProperties(user, userVo);
+            return ResponseEntity.ok(userVo);
         } else return ResponseEntity.badRequest().body("账户或密码错误");
     }
 
