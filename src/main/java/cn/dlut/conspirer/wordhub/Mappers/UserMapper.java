@@ -9,7 +9,6 @@ package cn.dlut.conspirer.wordhub.Mappers;
 import cn.dlut.conspirer.wordhub.Entities.User;
 import org.apache.ibatis.annotations.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Mapper
@@ -20,13 +19,12 @@ public interface UserMapper {
             @Result(column = "user_name", property = "username"),
             @Result(column = "user_password", property = "password"),
             @Result(column = "user_email", property = "email"),
-            @Result(column = "user_avatar_path", property = "avatarPath"),
             @Result(column = "user_score", property = "score"),
             @Result(column = "user_role", property = "role")
     })
     List<User> getAll();
 
-    @Insert("insert into `user`(user_name,user_password, user_email, user_avatar_path) values (#{username}, #{password}, #{email}, #{avatarPath})")
+    @Insert("insert into `user` (user_name,user_password, user_email, user_role) values (#{username}, #{password}, #{email}, 0)")
     // 使用自增长主键，并返回到成员id里
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int addUser(User user);
@@ -50,14 +48,16 @@ public interface UserMapper {
     @Update("update `user` " +
             "set user_name = #{username}, " +
             "    user_email = #{email}, " +
-            "    user_password = #{password}, " +
             "    user_score = #{score}, " +
-            "    user_avatar_path = #{avatarPath}, " +
             "    user_role = #{role} " +
             "where user_id = #{id}")
     @ResultMap("UserMap")
-    int updateUser(User user);
+    int updateUserProfile(User user);
 
+    @Update("update `user` " +
+            "set user_password = #{password} " +
+            "where user_id = #{id}")
+    int updateUserPassword(Long id, String password);
     /**
      * Add a study(learn or review) record.
      *

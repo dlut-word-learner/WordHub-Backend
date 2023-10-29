@@ -4,6 +4,7 @@ import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dlut.conspirer.wordhub.Entities.User;
 import cn.dlut.conspirer.wordhub.Services.UserService;
+import cn.dlut.conspirer.wordhub.Vos.UserProfileUpdateVo;
 import cn.dlut.conspirer.wordhub.Vos.UserRegisterVo;
 import cn.dlut.conspirer.wordhub.Vos.UserVo;
 import lombok.extern.slf4j.Slf4j;
@@ -53,7 +54,6 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<List<UserVo>> getAll() {
-
         return ResponseEntity.ok(userService.getAll().stream().map(x -> {
             UserVo user = new UserVo();
             BeanUtils.copyProperties(x, user);
@@ -66,24 +66,24 @@ public class UserController {
         User user = userService.getUserById(id);
         UserVo userVo = new UserVo();
         BeanUtils.copyProperties(user, userVo);
+        log.info(userVo.toString());
         return ResponseEntity.ok(userVo);
     }
 
     @PutMapping("/{id}")
     // 登录校验--只有登录之后才能进入该方法。
     @SaCheckLogin
-    public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @RequestBody User user) {
+    public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @RequestBody UserProfileUpdateVo userVo) {
         // 只能修改自己的信息，不能修改别人的
         if (StpUtil.getLoginIdAsLong() != id) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("无权修改该用户的信息");
         }
         User oldUser = userService.getUserById(id);
         if (oldUser != null) {
-            if (!oldUser.getId().equals(user.getId())) {
-                return ResponseEntity.badRequest().body("用户id不可修改");
-            }
-            userService.updateUser(user);
-            return ResponseEntity.ok(user);
+            User user = new User();
+            BeanUtils.copyProperties(userVo, user);
+            userService.updateUserProfile(user);
+            return ResponseEntity.ok(userService.getUserById(id));
         } else return ResponseEntity.badRequest().body("用户不存在");
     }
 
