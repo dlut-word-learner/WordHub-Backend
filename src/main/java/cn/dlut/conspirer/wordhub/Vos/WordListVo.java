@@ -11,10 +11,10 @@ import java.util.List;
  * WordList to return to the frontend to learn or review
  *
  * @author OuOu
- * @version 1.0
+ * @version 1.1
  */
 @Data
 @AllArgsConstructor
 public class WordListVo {
-    List<Word> words;
+    List<WordVo> words;
 }
