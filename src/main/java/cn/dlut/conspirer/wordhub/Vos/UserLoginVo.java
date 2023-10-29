@@ -22,6 +22,5 @@ public class UserLoginVo {
     @Length(min = 3, max = 20, message = "{UserLoginVo.username_len}")
     String username;
     @NotBlank(message = "{UserLoginVo.password_not_empty}")
-    @Length(min = 3, max = 20, message = "{UserLoginVo.password_len}")
     String password;
 }
