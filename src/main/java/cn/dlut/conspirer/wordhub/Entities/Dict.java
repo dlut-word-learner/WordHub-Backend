@@ -19,7 +19,6 @@ public class Dict {
     Long id;
     Languages language;
     String name;
-    List<Word> wordList;
 
     public Dict(Languages language, String name) {
         this.language = language;

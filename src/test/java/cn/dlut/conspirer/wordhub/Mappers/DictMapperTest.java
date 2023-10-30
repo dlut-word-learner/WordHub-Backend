@@ -58,7 +58,7 @@ class DictMapperTest {
         Dict dict = dictMapper.getDictById(1002L);
         Languages testLanguages = Languages.Test;
         List<Word> wordListTest = null;
-        Dict test =  new Dict(1002L,testLanguages,"Test",wordListTest);
+        Dict test =  new Dict(1002L,testLanguages,"Test");
         assertEquals(test,dict);
 
     }
