@@ -53,8 +53,12 @@ public class JsonNodeTypeHandler extends BaseTypeHandler<JsonNode> {
 
     @SneakyThrows
     private JsonNode read(String json) {
-        log.info(objectMapper.readTree(json).toString());
-        return json != null ? objectMapper.readTree(json) : null;
+        json = json.replace("\"{","{");
+        json = json.replace("}\"","}");
+        json = json.replace("\\","");
+        log.debug("original: {}, ", json);
+        log.debug("tree: {}", objectMapper.readTree(json));
+        return objectMapper.readTree(json);
     }
 }
 

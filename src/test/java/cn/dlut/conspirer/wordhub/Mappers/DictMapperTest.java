@@ -37,6 +37,7 @@ class DictMapperTest {
          JsonNode extension;
         try {
             extension = new ObjectMapper().readTree("{\"ukphone\": \"uk\", \"usphone\": \"us\"}");
+            // log.info(extension.toString());
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }

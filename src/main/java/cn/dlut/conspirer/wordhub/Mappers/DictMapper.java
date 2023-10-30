@@ -11,7 +11,6 @@ import cn.dlut.conspirer.wordhub.Entities.Languages;
 import cn.dlut.conspirer.wordhub.Entities.Word;
 import cn.dlut.conspirer.wordhub.Handlers.JsonNodeTypeHandler;
 import org.apache.ibatis.annotations.*;
-import org.apache.ibatis.type.JdbcType;
 
 import java.util.List;
 

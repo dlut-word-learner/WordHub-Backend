@@ -27,6 +27,12 @@ spring:
       additional-exclude: WEB-INF/**
   profiles:
     active: secret
+  jackson:
+    deserialization:
+      # 反序列化时，json 中包含 pojo 不存在属性时，是否抛异常
+      FAIL_ON_UNKNOWN_PROPERTIES: true
+    parser:
+      allow_unquoted_control_chars: true
 
 mybatis:
   mapper-locations: classpath:mappers/*.xml

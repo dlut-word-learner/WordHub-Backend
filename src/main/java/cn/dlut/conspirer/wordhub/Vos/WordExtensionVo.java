@@ -1,5 +1,6 @@
 package cn.dlut.conspirer.wordhub.Vos;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,17 +17,17 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class WordExtensionVo {
-    List<String> translations;
+    List<String> trans;
     /**
      * 英语：美式发音
      */
-    String usPhone;
+    String usphone;
     /**
      * 英语：英式发音
      */
-    String ukPhone;
+    String ukphone;
     /**
      * 日语：汉字（假名）表示
      */

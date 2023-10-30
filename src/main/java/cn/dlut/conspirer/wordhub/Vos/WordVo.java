@@ -1,14 +1,9 @@
 package cn.dlut.conspirer.wordhub.Vos;
 
-import cn.dlut.conspirer.wordhub.Entities.Word;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.JsonNode;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 /**
  * Word to return to the frontend
@@ -24,5 +19,7 @@ public class WordVo {
     Long id;
     String name;
     Long dictId;
+// 暂时不让extension与其它字段平级
+//    @JsonUnwrapped
     WordExtensionVo extension;
 }
