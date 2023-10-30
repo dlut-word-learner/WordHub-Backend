@@ -1,6 +1,9 @@
 package cn.dlut.conspirer.wordhub.Mappers;
 
 import cn.dlut.conspirer.wordhub.Entities.Word;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
@@ -19,6 +22,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class WordMapperTest {
     @Autowired
     WordMapper wordMapper;
+
+    @Test
+    void testAddWord(){
+        JsonNode extension;
+        try {
+            extension = new ObjectMapper().readTree("{\"ukphone\": \"uk\", \"usphone\": \"us\"}");
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        Word testWord = new Word(100001L,"testWord",101L,extension);
+        int lines = wordMapper.addWord(testWord);
+        assertEquals(1,lines);
+    }
 
 //    @Test
 //    void testGetTrans() {
