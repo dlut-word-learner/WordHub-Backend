@@ -31,9 +31,27 @@ class WordMapperTest {
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-        Word testWord = new Word(100001L,"testWord",101L,extension);
+        Word testWord = new Word(100001L,"testWord",0L,extension);
         int lines = wordMapper.addWord(testWord);
         assertEquals(1,lines);
+    }
+
+    /**
+     * TODO
+     * where is wordtrans ?
+     */
+    @Test
+    void testAddTransForword(){
+        JsonNode extension;
+        try {
+            extension = new ObjectMapper().readTree("{\"ukphone\": \"uk\", \"usphone\": \"us\"}");
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        Word testWord = new Word(100002L,"testWord",0L,extension);
+        String testTrans = "this is testTran" ;
+      int lines =   wordMapper.addTransForWord(testWord,testTrans);
+      assertEquals(1,lines);
     }
 
 //    @Test
