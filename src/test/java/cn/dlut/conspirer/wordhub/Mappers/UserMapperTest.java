@@ -59,6 +59,35 @@ class UserMapperTest {
     }
 
     @Test
+    @Order(4)
+    void getUserByUsernameAndPassword(){
+        User testUser = getTestUser();
+        userMapper.addUser(testUser);
+        User user = userMapper.getUserByUsernameAndPassword(testUser.getUsername(),testUser.getPassword());
+        assertEquals(user,testUser);
+    }
+
+    @Test
+    @Order(5)
+    void getUserByIdAndPassword(){
+        User testUser = getTestUser();
+        userMapper.addUser(testUser);
+        User user = userMapper.getUserByIdAndPassword(testUser.getId(), testUser.getPassword());
+        assertEquals(user,testUser);
+    }
+
+    @Test
+    @Order(6)
+    void updateUserPassword(){
+        User testUser = getTestUser();
+        userMapper.addUser(testUser);
+        String testPass =  "test888";
+        int lines = userMapper.updateUserPassword(testUser.getId(), testPass);
+        assertEquals(1,lines);
+        assertEquals(testPass,testUser.getPassword());
+    }
+
+    @Test
     @Order(3)
     void deleteUser() {
         // given

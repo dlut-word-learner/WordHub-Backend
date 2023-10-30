@@ -1,14 +1,19 @@
 package cn.dlut.conspirer.wordhub.Mappers;
 
 import cn.dlut.conspirer.wordhub.Entities.Word;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.test.context.ActiveProfiles;
-
+import static org.assertj.core.api.Assertions.assertThat;
+import org.springframework.test.context.jdbc.Sql;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -19,6 +24,58 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class WordMapperTest {
     @Autowired
     WordMapper wordMapper;
+
+    @Test
+    void testAddWord(){
+        JsonNode extension;
+        try {
+            extension = new ObjectMapper().readTree("{\"ukphone\": \"uk\", \"usphone\": \"us\"}");
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        Word testWord = new Word(100001L,"testWord",0L,extension);
+        int lines = wordMapper.addWord(testWord);
+        assertEquals(1,lines);
+    }
+
+    /**
+     * TODO
+     * where is wordtrans ?
+     */
+    @Test
+    void testAddTransForword(){
+        JsonNode extension;
+        try {
+            extension = new ObjectMapper().readTree("{\"ukphone\": \"uk\", \"usphone\": \"us\"}");
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        Word testWord = new Word(100002L,"testWord",0L,extension);
+        String testTrans = "this is testTran" ;
+      int lines =   wordMapper.addTransForWord(testWord,testTrans);
+      assertEquals(1,lines);
+    }
+
+    /**
+     * TODO
+     * does not finish
+     */
+    @Test
+   // @sql("/data.sql")??
+    void testAddTransByWordId(){
+        String testTrans = "this is testTran" ;
+            int lines = wordMapper.addTransByWordId(1000001L,testTrans);
+            assertEquals(1,lines);
+    }
+    /**
+     * TODO
+     * does not finish
+     */
+    @Test
+    void testGetTranslationsByWordId(){
+       List<String> testTrans= wordMapper.getTranslationsByWordId(1000001L);
+       assertThat(testTrans).contains("唱歌");
+    }
 
 //    @Test
 //    void testGetTrans() {
