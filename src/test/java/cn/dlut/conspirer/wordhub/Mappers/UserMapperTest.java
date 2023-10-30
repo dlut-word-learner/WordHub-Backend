@@ -27,6 +27,8 @@ class UserMapperTest {
         user.setUsername("test_abc");
         user.setEmail("test@te.st");
         user.setPassword("Test123");
+        user.setScore(0L);
+        user.setRole((short) 0);
         return user;
     }
 
@@ -83,6 +85,7 @@ class UserMapperTest {
         userMapper.addUser(testUser);
         String testPass =  "test888";
         int lines = userMapper.updateUserPassword(testUser.getId(), testPass);
+        testUser = userMapper.getUserById(testUser.getId());
         assertEquals(1,lines);
         assertEquals(testPass,testUser.getPassword());
     }

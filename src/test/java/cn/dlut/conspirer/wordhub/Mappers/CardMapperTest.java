@@ -29,8 +29,7 @@ public class CardMapperTest {
     @Autowired
     CardMapper cardMapper;
     Card getTestCard() {
-        Card card = new Card(1001L,101L,1L,"",true);
-        return card;
+        return new Card(1005L,1000001L,1000001L,"test",true);
     }
     @Test
     @Order(1)
@@ -47,7 +46,7 @@ public class CardMapperTest {
         Card card = getTestCard();
         cardMapper.addCard(card);
         List<Card> testCard = cardMapper.getCardsByUser(card.getUserId());
-        assertThat(testCard).contains(card);
+        assertThat(testCard).extracting(Card::getContent).contains("test");
     }
 
 

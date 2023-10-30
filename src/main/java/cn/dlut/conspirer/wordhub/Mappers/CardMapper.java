@@ -13,7 +13,7 @@ import java.util.List;
 
 @Mapper
 public interface CardMapper {
-    @Insert("insert into card(user_id, word_id, card_content, is_public) values (#{userId}, #{wordId}, #{content}, false)")
+    @Insert("insert into card(user_id, word_id, card_content, is_public) values (#{userId}, #{wordId}, #{content}, #{isPublic})")
     int addCard(Card card);
 
     @Select("select * from card where user_id = #{user_id}")
