@@ -74,14 +74,15 @@ class DictMapperTest {
 
     }
 
-    /**
-     * TODO
-     */
     @Test
-  //  @Sql("data-testGetDict.sql")
-    void testGetDict(){
+    @Sql("/data-testGetDicts.sql")
+    void testGetDicts(){
         List<Dict> testDict = dictMapper.getDicts();
         assertNotNull(testDict);
+        String DictName = "DictTest";
+        Languages testLanguages = Languages.Test;
+        Dict dict = new Dict(1010L,testLanguages,DictName);
+        assertThat(testDict).contains(dict);
     }
 
     @Test
