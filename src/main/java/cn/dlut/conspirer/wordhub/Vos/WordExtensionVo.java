@@ -12,14 +12,15 @@ import java.util.List;
  * Extension field of WordVo
  *
  * @author OuOu
- * @version 1.0
+ * @version 1.1
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class WordExtensionVo {
-    List<String> trans;
+    @JsonAlias("trans")
+    List<String> meanings;
     /**
      * 英语：美式发音
      */
