@@ -20,22 +20,9 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class WordVo {
     Long id;
     String name;
     Long dictId;
-    List<String> translations;
-    /**
-     * 英语：美式发音
-     */
-    String usPhone;
-    /**
-     * 英语：英式发音
-     */
-    String ukPhone;
-    /**
-     * 日语：汉字（假名）表示
-     */
-    String notation;
+    WordExtensionVo extension;
 }
