@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+import org.mockito.internal.matchers.Null;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -48,9 +49,19 @@ class DictMapperTest {
     void testGetLanguageByDictId(){
         Languages id = dictMapper.getLanguageByDictId(101L);
         Languages test = Languages.Test;
-        assertEquals(id,test);
+        assertEquals(test,id);
     }
 
+    @Test
+    @Sql("/data-testGetDictByName.sql")
+    void testGetDictByName(){
+        Dict dict = dictMapper.getDictById(1002L);
+        Languages testLanguages = Languages.Test;
+        List<Word> wordListTest = null;
+        Dict test =  new Dict(1002L,testLanguages,"Test",wordListTest);
+        assertEquals(test,dict);
+
+    }
 //    @Test
 //    void getWordsByDictId() {
 //        List<Word> wordList = dictMapper.getWordsByDictId(0L);
