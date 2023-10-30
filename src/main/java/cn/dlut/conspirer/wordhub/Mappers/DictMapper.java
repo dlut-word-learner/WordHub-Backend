@@ -22,7 +22,7 @@ public interface DictMapper {
             @Result(property = "id", column = "word_id"),
             @Result(property = "name", column = "word_name"),
             @Result(property = "dictId", column = "dict_id"),
-            @Result(property = "extension", column = "word_extension", typeHandler = JsonNodeTypeHandler.class)
+            @Result(property = "extension", column = "extension", typeHandler = JsonNodeTypeHandler.class)
     })
     List<Word> getWordsByDictId(Long dictId);
 
@@ -34,6 +34,7 @@ public interface DictMapper {
             @Result(property = "id", column = "dict_id"),
 //            @Result(property = "language", column = "lang_id", jdbcType = JdbcType.INTEGER, typeHandler = LanguagesTypeHandler.class),
             @Result(property = "name", column = "dict_name"),
+            @Result(property = "language", column = "lang_name"),
     })
     Dict getDictByName(String name);
 
