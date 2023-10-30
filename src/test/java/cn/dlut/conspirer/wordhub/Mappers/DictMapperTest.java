@@ -74,6 +74,27 @@ class DictMapperTest {
 
     }
 
+    /**
+     * TODO
+     */
+    @Test
+  //  @Sql("data-testGetDict.sql")
+    void testGetDict(){
+        List<Dict> testDict = dictMapper.getDicts();
+        assertNotNull(testDict);
+    }
+
+    @Test
+    @Sql("/data-testGetWordsToLearn.sql")
+    void testGetWordsToLearn(){
+        List<Word > wordList = dictMapper.getWordsToLearn(1005L, 1L, 5L);
+        assertThat(wordList).extracting(Word::getName).containsExactlyInAnyOrder("word2","word4");
+        assertThat(wordList).extracting(Word::getName).doesNotContain("word6");
+        wordList = dictMapper.getWordsToLearn(1005L, 1L, 1L);
+        assertThat(wordList).extracting(Word::getName).doesNotContain("word5","word6");
+
+    }
+
 //    @Test
 //    void getWordsByDictId() {
 //        List<Word> wordList = dictMapper.getWordsByDictId(0L);
