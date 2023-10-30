@@ -55,6 +55,17 @@ class DictMapperTest {
     @Test
     @Sql("/data-testGetDictByName.sql")
     void testGetDictByName(){
+        Dict dict = dictMapper.getDictByName("NameTest");
+        Languages testLanguages = Languages.Test;
+        List<Word> wordListTest = null;
+        Dict test = new Dict(1003L,testLanguages,"NameTest",wordListTest);
+        assertEquals(test,dict);
+    }
+
+
+    @Test
+    @Sql("/data-testGetDictById.sql")
+    void testGetDictById(){
         Dict dict = dictMapper.getDictById(1002L);
         Languages testLanguages = Languages.Test;
         List<Word> wordListTest = null;
@@ -62,6 +73,7 @@ class DictMapperTest {
         assertEquals(test,dict);
 
     }
+
 //    @Test
 //    void getWordsByDictId() {
 //        List<Word> wordList = dictMapper.getWordsByDictId(0L);
