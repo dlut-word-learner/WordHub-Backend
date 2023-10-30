@@ -36,7 +36,7 @@ class DictMapperTest {
          assertFalse(wordList.isEmpty());
          JsonNode extension;
         try {
-            extension = new ObjectMapper().readTree("{\"ukphone\": \"uk\", \"usphone\": \"us\"}");
+            extension = new ObjectMapper().readTree("{\"ukphone\": \"uk\", \"usphone\": \"us\", \"trans\": [\"trans1\",\"trans2\"]}");
             // log.info(extension.toString());
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);

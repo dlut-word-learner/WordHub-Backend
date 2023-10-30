@@ -49,8 +49,8 @@ public interface WordMapper {
      * @param trans translation to be added
      * @return 1 if succeeded, 0 if failed
      */
-//    @Insert("insert into word_trans(word_id, trans) values (#{id}, #{trans})")
-//    int addTransByWordId(Long id, String trans);
+    @Insert("insert into word_trans(word_id, trans) values (#{id}, #{trans})")
+    int addTransByWordId(Long id, String trans);
 
     /**
      * Get translations of a word by its id.
@@ -58,6 +58,6 @@ public interface WordMapper {
      * @param id the id of the word
      * @return the meanings(translations) of the word
      */
-//    @Select("select trans from word_trans where word_id = #{id}")
-//    List<String> getTranslationsByWordId(Long id);
+    @Select("select trans from word_trans where word_id = #{id}")
+    List<String> getTranslationsByWordId(Long id);
 }
