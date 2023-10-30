@@ -59,6 +59,17 @@ class UserMapperTest {
     }
 
     @Test
+    @Order(4)
+    void getUserByUsernameAndPassword(){
+        User testUser = getTestUser();
+        userMapper.addUser(testUser);
+        User user = userMapper.getUserByUsernameAndPassword(testUser.getUsername(),testUser.getPassword());
+        assertEquals(user,testUser);
+    }
+
+
+
+    @Test
     @Order(3)
     void deleteUser() {
         // given
