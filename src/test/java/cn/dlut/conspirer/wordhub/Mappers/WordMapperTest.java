@@ -10,8 +10,10 @@ import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.test.context.ActiveProfiles;
-
+import static org.assertj.core.api.Assertions.assertThat;
+import org.springframework.test.context.jdbc.Sql;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -52,6 +54,27 @@ class WordMapperTest {
         String testTrans = "this is testTran" ;
       int lines =   wordMapper.addTransForWord(testWord,testTrans);
       assertEquals(1,lines);
+    }
+
+    /**
+     * TODO
+     * does not finish
+     */
+    @Test
+   // @sql("/data.sql")??
+    void testAddTransByWordId(){
+        String testTrans = "this is testTran" ;
+            int lines = wordMapper.addTransByWordId(1000001L,testTrans);
+            assertEquals(1,lines);
+    }
+    /**
+     * TODO
+     * does not finish
+     */
+    @Test
+    void testGetTranslationsByWordId(){
+       List<String> testTrans= wordMapper.getTranslationsByWordId(1000001L);
+       assertThat(testTrans).contains("唱歌");
     }
 
 //    @Test
