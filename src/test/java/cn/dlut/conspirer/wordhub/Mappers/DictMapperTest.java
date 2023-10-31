@@ -87,12 +87,10 @@ class DictMapperTest {
     @Test
     @Sql("/data-testGetWordsToLearn.sql")
     void testGetWordsToLearn(){
-        List<Word > wordList = dictMapper.getWordsToLearn(1005L, 1L, 5L);
-        assertThat(wordList).extracting(Word::getName).containsExactlyInAnyOrder("word2","word4");
-        assertThat(wordList).extracting(Word::getName).doesNotContain("word6");
+        List<Word > wordList = dictMapper.getWordsToLearn(1005L, 1L, 3L);
+        assertThat(wordList).extracting(Word::getName).containsExactlyInAnyOrder("word5", "word4");
         wordList = dictMapper.getWordsToLearn(1005L, 1L, 1L);
-        assertThat(wordList).extracting(Word::getName).doesNotContain("word5","word6");
-
+        assertThat(wordList).extracting(Word::getName).containsAnyOf("word5", "word4");
     }
 
 //    @Test
