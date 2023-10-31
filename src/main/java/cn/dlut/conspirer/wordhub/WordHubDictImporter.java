@@ -12,10 +12,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.WebApplicationType;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.web.embedded.EmbeddedWebServerFactoryCustomizerAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -25,10 +31,8 @@ import java.util.List;
  * @version 1.0
  */
 @Slf4j
-@Component
+@SpringBootApplication(exclude = {WebMvcAutoConfiguration.class, EmbeddedWebServerFactoryCustomizerAutoConfiguration.class})
 public class WordHubDictImporter implements CommandLineRunner {
-    @Autowired
-    private ApplicationContext context;
     @Autowired
     DictService dictService;
     @Autowired
@@ -36,10 +40,15 @@ public class WordHubDictImporter implements CommandLineRunner {
     @Autowired
     ObjectMapper objectMapper;
     public static void main(String[] args) {
-        SpringApplication.run(WordHubDictImporter.class, args);
+        log.info("STARTING THE APPLICATION");
+        new SpringApplicationBuilder(WordHubDictImporter.class).web(WebApplicationType.NONE).run(args);
+        log.info("APPLICATION FINISHED");
     }
     @Override
     public void run(String... args) throws Exception {
+        log.info("WordHubDictImporter启动");
+        Arrays.stream(args).forEach(log::info);
+        if(args.length<2)return ;
         File dictFile = new File(args[0]);
         String dictName = args[1];
         JsonNode words = objectMapper.readTree(dictFile);
@@ -54,7 +63,5 @@ public class WordHubDictImporter implements CommandLineRunner {
                 throw new RuntimeException(e);
             }
         });
-
-        System.exit(0);
     }
 }

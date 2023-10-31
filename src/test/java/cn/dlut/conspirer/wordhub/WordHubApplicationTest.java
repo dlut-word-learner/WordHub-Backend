@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 /**
  * TODO
  */
-@SpringBootTest
+@SpringBootTest(classes = WordHubApplication.class)
 class WordHubApplicationTest {
 
     @Test
