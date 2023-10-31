@@ -53,4 +53,8 @@ public interface DictMapper {
     "limit #{num}")
     @ResultMap("wordMap")
     List<Word> getWordsToLearn(Long dictId, Long userId, Long num);
+
+    @Insert("insert into dict(lang_name, dict_name) values(#{language}, #{name})")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "dict_id")
+    int addDict(Dict dict);
 }

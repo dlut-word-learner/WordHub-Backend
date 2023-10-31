@@ -39,4 +39,9 @@ public class DictServiceImpl implements DictService {
     public List<Word> getWordsToLearn(Long dictId, Long userId, Long num) {
         return dictMapper.getWordsToLearn(dictId, userId, num);
     }
+
+    @Override
+    public int addDict(Dict dict) {
+        return dictMapper.addDict(dict);
+    }
 }

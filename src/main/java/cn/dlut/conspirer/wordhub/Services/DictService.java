@@ -18,4 +18,6 @@ public interface DictService {
     Dict getDictionaryById(Long id);
 
     List<Word> getWordsToLearn(Long dictId, Long userId, Long num);
+
+    int addDict(Dict dict);
 }
