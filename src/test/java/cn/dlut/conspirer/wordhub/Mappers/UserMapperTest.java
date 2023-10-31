@@ -1,6 +1,7 @@
 package cn.dlut.conspirer.wordhub.Mappers;
 
 import cn.dlut.conspirer.wordhub.Entities.User;
+import cn.dlut.conspirer.wordhub.WordHubApplication;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -8,12 +9,14 @@ import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @MybatisTest
+@ContextConfiguration(classes = WordHubApplication.class)
 // 优先启用application-test.yml
 @ActiveProfiles("test")
 // MybatisTest默认使用H2数据库并固定了一些配置选项，所以需要手动配置这里来调用yml配置中的数据库url进行测试，以启用自定义的设置

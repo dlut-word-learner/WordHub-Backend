@@ -1,6 +1,8 @@
 package cn.dlut.conspirer.wordhub.Mappers;
 import cn.dlut.conspirer.wordhub.Entities.Card;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
+import cn.dlut.conspirer.wordhub.WordHubApplication;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
@@ -9,12 +11,14 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ActiveProfiles;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 @MybatisTest
+@ContextConfiguration(classes = WordHubApplication.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles("test")
 @Slf4j
