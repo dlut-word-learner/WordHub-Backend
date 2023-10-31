@@ -131,6 +131,7 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                    <mainClass>cn.dlut.conspirer.wordhub.WordHubApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
