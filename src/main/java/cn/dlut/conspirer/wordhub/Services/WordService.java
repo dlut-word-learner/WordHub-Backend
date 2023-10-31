@@ -12,9 +12,9 @@ import cn.dlut.conspirer.wordhub.Entities.Word;
 import java.util.List;
 
 public interface WordService {
-    List<Word> getWordsByDict(Dict dict);
+    // List<Word> getWordsByDict(Dict dict);
 
-    Word getWordByDictAndName(Dict dict, String name);
+    // Word getWordByDictAndName(Dict dict, String name);
 
-
+    int addWordToDict(Long dictId, Word word);
 }

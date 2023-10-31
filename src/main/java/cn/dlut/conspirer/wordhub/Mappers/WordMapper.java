@@ -10,9 +10,6 @@ import cn.dlut.conspirer.wordhub.Entities.Word;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
-
-import java.util.List;
 
 /**
  * Mapper related to words.
@@ -30,7 +27,7 @@ public interface WordMapper {
      */
     @Insert("insert into word(word_name, dict_id, extension) values(#{name}, #{dictId}, #{extension, typeHandler=cn.dlut.conspirer.wordhub.Handlers.JsonNodeTypeHandler})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "word_id")
-    int addWord(Word word);
+    int addWordToDict(Long dictId, Word word);
 
     /**
      * Add a translation for a word.
