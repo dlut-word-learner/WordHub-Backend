@@ -6,7 +6,6 @@ import cn.dlut.conspirer.wordhub.Entities.Dict;
 import cn.dlut.conspirer.wordhub.Services.DictService;
 import cn.dlut.conspirer.wordhub.Vos.DictVo;
 import cn.dlut.conspirer.wordhub.Vos.WordExtensionVo;
-import cn.dlut.conspirer.wordhub.Vos.WordListVo;
 import cn.dlut.conspirer.wordhub.Vos.WordVo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,9 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,10 +61,11 @@ public class DictController {
      * @param num
      * @return num words to learn
      */
-    @GetMapping("/{id}/toLearn")
+    @GetMapping("/{id}/learn")
     @SaCheckLogin
-    public ResponseEntity<?> getWordsToLearn(@PathVariable("id") Long dictId, @RequestParam Long num) {
+    public ResponseEntity<?> getWordsToLearn(@PathVariable("id") Long dictId, @RequestParam @Nullable Long num) {
         Long userId = StpUtil.getLoginIdAsLong();
+        if(num==null)num=20L;
         // Languages lang = dictService.getLanguageByDictId(dictId);
         List<WordVo> wordList = dictService.getWordsToLearn(dictId, userId, num).stream().map(x -> {
             try {
@@ -78,6 +78,6 @@ public class DictController {
                 throw new RuntimeException(e);
             }
         }).collect(Collectors.toList());
-        return ResponseEntity.ok(new WordListVo(wordList));
+        return ResponseEntity.ok(wordList);
     }
 }
