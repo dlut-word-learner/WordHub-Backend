@@ -21,7 +21,7 @@ public class DictServiceImpl implements DictService {
     DictMapper dictMapper;
 
     @Autowired
-    DictServiceImpl(DictMapper dictMapper) {
+    public DictServiceImpl(DictMapper dictMapper) {
         this.dictMapper = dictMapper;
     }
 
