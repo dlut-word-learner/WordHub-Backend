@@ -45,4 +45,14 @@ public interface CardMapper {
             @Result(column = "card_response_content", property = "content")
     })
     List<CardResponse> getResponseByCardId(Long cardId);
+
+    @Update("update card " +
+            "set card_content = #{content} " +
+            "where card_id = #{cardId}")
+    int editCardContent(Long cardId, String content);
+
+    @Update("update card " +
+            "set is_public = #{isPublic} " +
+            "where card_id = #{cardId}")
+    int setPublic(Long cardId, boolean isPublic);
 }
