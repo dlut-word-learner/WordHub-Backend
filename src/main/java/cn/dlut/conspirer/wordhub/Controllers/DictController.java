@@ -3,6 +3,7 @@ package cn.dlut.conspirer.wordhub.Controllers;
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dlut.conspirer.wordhub.Entities.Dict;
+import cn.dlut.conspirer.wordhub.Entities.Languages;
 import cn.dlut.conspirer.wordhub.Services.DictService;
 import cn.dlut.conspirer.wordhub.Vos.DictVo;
 import cn.dlut.conspirer.wordhub.Vos.WordExtensionVo;
@@ -40,8 +41,9 @@ public class DictController {
     }
 
     @GetMapping
-    public ResponseEntity<List<DictVo>> getAllDictionaries() {
-        return ResponseEntity.ok(dictService.getAllDictionaries().stream().map(x -> {
+    public ResponseEntity<List<DictVo>> getDictionaries(@RequestParam @Nullable Languages lang) {
+        log.info("language: " + lang);
+        return ResponseEntity.ok((lang!=null ?dictService.getDictionariesByLanguage(lang): dictService.getAllDictionaries()).stream().map(x -> {
             DictVo dictVo = new DictVo();
             BeanUtils.copyProperties(x, dictVo);
             return dictVo;
