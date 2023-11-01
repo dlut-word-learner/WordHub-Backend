@@ -14,6 +14,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DictVo {
     Long Id;
-    Languages lang;
+    Languages language;
     String name;
 }
