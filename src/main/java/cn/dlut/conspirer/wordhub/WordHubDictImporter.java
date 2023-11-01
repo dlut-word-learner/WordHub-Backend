@@ -19,6 +19,7 @@ import org.springframework.boot.autoconfigure.web.embedded.EmbeddedWebServerFact
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,6 +34,7 @@ import java.util.*;
  */
 @Slf4j
 @SpringBootApplication(exclude = {WebMvcAutoConfiguration.class, EmbeddedWebServerFactoryCustomizerAutoConfiguration.class})
+@Profile("cli")
 public class WordHubDictImporter implements CommandLineRunner {
     @Autowired
     DictService dictService;
