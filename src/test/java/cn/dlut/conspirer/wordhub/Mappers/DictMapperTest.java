@@ -44,7 +44,7 @@ class DictMapperTest {
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-        Word word1 = Word.builder().id(101L).name("word1").dictId(1001L).extension(extension).build();
+        Word word1 = Word.builder().id(101L).name("word1").extension(extension).build();
          assertThat(wordList).hasSize(6).contains(word1);
     }
 
