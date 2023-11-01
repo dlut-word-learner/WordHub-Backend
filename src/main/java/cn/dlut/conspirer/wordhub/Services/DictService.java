@@ -14,6 +14,7 @@ import java.util.List;
 
 public interface DictService {
     List<Dict> getAllDictionaries();
+    List<Dict> getDictionariesByLanguage(Languages lang);
 
     Dict getDictionaryById(Long id);
 

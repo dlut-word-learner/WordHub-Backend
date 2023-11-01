@@ -56,4 +56,8 @@ public interface DictMapper {
     @Insert("insert into dict(lang_name, dict_name) values(#{language}, #{name})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "dict_id")
     int addDict(Dict dict);
+
+    @Select("select * from dict where lang_name = #{lang}")
+    @ResultMap("dictMap")
+    List<Dict> getDictsByLanguage(Languages lang);
 }
