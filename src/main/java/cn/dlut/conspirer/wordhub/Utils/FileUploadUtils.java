@@ -20,6 +20,7 @@ public class FileUploadUtils {
     }
     public static String upload(byte[] file, String pathName, String extension) throws IOException {
         File dest = new File(pathName+'.'+extension);
+        log.info(dest.toString());
         File fileParent = dest.getParentFile();
         if (!fileParent.exists()) {
             fileParent.mkdirs();
