@@ -31,6 +31,11 @@ public class DictServiceImpl implements DictService {
     }
 
     @Override
+    public List<Dict> getDictionariesByLanguage(Languages lang) {
+        return dictMapper.getDictsByLanguage(lang);
+    }
+
+    @Override
     public Dict getDictionaryById(Long id) {
         return dictMapper.getDictById(id);
     }

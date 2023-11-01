@@ -27,8 +27,6 @@ import java.util.List;
 @Slf4j
 public class UserServiceImpl implements UserService {
     private UserMapper usermapper;
-
-    @Value("${urls.avatar}")
     private String avatarPath;
 
 
@@ -36,13 +34,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Autowired
-    public UserServiceImpl(UserMapper userMapper) {
+    public UserServiceImpl(UserMapper userMapper, @Value("${urls.avatar}")String avatarPath) {
         this.usermapper = userMapper;
+        this.avatarPath = avatarPath;
     }
 
     @Autowired
     public void setUserMapper(UserMapper u) {
         usermapper = u;
+    }
+
+    @Autowired
+    public void setUserMapper(@Value("${urls.avatar}")String path) {
+        avatarPath = path;
     }
 
     @Override
