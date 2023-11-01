@@ -68,17 +68,15 @@ public class DictController {
         Long userId = StpUtil.getLoginIdAsLong();
         // Languages lang = dictService.getLanguageByDictId(dictId);
         List<WordVo> wordList = dictService.getWordsToLearn(dictId, userId, num).stream().map(x -> {
-//            WordExtensionVo wordExtensionVo = null;
-//            try {
-//                wordExtensionVo = objectMapper.treeToValue(x.getExtension(), WordExtensionVo.class);
-//            } catch (JsonProcessingException e) {
-//                throw new RuntimeException(e);
-//            }
-            return WordVo.builder()
-                    .id(x.getId())
-                    .name(x.getName())
-                    //.extension(x.getExtension())
-                    .build();
+            try {
+                return WordVo.builder()
+                        .id(x.getId())
+                        .name(x.getName())
+                        .extension(objectMapper.treeToValue(x.getExtension(), WordExtensionVo.class))
+                        .build();
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
         }).collect(Collectors.toList());
         return ResponseEntity.ok(new WordListVo(wordList));
     }
