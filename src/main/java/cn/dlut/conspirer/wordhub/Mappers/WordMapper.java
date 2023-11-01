@@ -25,8 +25,8 @@ public interface WordMapper {
      * @param word to be added
      * @return 1 if succeeded, 0 if failed
      */
-    @Insert("insert into word(word_name, dict_id, extension) values(#{name}, #{dictId}, #{extension, typeHandler=cn.dlut.conspirer.wordhub.Handlers.JsonNodeTypeHandler})")
-    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "word_id")
+    @Insert("insert into word(word_name, dict_id, extension) values(#{word.name}, #{dictId}, #{word.extension, typeHandler=cn.dlut.conspirer.wordhub.Handlers.JsonNodeTypeHandler})")
+    @Options(useGeneratedKeys = true, keyProperty = "word.id", keyColumn = "word_id")
     int addWordToDict(Long dictId, Word word);
 
     /**
