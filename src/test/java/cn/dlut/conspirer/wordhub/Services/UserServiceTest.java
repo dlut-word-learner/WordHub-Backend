@@ -105,7 +105,6 @@ class UserServiceTest {
     @Test
     void getAvatarById(){
 
-
     }
 }
 
