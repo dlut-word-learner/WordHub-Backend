@@ -9,8 +9,15 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.internal.matchers.Null;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -26,6 +33,8 @@ class UserServiceTest {
     @Mock
     UserMapper userMapper;
 
+    @MockBean
+    String avatarPath = "./WordHub/avatars";
     @InjectMocks
     private UserService userService = new UserServiceImpl();
 
@@ -65,7 +74,7 @@ class UserServiceTest {
     }
 
     @Test
-    void updateUser() throws IOException {
+    void updateUserProfile() throws IOException {
         // given
         User user = new User();
         user.setEmail("test1@te.st");
@@ -78,4 +87,33 @@ class UserServiceTest {
         // then
         verify(userMapper).updateUserProfile(user);
     }
+    @Test
+    void updateUserPassword(){
+        long testId = 1L;
+        String testPassWord = "testPass888";
+        userService.updateUserPassword(testId,testPassWord);
+        verify(userMapper).updateUserPassword(testId,testPassWord);
+    }
+
+    /**   @Test
+     *
+     * TODO
+     */
+   /* void updateUserAvatar() throws IOException {
+        long testId = 1L;
+
+        byte[] testAvatar = getClass().getResourceAsStream("/test_update_avatar.png").readAllBytes();
+
+        userService.updateUserAvatar(testId,testAvatar);
+        verify(userService).updateUserAvatar(testId,testAvatar);
+
+    }
+
+    @Test
+    void getAvatarById(){
+
+    }
+    *
+    */
 }
+
