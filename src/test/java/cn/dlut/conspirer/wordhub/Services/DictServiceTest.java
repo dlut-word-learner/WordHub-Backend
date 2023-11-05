@@ -1,5 +1,6 @@
 package cn.dlut.conspirer.wordhub.Services;
 
+import cn.dlut.conspirer.wordhub.Entities.Languages;
 import cn.dlut.conspirer.wordhub.Mappers.DictMapper;
 import cn.dlut.conspirer.wordhub.Services.Impls.DictServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -37,5 +38,13 @@ public class DictServiceTest {
         dictService.getAllDictionaries();
         verify(dictMapper).getDicts();
     }
+
+    @Test
+    void getDictionariesByLanguage(){
+        Languages testLanguages = Languages.Test;
+        dictService.getDictionariesByLanguage(testLanguages);
+        verify(dictMapper).getDictsByLanguage(testLanguages);
+    }
+
 
 }
