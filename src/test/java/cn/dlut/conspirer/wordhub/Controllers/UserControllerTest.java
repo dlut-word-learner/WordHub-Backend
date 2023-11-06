@@ -44,6 +44,8 @@ class UserControllerTest {
      *
      * @TODO
      * by damijiang123
+     * No serializer found for class java.io.ByteArrayInputStream and no properties discovered to create BeanSerializer
+     * I have no idea  to test the "register" too.
      */
     @Test
     @Order(1)
