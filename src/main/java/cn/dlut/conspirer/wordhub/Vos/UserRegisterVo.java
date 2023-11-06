@@ -2,7 +2,9 @@ package cn.dlut.conspirer.wordhub.Vos;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
  * @version 1.0
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserRegisterVo {
     @NotBlank(message = "{UserLoginVo.username_not_empty}")
     @Length(min = 3, max = 20, message = "{UserLoginVo.username_len}")
