@@ -4,6 +4,8 @@ import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dlut.conspirer.wordhub.Mappers.WordMapper;
 import cn.dlut.conspirer.wordhub.Services.WordService;
+import cn.dlut.conspirer.wordhub.Vos.LearnWordVo;
+import cn.dlut.conspirer.wordhub.Vos.ReviewWordVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,11 +34,11 @@ public class WordController {
      * @param wordId
      * @return
      */
-    @PostMapping("/{wordId}/rec")
+    @PostMapping("/{wordId}/learn")
     @SaCheckLogin
-    public ResponseEntity<?> learnWord(@PathVariable("wordId") Long wordId){
+    public ResponseEntity<?> learnWord(@PathVariable("wordId") Long wordId, @RequestBody LearnWordVo learnWordVo){
         Long userId = StpUtil.getLoginIdAsLong();
-        //wordService;
+        wordService.learnWord(userId, wordId, learnWordVo.isFamiliar());
         return ResponseEntity.internalServerError().build();
     }
 
@@ -45,11 +47,11 @@ public class WordController {
      * @param wordId
      * @return
      */
-    @PutMapping("/{wordId}/rec")
+    @PutMapping("/{wordId}/review")
     @SaCheckLogin
-    public ResponseEntity<?> reviewWord(@PathVariable("wordId") Long wordId){
+    public ResponseEntity<?> reviewWord(@PathVariable("wordId") Long wordId, @RequestBody ReviewWordVo reviewWordVo){
         Long userId = StpUtil.getLoginIdAsLong();
-        //wordService.;
+        wordService.reviewWord(userId, wordId, reviewWordVo.getRating());
         return ResponseEntity.internalServerError().build();
     }
 }
