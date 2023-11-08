@@ -63,8 +63,8 @@ class UserControllerTest {
     @Test
     @Order(2)
     void getAll() throws Exception {
-    mvc.perform(MockMvcRequestBuilders.get("/user"));
-    verify(userService).getAll();
+        mvc.perform(MockMvcRequestBuilders.get("/users"));
+        verify(userService).getAll();
     }
 //    @Test
 //    void getAll() {
