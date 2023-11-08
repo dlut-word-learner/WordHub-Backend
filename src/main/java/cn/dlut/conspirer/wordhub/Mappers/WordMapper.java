@@ -6,10 +6,11 @@
  */
 package cn.dlut.conspirer.wordhub.Mappers;
 
+import cn.dlut.conspirer.wordhub.Entities.StudyRec;
 import cn.dlut.conspirer.wordhub.Entities.Word;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.*;
+
+import java.sql.Timestamp;
 
 /**
  * Mapper related to words.
@@ -29,6 +30,20 @@ public interface WordMapper {
     @Options(useGeneratedKeys = true, keyProperty = "word.id", keyColumn = "word_id")
     int addWordToDict(Long dictId, Word word);
 
+    @Insert("insert into study_rec(word_id, user_id, study_rec_tick, study_rec_gap, study_rec_due_time, study_rec_ease) values(#{wordId}, #{userId}, #{tick}, #{gap}, #{dueTime}, #{ease})")
+    int insertStudyRec(Long userId, Long wordId, Long tick, Long gap, Timestamp dueTime, Double ease);
+
+    @Select("select * from study_rec where user_id=#{userId} and word_id=#{wordId} ORDER BY study_rec_due_time DESC LIMIT 1")
+    @Results(id = "StudyRecMap", value = {
+            @Result(column = "study_rec_id", property = "id"),
+            @Result(column = "word_id", property = "wordId"),
+            @Result(column = "user_id", property = "userId"),
+            @Result(column = "study_rec_gap", property = "gap"),
+            @Result(column = "study_rec_ease", property = "ease"),
+            @Result(column = "study_rec_due_time", property = "dueTime"),
+            @Result(column = "study_rec_tick", property = "tick"),
+    })
+    StudyRec getLatestStudyRec(Long userId, Long wordId);
     /**
      * Add a translation for a word.
      *
