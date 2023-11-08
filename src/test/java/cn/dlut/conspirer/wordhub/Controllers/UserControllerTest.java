@@ -60,6 +60,12 @@ class UserControllerTest {
         // MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post("/users").contentType("text");
     }
 
+    @Test
+    @Order(2)
+    void getAll() throws Exception {
+    mvc.perform(MockMvcRequestBuilders.get("/user"));
+    verify(userService).getAll();
+    }
 //    @Test
 //    void getAll() {
 //    }
