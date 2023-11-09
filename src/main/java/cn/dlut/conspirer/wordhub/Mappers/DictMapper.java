@@ -57,7 +57,7 @@ public interface DictMapper {
             "limit #{num}")
     @ResultMap("wordMap")
     List<Word> getWordsToLearn(Long dictId, Long userId, Long num);
-//    TODO
+
     @Select("SELECT word.word_id, word.word_name, word.extension, study_rec.study_rec_tick " +
             "FROM word " +
             "         JOIN ( " +

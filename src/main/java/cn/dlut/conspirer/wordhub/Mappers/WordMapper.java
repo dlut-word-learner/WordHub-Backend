@@ -30,7 +30,9 @@ public interface WordMapper {
     @Options(useGeneratedKeys = true, keyProperty = "word.id", keyColumn = "word_id")
     int addWordToDict(Long dictId, Word word);
 //TODO for two
-    @Insert("insert into study_rec(word_id, user_id, study_rec_tick, study_rec_gap, study_rec_due_time, study_rec_ease) values(#{wordId}, #{userId}, #{tick}, #{gap}, #{dueTime}, #{ease})")
+    @Insert("insert into study_rec(word_id, user_id, study_rec_tick, study_rec_gap, study_rec_due_time, study_rec_ease) " +
+            "values(#{wordId}, #{userId}, #{tick}, #{gap}, #{dueTime}, #{ease})")
+//    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "study_rec_id")
     int insertStudyRec(Long userId, Long wordId, Long tick, Long gap, Timestamp dueTime, Double ease);
 
     @Select("select * from study_rec where user_id=#{userId} and word_id=#{wordId} ORDER BY study_rec_due_time DESC LIMIT 1")
