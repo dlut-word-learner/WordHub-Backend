@@ -2,6 +2,7 @@ package cn.dlut.conspirer.wordhub.Controllers;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.dev33.satoken.stp.StpUtil;
+import cn.dlut.conspirer.wordhub.Dtos.WordToReviewDTO;
 import cn.dlut.conspirer.wordhub.Entities.Dict;
 import cn.dlut.conspirer.wordhub.Entities.Languages;
 import cn.dlut.conspirer.wordhub.Services.DictService;
@@ -90,7 +91,7 @@ public class DictController {
         Long userId = StpUtil.getLoginIdAsLong();
         if (num == null) num = 20L;
         // Languages lang = dictService.getLanguageByDictId(dictId);
-        List<WordToReviewVo> wordList = dictService.getWordsToReview(dictId, userId, num);
+        List<WordToReviewDTO> wordList = dictService.getWordsToReview(dictId, userId, num);
         return ResponseEntity.ok(wordList);
     }
 }

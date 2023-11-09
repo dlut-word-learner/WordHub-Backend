@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 /**
  * Word实体类包括id, name, 字典id，以及扩展信息
@@ -20,7 +21,7 @@ import lombok.NoArgsConstructor;
  * @version 1.1
  */
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Word {

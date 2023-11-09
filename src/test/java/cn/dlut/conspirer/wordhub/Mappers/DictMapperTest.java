@@ -1,8 +1,12 @@
 package cn.dlut.conspirer.wordhub.Mappers;
 
+import cn.dlut.conspirer.wordhub.Dtos.WordToReviewDTO;
 import cn.dlut.conspirer.wordhub.Entities.Dict;
 import cn.dlut.conspirer.wordhub.Entities.Languages;
+import cn.dlut.conspirer.wordhub.Entities.StudyRec;
 import cn.dlut.conspirer.wordhub.Entities.Word;
+import cn.dlut.conspirer.wordhub.Vos.WordExtensionVo;
+import cn.dlut.conspirer.wordhub.Vos.WordToReviewVo;
 import cn.dlut.conspirer.wordhub.WordHubApplication;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -10,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.test.annotation.Rollback;
@@ -18,6 +23,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -99,6 +105,29 @@ class DictMapperTest {
         assertThat(wordList).extracting(Word::getName).containsAnyOf("word5",
                 "word4");
     }
+
+    @Test
+    @Sql("/data-testGetWordsToReview.sql")
+    void testGetWordsToReview() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        WordToReviewVo study_rec =
+                WordToReviewVo.builder().id(101L).tick(1L).name("word1").extension(new WordExtensionVo()).build();
+        List<WordToReviewVo> testWordToReview = dictMapper.getWordsToReview(1005L,1L,3L).stream().map(x -> {
+            WordToReviewVo word =
+                    null;
+            try {
+                word = WordToReviewVo.builder().tick(x.getTick()).id(x.getId()).name(x.getName()).extension(objectMapper.treeToValue(x.getExtension(), WordExtensionVo.class)).build();
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+
+            return word;
+        }).collect(Collectors.toList()); ;
+
+        assertThat(testWordToReview).contains(study_rec);
+
+    }
+
 
 //    @Test
 //    void getWordsByDictId() {

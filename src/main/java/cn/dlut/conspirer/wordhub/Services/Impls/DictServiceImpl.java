@@ -1,11 +1,11 @@
 package cn.dlut.conspirer.wordhub.Services.Impls;
 
+import cn.dlut.conspirer.wordhub.Dtos.WordToReviewDTO;
 import cn.dlut.conspirer.wordhub.Entities.Dict;
 import cn.dlut.conspirer.wordhub.Entities.Languages;
 import cn.dlut.conspirer.wordhub.Entities.Word;
 import cn.dlut.conspirer.wordhub.Mappers.DictMapper;
 import cn.dlut.conspirer.wordhub.Services.DictService;
-import cn.dlut.conspirer.wordhub.Vos.WordToReviewVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,7 +47,7 @@ public class DictServiceImpl implements DictService {
     }
 
     @Override
-    public List<WordToReviewVo> getWordsToReview(Long dictId, Long userId, Long num) {
+    public List<WordToReviewDTO> getWordsToReview(Long dictId, Long userId, Long num) {
         return dictMapper.getWordsToReview(dictId, userId, num);
     }
 
