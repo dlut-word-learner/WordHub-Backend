@@ -29,7 +29,7 @@ public interface WordMapper {
     @Insert("insert into word(word_name, dict_id, extension) values(#{word.name}, #{dictId}, #{word.extension, typeHandler=cn.dlut.conspirer.wordhub.Handlers.JsonNodeTypeHandler})")
     @Options(useGeneratedKeys = true, keyProperty = "word.id", keyColumn = "word_id")
     int addWordToDict(Long dictId, Word word);
-
+//TODO for two
     @Insert("insert into study_rec(word_id, user_id, study_rec_tick, study_rec_gap, study_rec_due_time, study_rec_ease) values(#{wordId}, #{userId}, #{tick}, #{gap}, #{dueTime}, #{ease})")
     int insertStudyRec(Long userId, Long wordId, Long tick, Long gap, Timestamp dueTime, Double ease);
 

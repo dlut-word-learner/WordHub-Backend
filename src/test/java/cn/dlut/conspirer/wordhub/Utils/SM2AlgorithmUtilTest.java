@@ -35,7 +35,7 @@ public class SM2AlgorithmUtilTest {
 
     StudyRec getStudyRec_1(){
         long id =100L;long wordId = 1001L;long UserId = 10001L;long gap = 1L;
-        double ease = SM2AlgorithmUtil.MAX_EASE+SM2AlgorithmUtil.MIN_EASE;
+        double ease = (SM2AlgorithmUtil.MAX_EASE+SM2AlgorithmUtil.MIN_EASE)*0.5;
         String str = "2023-10-1 15:40:00";
         Timestamp dueTime = Timestamp.valueOf(str);
         long tick = 1;
@@ -60,7 +60,7 @@ public class SM2AlgorithmUtilTest {
 
     StudyRec getStudyRec_2(){
         long id =100L; long wordId = 1001L;long UserId = 10001L;long gap = 5L;
-        double ease = SM2AlgorithmUtil.MAX_EASE+SM2AlgorithmUtil.MIN_EASE;
+        double ease = (SM2AlgorithmUtil.MAX_EASE+SM2AlgorithmUtil.MIN_EASE)*0.5;
         String str = "2023-10-1 15:40:00";
         Timestamp dueTime = Timestamp.valueOf(str);
         long tick = 1;
@@ -68,7 +68,8 @@ public class SM2AlgorithmUtilTest {
     }
     /**
      *getStudyRec_2 ：ease = 1.9，2023-10-1 15:40:00
-     *第二次测试  1.9*2(5+gap/2)
+     *第二次测试  1.9*2(5+gap/2)  gap=5-1
+     * 应为26
      */
     @Test
     @Order(3)
@@ -78,7 +79,27 @@ public class SM2AlgorithmUtilTest {
         String strTime = "2023-10-5 15:40:00";
         Timestamp now = Timestamp.valueOf(strTime);
         long gap = SM2AlgorithmUtil.calcGap(studyRec_2,scheduLingStates_easy,now);
-       // assertThat();
+        assertEquals(1.9,studyRec_2.getEase());
+         assertEquals(26L,gap);
+    }
+    StudyRec getStudyRec_3(){
+        long id =100L; long wordId = 1001L;long UserId = 10001L;long gap = 4L;
+        double ease = (SM2AlgorithmUtil.MAX_EASE+SM2AlgorithmUtil.MIN_EASE)*0.5;
+        String str = "2023-10-1 15:40:00";
+        Timestamp dueTime = Timestamp.valueOf(str);
+        long tick = 1;
+        return(new StudyRec(id,wordId,UserId,gap,ease,dueTime,tick));
+    }
+    //第三次测试  1.2(4+(10-1)/4)=7.5
+    @Test
+    @Order(3)
+    void testCalcGap_3(){
+        StudyRec studyRec_3 = getStudyRec_3();
+        SchedulingStates scheduLingStates_hard = SchedulingStates.Hard;
+        String strTime = "2023-10-10 15:40:00";
+        Timestamp now = Timestamp.valueOf(strTime);
+        long gap = SM2AlgorithmUtil.calcGap(studyRec_3,scheduLingStates_hard,now);
+        assertEquals(7L,gap);
     }
 
 }
