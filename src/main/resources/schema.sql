@@ -89,7 +89,7 @@ create table if not exists wordhub.card_tag
 );
 
 -- auto-generated definition
-create table study_rec
+create table wordhub.study_rec
 (
     study_rec_id       int auto_increment
         primary key,
