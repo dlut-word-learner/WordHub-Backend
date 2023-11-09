@@ -29,7 +29,7 @@ public class ValidatedExceptionHandler {
             List<ObjectError> errors = result.getAllErrors();
             errors.forEach(p -> {
                 FieldError fieldError = (FieldError) p;
-                log.warn("Bad Request Parameters: VO Entity [{}],field [{}],message [{}]", fieldError.getObjectName(), fieldError.getField(), fieldError.getDefaultMessage());
+                log.warn("Bad Request Parameters: VO Entity [{}], field [{}], value [{}],message [{}]", fieldError.getObjectName(), fieldError.getField(), fieldError.getRejectedValue().toString(), fieldError.getDefaultMessage());
                 stringBuilder.append(fieldError.getDefaultMessage()).append("; ");
             });
         } else stringBuilder.append("未知错误");

@@ -8,6 +8,7 @@ import cn.dlut.conspirer.wordhub.Services.UserService;
 import cn.dlut.conspirer.wordhub.Vos.UserProfileUpdateVo;
 import cn.dlut.conspirer.wordhub.Vos.UserRegisterVo;
 import cn.dlut.conspirer.wordhub.Vos.UserVo;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -55,8 +56,6 @@ public class UserController {
             log.error("Register failed: " + e.getMessage());
             return ResponseEntity.badRequest().build();
         }
-//        if(Objects.equals(user.getUsername(), "abcd") && user.getPassword().equals("123456"))return ResponseEntity.ok().build();
-//        else return ResponseEntity.badRequest().body("账户或密码错误");
     }
 
     @GetMapping
@@ -91,7 +90,7 @@ public class UserController {
     @PutMapping("/{id}/profile")
     // 登录校验--只有登录之后才能进入该方法。
     @SaCheckLogin
-    public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @RequestBody UserProfileUpdateVo userVo) {
+    public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @Validated @RequestBody UserProfileUpdateVo userVo) {
         // 只能修改自己的信息，不能修改别人的
         if (StpUtil.getLoginIdAsLong() != id) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("无权修改该用户的信息");
