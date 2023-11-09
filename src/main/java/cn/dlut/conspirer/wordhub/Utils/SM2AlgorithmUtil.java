@@ -6,6 +6,8 @@ import lombok.extern.log4j.Log4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Timestamp;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 
 /**
@@ -66,8 +68,33 @@ public class SM2AlgorithmUtil {
         return ease > MAX_EASE ? MAX_EASE : (ease < MIN_EASE ? MIN_EASE :ease);
     }
 
-    // TODO
-    public static Double clacGap(StudyRec lastRec, SchedulingStates state){
-        return 0.;
+    /**
+     * 计算下次的间隔
+     * 公式：系数 * （lastGap + delayDays / difficulty）
+     * 系数：good: ease, hard: 1.2, easy: ease * reward
+     *
+     * @param lastRec
+     * @param state
+     * @return
+     */
+    public static Long calcGap(StudyRec lastRec, SchedulingStates state, Timestamp now){
+        if(lastRec.getGap()<4)return lastRec.getGap()*2;
+        Double coefficient = -1.;
+        switch (state){
+            case Again -> {
+                log.error("不应出现again");
+                return 0L;
+            }
+            case Hard -> {
+                coefficient = 1.2;
+            }
+            case Good -> {
+                coefficient = lastRec.getEase();
+            }
+            case Easy -> {
+                coefficient = lastRec.getEase() * EASY_REWARD;
+            }
+        }
+        return (long) (coefficient * (lastRec.getGap() + ChronoUnit.DAYS.between(lastRec.getDueTime().toLocalDateTime().toLocalDate(), now.toLocalDateTime().toLocalDate())));
     }
 }

@@ -8,6 +8,12 @@ import cn.dlut.conspirer.wordhub.Services.WordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
+
+import static cn.dlut.conspirer.wordhub.Utils.SM2AlgorithmUtil.calcGap;
+import static cn.dlut.conspirer.wordhub.Utils.SM2AlgorithmUtil.clampEase;
+
 /**
  * TODO
  *
@@ -38,6 +44,7 @@ public class WordServiceImpl implements WordService {
      */
     @Override
     public boolean learnWord(Long userId, Long wordId, boolean familiar) {
+
         return false;
     }
 
@@ -52,6 +59,36 @@ public class WordServiceImpl implements WordService {
     public boolean reviewWord(Long userId, Long wordId, SchedulingStates rating, Long tick){
         StudyRec latest = wordMapper.getLatestStudyRec(userId, wordId);
         if(latest == null) return false;
-        return false;
+        Double newEase = latest.getEase();
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+        long gap= calcGap(latest, rating, now);;
+        if(latest.getGap()>=4){
+            switch (rating){
+                case Again -> {
+                    newEase-=0.2;
+                }
+                case Hard -> {
+                    newEase-=0.15;
+                }
+                case Good -> {
+
+                }
+                case Easy -> {
+                    newEase+=0.15;
+                }
+            }
+            newEase = clampEase(newEase);
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(now.getTime());
+        calendar.add(Calendar.DATE, Math.toIntExact(gap));
+        Timestamp due = new Timestamp(calendar.getTimeInMillis());
+
+        return wordMapper.insertStudyRec(userId, wordId, tick, gap, due, newEase)==1;
+    }
+
+    @Override
+    public StudyRec getLatestStudyRec(Long userId, Long wordId){
+        return wordMapper.getLatestStudyRec(userId, wordId);
     }
 }

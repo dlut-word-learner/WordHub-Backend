@@ -7,6 +7,7 @@
 package cn.dlut.conspirer.wordhub.Services;
 
 import cn.dlut.conspirer.wordhub.Entities.SchedulingStates;
+import cn.dlut.conspirer.wordhub.Entities.StudyRec;
 import cn.dlut.conspirer.wordhub.Entities.Word;
 
 public interface WordService {
@@ -20,4 +21,6 @@ public interface WordService {
 
 
     boolean reviewWord(Long userId, Long wordId, SchedulingStates rating, Long tick);
+
+    StudyRec getLatestStudyRec(Long userId, Long wordId);
 }
