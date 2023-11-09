@@ -21,6 +21,7 @@ public interface DictMapper {
     @Results(id = "wordMap", value = {
             @Result(property = "id", column = "word_id"),
             @Result(property = "name", column = "word_name"),
+            @Result(property = "dictId", column = "dict_id"),
             @Result(property = "extension", column = "extension", typeHandler = JsonNodeTypeHandler.class)
     })
     List<Word> getWordsByDictId(Long dictId);
@@ -48,7 +49,9 @@ public interface DictMapper {
     @Select("select word.word_id, word_name, extension from word " +
             "where word.dict_id = #{dictId} and " +
             "word.word_id not in " +
-            "(select word.word_id from study_rec where study_rec.user_id = #{userId}) " +
+            "(select distinct study_rec.word_id from study_rec where study_rec" +
+            ".user_id" +
+            " = #{userId}) " +
             "order by rand(#{userId})" +
             "limit #{num}")
     @ResultMap("wordMap")

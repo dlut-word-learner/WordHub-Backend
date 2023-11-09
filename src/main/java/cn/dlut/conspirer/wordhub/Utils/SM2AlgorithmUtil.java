@@ -67,7 +67,7 @@ public class SM2AlgorithmUtil {
     /**
      * 计算下次的间隔 <br/>
      * 公式：系数 * （lastGap + delayDays / difficulty） <br/>
-     * 系数：good: ease, hard: 1.2, easy: ease * reward
+     * 系数：good: ease, hard: 1.2, easy: ease * reward(2.0)
      *
      * @param lastRec
      * @param state
@@ -77,6 +77,7 @@ public class SM2AlgorithmUtil {
         if (lastRec.getGap() < 4) return lastRec.getGap() * 2;
         Double coefficient = getExpFactor(state, lastRec.getEase());
 
-        return (long) (coefficient * (lastRec.getGap() + ChronoUnit.DAYS.between(lastRec.getDueTime().toLocalDateTime().toLocalDate(), now.toLocalDateTime().toLocalDate()) / DIFFICULTY_CATE.get(state)));
+        return (long) (coefficient * (lastRec.getGap() + ChronoUnit.DAYS.between(lastRec.getDueTime().toLocalDateTime().toLocalDate()
+                , now.toLocalDateTime().toLocalDate()) / DIFFICULTY_CATE.get(state)));
     }
 }

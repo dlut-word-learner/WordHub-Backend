@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
@@ -24,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @Slf4j
 @MybatisTest
 @ContextConfiguration(classes = WordHubApplication.class)
+@Rollback(value = true)
 @ActiveProfiles("test")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class DictMapperTest {
@@ -42,7 +44,8 @@ class DictMapperTest {
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-        Word word1 = Word.builder().id(101L).name("word1").extension(extension).build();
+        Word word1 =
+                Word.builder().id(101L).name("word1").dictId(1001L).extension(extension).build();
         assertThat(wordList).hasSize(6).contains(word1);
     }
 
@@ -90,9 +93,11 @@ class DictMapperTest {
     @Sql("/data-testGetWordsToLearn.sql")
     void testGetWordsToLearn() {
         List<Word> wordList = dictMapper.getWordsToLearn(1005L, 1L, 3L);
+        log.info(wordList.toString());
         assertThat(wordList).extracting(Word::getName).containsExactlyInAnyOrder("word5", "word4");
         wordList = dictMapper.getWordsToLearn(1005L, 1L, 1L);
-        assertThat(wordList).extracting(Word::getName).containsAnyOf("word5", "word4");
+        assertThat(wordList).extracting(Word::getName).containsAnyOf("word5",
+                "word4");
     }
 
 //    @Test
