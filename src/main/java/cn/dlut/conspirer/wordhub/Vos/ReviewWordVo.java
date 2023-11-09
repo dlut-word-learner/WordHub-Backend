@@ -6,7 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * TODO
+ * 复习单词的接口 <br/>
+ * 包含记忆评级与第几次复习信息
  *
  * @author OuOu
  * @version 1.0

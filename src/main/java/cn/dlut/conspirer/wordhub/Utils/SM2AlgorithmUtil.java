@@ -69,8 +69,8 @@ public class SM2AlgorithmUtil {
     }
 
     /**
-     * 计算下次的间隔
-     * 公式：系数 * （lastGap + delayDays / difficulty）
+     * 计算下次的间隔 <br/>
+     * 公式：系数 * （lastGap + delayDays / difficulty） <br/>
      * 系数：good: ease, hard: 1.2, easy: ease * reward
      *
      * @param lastRec

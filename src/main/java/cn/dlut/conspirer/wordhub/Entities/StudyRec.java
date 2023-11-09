@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import java.sql.Timestamp;
 
 /**
- * TODO
+ * 学习记录
  *
  * @author OuOu
  * @version 1.0

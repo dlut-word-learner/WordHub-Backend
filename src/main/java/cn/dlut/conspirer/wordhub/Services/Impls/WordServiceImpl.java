@@ -36,11 +36,11 @@ public class WordServiceImpl implements WordService {
     }
 
     /**
-     * TODO
+     * 学习新单词（或者不是新的但忘记了重学）
      *
      * @param userId
      * @param wordId
-     * @param familiar
+     * @param familiar 是否熟悉，熟悉的话可以四天后再复习
      * @return
      */
     @Override
@@ -50,16 +50,19 @@ public class WordServiceImpl implements WordService {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(now.getTime());
         calendar.add(Calendar.DATE, Math.toIntExact(1L));
-        Long gap = latest == null ? 1L: latest.getTick()+1;
+        Long gap = latest == null ? (familiar ? 4L : 1L) : latest.getTick()+1;
         return wordMapper.insertStudyRec(userId, wordId, gap, 1L, new Timestamp(calendar.getTimeInMillis()), SM2AlgorithmUtil.EASE_FACTOR_INITIAL) ==1;
     }
 
     /**
-     * TODO
+     * 复习单词<br/>
+     *
+     * 调用 SM-2 算法计算下次应该隔多久复习，并更新单词的ease值
+     *
      * @param userId
      * @param wordId
-     * @param rating
-     * @param tick
+     * @param rating 记忆评级
+     * @param tick 本次是第几次学习
      */
     @Override
     public boolean reviewWord(Long userId, Long wordId, SchedulingStates rating, Long tick){
