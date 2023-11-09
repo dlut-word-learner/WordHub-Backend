@@ -7,6 +7,7 @@ import cn.dlut.conspirer.wordhub.Entities.Languages;
 import cn.dlut.conspirer.wordhub.Services.DictService;
 import cn.dlut.conspirer.wordhub.Vos.DictVo;
 import cn.dlut.conspirer.wordhub.Vos.WordExtensionVo;
+import cn.dlut.conspirer.wordhub.Vos.WordToReviewVo;
 import cn.dlut.conspirer.wordhub.Vos.WordVo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -80,6 +81,16 @@ public class DictController {
                 throw new RuntimeException(e);
             }
         }).collect(Collectors.toList());
+        return ResponseEntity.ok(wordList);
+    }
+
+    @GetMapping("/{id}/review")
+    @SaCheckLogin
+    public ResponseEntity<?> getWordsToReview(@PathVariable("id") Long dictId, @RequestParam @Nullable Long num) {
+        Long userId = StpUtil.getLoginIdAsLong();
+        if(num==null)num=20L;
+        // Languages lang = dictService.getLanguageByDictId(dictId);
+        List<WordToReviewVo> wordList = dictService.getWordsToReview(dictId, userId, num);
         return ResponseEntity.ok(wordList);
     }
 }

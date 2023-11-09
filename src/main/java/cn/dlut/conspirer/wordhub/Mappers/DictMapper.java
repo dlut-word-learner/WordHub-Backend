@@ -10,6 +10,7 @@ import cn.dlut.conspirer.wordhub.Entities.Dict;
 import cn.dlut.conspirer.wordhub.Entities.Languages;
 import cn.dlut.conspirer.wordhub.Entities.Word;
 import cn.dlut.conspirer.wordhub.Handlers.JsonNodeTypeHandler;
+import cn.dlut.conspirer.wordhub.Vos.WordToReviewVo;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -45,14 +46,31 @@ public interface DictMapper {
     List<Dict> getDicts();
 
     @Select("select word.word_id, word_name, extension from word " +
-    "left join (select distinct word_id from study_rec " +
-    "where user_id = #{userId}) as sr " +
-    "on word.word_id = sr.word_id " +
-    "where word.dict_id = #{dictId} and sr.word_id is null " +
+    "where word.dict_id = #{dictId} and " +
+    "word.word_id not in " +
+        "(select word.word_id from study_rec where study_rec.user_id = #{userId}) " +
     "order by rand(#{userId})" +
     "limit #{num}")
     @ResultMap("wordMap")
     List<Word> getWordsToLearn(Long dictId, Long userId, Long num);
+
+    @Select("SELECT word.word_id, word.word_name, word.extension, latest_study_rec.tick " +
+            "FROM word " +
+            "JOIN ( " +
+            "    SELECT word_id, study_rec_tick, study_rec_due_time, MAX(study_rec.study_rec_tick) AS tick " +
+            "    FROM study_rec " +
+            "    WHERE user_id = #{userId} " +
+            "    GROUP BY word_id " +
+            ") AS latest_study_rec " +
+            "ON word.word_id = latest_study_rec.word_id " +
+//            "JOIN study_rec " +
+//            "ON latest_study_rec.word_id = study_rec.word_id " +
+//            "AND latest_study_rec.tick = study_rec.study_rec_tick " +
+            "WHERE word.dict_id = #{dictId} " +
+            "AND DATE(latest_study_rec.study_rec_tick) <= CURDATE() " +
+            "ORDER BY latest_study_rec.study_rec_due_time ASC " +
+            "LIMIT #{num}; ")
+    List<WordToReviewVo> getWordsToReview(Long dictId, Long userId, Long num);
 
     @Insert("insert into dict(lang_name, dict_name) values(#{language}, #{name})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "dict_id")
