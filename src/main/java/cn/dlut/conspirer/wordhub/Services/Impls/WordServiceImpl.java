@@ -5,6 +5,7 @@ import cn.dlut.conspirer.wordhub.Entities.StudyRec;
 import cn.dlut.conspirer.wordhub.Entities.Word;
 import cn.dlut.conspirer.wordhub.Mappers.WordMapper;
 import cn.dlut.conspirer.wordhub.Services.WordService;
+import cn.dlut.conspirer.wordhub.Utils.SM2AlgorithmUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -44,8 +45,13 @@ public class WordServiceImpl implements WordService {
      */
     @Override
     public boolean learnWord(Long userId, Long wordId, boolean familiar) {
-
-        return false;
+        StudyRec latest = wordMapper.getLatestStudyRec(userId, wordId);
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(now.getTime());
+        calendar.add(Calendar.DATE, Math.toIntExact(1L));
+        Long gap = latest == null ? 1L: latest.getTick()+1;
+        return wordMapper.insertStudyRec(userId, wordId, gap, 1L, new Timestamp(calendar.getTimeInMillis()), SM2AlgorithmUtil.EASE_FACTOR_INITIAL) ==1;
     }
 
     /**
