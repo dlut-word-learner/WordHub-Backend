@@ -1,7 +1,6 @@
 package cn.dlut.conspirer.wordhub.Vos;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -19,7 +18,7 @@ import lombok.experimental.SuperBuilder;
 public class WordVo {
     Long id;
     String name;
-//    Long dictId;
+    //    Long dictId;
 // 暂时不让extension与其它字段平级
 //    @JsonUnwrapped
     WordExtensionVo extension;

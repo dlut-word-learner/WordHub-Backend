@@ -21,7 +21,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -61,9 +62,6 @@ class UserSessionControllerTest {
         mvc.perform(MockMvcRequestBuilders.post("/session").contentType(MediaType.APPLICATION_JSON).content(s)).andExpect(status().isOk());
         verify(userService).checkLogin(userLoginVo.getUsername(), userLoginVo.getPassword());
     }
-
-
-
 
 
 }

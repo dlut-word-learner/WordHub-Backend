@@ -9,11 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.List;
 
@@ -34,7 +32,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Autowired
-    public UserServiceImpl(UserMapper userMapper, @Value("${urls.avatar}")String avatarPath) {
+    public UserServiceImpl(UserMapper userMapper, @Value("${urls.avatar}") String avatarPath) {
         this.usermapper = userMapper;
         this.avatarPath = avatarPath;
     }
@@ -45,7 +43,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Autowired
-    public void setUserMapper(@Value("${urls.avatar}")String path) {
+    public void setUserMapper(@Value("${urls.avatar}") String path) {
         avatarPath = path;
     }
 

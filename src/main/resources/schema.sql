@@ -8,7 +8,7 @@ create table if not exists wordhub.dict
 (
     dict_id   int auto_increment
         primary key,
-    lang_name   varchar(20)         not null,
+    lang_name varchar(20) not null,
     dict_name varchar(20) not null,
     constraint dict_language_lang_name_fk
         foreign key (lang_name) references wordhub.language (lang_name)
@@ -23,13 +23,13 @@ create table if not exists wordhub.tag
 
 create table if not exists wordhub.user
 (
-    user_id          int auto_increment
+    user_id       int auto_increment
         primary key,
-    user_name        varchar(30)       not null comment '用户名',
-    user_password    char(60)          not null comment '存储Bcrypt加密后的密码',
-    user_email       varchar(50)       not null,
-    user_score       int     default 0 not null,
-    user_role        tinyint default 0 not null comment '0 普通用户 1管理员 其它预留',
+    user_name     varchar(30)       not null comment '用户名',
+    user_password char(60)          not null comment '存储Bcrypt加密后的密码',
+    user_email    varchar(50)       not null,
+    user_score    int     default 0 not null,
+    user_role     tinyint default 0 not null comment '0 普通用户 1管理员 其它预留',
     constraint user_pk_email
         unique (user_email),
     constraint user_pk_name
@@ -78,7 +78,7 @@ create table if not exists wordhub.card_response
 
 create table if not exists wordhub.card_tag
 (
-    card_id     int not null,
+    card_id     int         not null,
     tag_name    varchar(20) not null,
     card_tag_id int auto_increment
         primary key,
@@ -93,12 +93,12 @@ create table wordhub.study_rec
 (
     study_rec_id       int auto_increment
         primary key,
-    word_id            int                                not null,
-    user_id            int                                not null,
-    study_rec_gap      int                                not null comment '间隔天数',
-    study_rec_ease     double                             not null comment '简单值',
-    study_rec_due_time datetime                           not null comment '预计下次复习时间',
-    study_rec_tick     int                                not null comment '第几次学习',
+    word_id            int      not null,
+    user_id            int      not null,
+    study_rec_gap      int      not null comment '间隔天数',
+    study_rec_ease     double   not null comment '简单值',
+    study_rec_due_time datetime not null comment '预计下次复习时间',
+    study_rec_tick     int      not null comment '第几次学习',
     constraint study_rec_pk
         unique (user_id, word_id, study_rec_tick),
     constraint study_rec_user_user_id_fk

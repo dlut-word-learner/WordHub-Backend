@@ -8,7 +8,6 @@ import cn.dlut.conspirer.wordhub.Services.UserService;
 import cn.dlut.conspirer.wordhub.Vos.UserProfileUpdateVo;
 import cn.dlut.conspirer.wordhub.Vos.UserRegisterVo;
 import cn.dlut.conspirer.wordhub.Vos.UserVo;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -18,11 +17,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -108,7 +104,7 @@ public class UserController {
 
     @GetMapping("/{id}/profile/avatar")
     @SaIgnore
-    public ResponseEntity<?> getAvatar(@PathVariable("id") Long id){
+    public ResponseEntity<?> getAvatar(@PathVariable("id") Long id) {
         try {
             return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(userService.getAvatarById(id));
         } catch (IOException e) {
@@ -119,7 +115,7 @@ public class UserController {
 
     @PostMapping("/{id}/profile/avatar")
     @SaCheckLogin
-    public ResponseEntity<?> updateAvatar(@PathVariable("id") Long id, @NotNull @RequestBody byte[] avatar){
+    public ResponseEntity<?> updateAvatar(@PathVariable("id") Long id, @NotNull @RequestBody byte[] avatar) {
         if (StpUtil.getLoginIdAsLong() != id) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("无权修改该用户的头像");
         }

@@ -46,11 +46,11 @@ public interface DictMapper {
     List<Dict> getDicts();
 
     @Select("select word.word_id, word_name, extension from word " +
-    "where word.dict_id = #{dictId} and " +
-    "word.word_id not in " +
-        "(select word.word_id from study_rec where study_rec.user_id = #{userId}) " +
-    "order by rand(#{userId})" +
-    "limit #{num}")
+            "where word.dict_id = #{dictId} and " +
+            "word.word_id not in " +
+            "(select word.word_id from study_rec where study_rec.user_id = #{userId}) " +
+            "order by rand(#{userId})" +
+            "limit #{num}")
     @ResultMap("wordMap")
     List<Word> getWordsToLearn(Long dictId, Long userId, Long num);
 

@@ -49,28 +49,29 @@ public class WordServiceImpl implements WordService {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(now.getTime());
         calendar.add(Calendar.DATE, Math.toIntExact(1L));
-        Long gap = latest == null ? (familiar ? 4L : 1L) : latest.getTick()+1;
-        return wordMapper.insertStudyRec(userId, wordId, gap, 1L, new Timestamp(calendar.getTimeInMillis()), SM2AlgorithmUtil.EASE_FACTOR_INITIAL) ==1;
+        Long gap = latest == null ? (familiar ? 4L : 1L) : latest.getTick() + 1;
+        return wordMapper.insertStudyRec(userId, wordId, gap, 1L, new Timestamp(calendar.getTimeInMillis()), SM2AlgorithmUtil.EASE_FACTOR_INITIAL) == 1;
     }
 
     /**
      * 复习单词<br/>
-     *
+     * <p>
      * 调用 SM-2 算法计算下次应该隔多久复习，并更新单词的ease值
      *
      * @param userId
      * @param wordId
      * @param rating 记忆评级
-     * @param tick 本次是第几次学习
+     * @param tick   本次是第几次学习
      */
     @Override
-    public boolean reviewWord(Long userId, Long wordId, SchedulingStates rating, Long tick){
+    public boolean reviewWord(Long userId, Long wordId, SchedulingStates rating, Long tick) {
         StudyRec latest = wordMapper.getLatestStudyRec(userId, wordId);
-        if(latest == null) return false;
+        if (latest == null) return false;
         Double newEase = latest.getEase();
         Timestamp now = new Timestamp(System.currentTimeMillis());
-        long gap= calcGap(latest, rating, now);;
-        if(latest.getGap()>=4){
+        long gap = calcGap(latest, rating, now);
+
+        if (latest.getGap() >= 4) {
             newEase += EASE_CHANGE.get(rating);
             newEase = clampEase(newEase);
         }
@@ -79,11 +80,11 @@ public class WordServiceImpl implements WordService {
         calendar.add(Calendar.DATE, Math.toIntExact(gap));
         Timestamp due = new Timestamp(calendar.getTimeInMillis());
 
-        return wordMapper.insertStudyRec(userId, wordId, tick, gap, due, newEase)==1;
+        return wordMapper.insertStudyRec(userId, wordId, tick, gap, due, newEase) == 1;
     }
 
     @Override
-    public StudyRec getLatestStudyRec(Long userId, Long wordId){
+    public StudyRec getLatestStudyRec(Long userId, Long wordId) {
         return wordMapper.getLatestStudyRec(userId, wordId);
     }
 }

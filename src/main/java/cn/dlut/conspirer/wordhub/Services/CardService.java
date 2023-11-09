@@ -13,10 +13,15 @@ import java.util.List;
  */
 public interface CardService {
     void addCard(Card card);
+
     List<Card> getCardsByUser(Long user_id);
+
     Card getCardById(Long cardId);
+
     List<CardResponse> getResponseByCardId(Long cardId);
+
     void addCardResponse(CardResponse response);
+
     void editCardContent(Long cardId, String content);
 
     void setPublic(Long cardId, boolean isPublic);

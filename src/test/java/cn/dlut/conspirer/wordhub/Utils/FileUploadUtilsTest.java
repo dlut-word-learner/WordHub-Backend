@@ -29,7 +29,7 @@ class FileUploadUtilsTest {
 
     @Test
     void testUpload() throws IOException {
-        MockMultipartFile avatar = new MockMultipartFile("avatar","test_avatar.png", "image/png", resourceLoader.getResource("classpath:test_avatar.png").getInputStream());
+        MockMultipartFile avatar = new MockMultipartFile("avatar", "test_avatar.png", "image/png", resourceLoader.getResource("classpath:test_avatar.png").getInputStream());
         String path = FileUploadUtils.upload(avatar, avatarPath + avatar.getName());
         Assertions.assertNotNull(path);
     }
@@ -37,7 +37,7 @@ class FileUploadUtilsTest {
     @Test
     void testUpload2() throws IOException {
         // 前端上传时候的参数名；用户文件系统中的文件名；上传格式；
-        MockMultipartFile avatar = new MockMultipartFile("avatar","test_avatar", "image/png", resourceLoader.getResource("classpath:test_avatar.png").getInputStream());
+        MockMultipartFile avatar = new MockMultipartFile("avatar", "test_avatar", "image/png", resourceLoader.getResource("classpath:test_avatar.png").getInputStream());
         String path = FileUploadUtils.upload(avatar, avatarPath + avatar.getName());
         Assertions.assertNotNull(path);
     }

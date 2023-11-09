@@ -1,6 +1,8 @@
 package cn.dlut.conspirer.wordhub.Vos;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 /**
@@ -14,6 +16,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class WordToReviewVo extends WordVo{
+public class WordToReviewVo extends WordVo {
     Long tick;
 }

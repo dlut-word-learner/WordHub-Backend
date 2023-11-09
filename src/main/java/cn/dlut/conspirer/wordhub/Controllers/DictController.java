@@ -44,7 +44,7 @@ public class DictController {
     @GetMapping
     public ResponseEntity<List<DictVo>> getDictionaries(@RequestParam @Nullable Languages lang) {
         log.info("language: " + lang);
-        return ResponseEntity.ok((lang!=null ?dictService.getDictionariesByLanguage(lang): dictService.getAllDictionaries()).stream().map(x -> {
+        return ResponseEntity.ok((lang != null ? dictService.getDictionariesByLanguage(lang) : dictService.getAllDictionaries()).stream().map(x -> {
             DictVo dictVo = new DictVo();
             BeanUtils.copyProperties(x, dictVo);
             return dictVo;
@@ -68,15 +68,15 @@ public class DictController {
     @SaCheckLogin
     public ResponseEntity<?> getWordsToLearn(@PathVariable("id") Long dictId, @RequestParam @Nullable Long num) {
         Long userId = StpUtil.getLoginIdAsLong();
-        if(num==null)num=20L;
+        if (num == null) num = 20L;
         // Languages lang = dictService.getLanguageByDictId(dictId);
         List<WordVo> wordList = dictService.getWordsToLearn(dictId, userId, num).stream().map(x -> {
             try {
                 return WordVo.builder()
-                        .id(x.getId())
-                        .name(x.getName())
-                        .extension(objectMapper.treeToValue(x.getExtension(), WordExtensionVo.class))
-                        .build();
+                             .id(x.getId())
+                             .name(x.getName())
+                             .extension(objectMapper.treeToValue(x.getExtension(), WordExtensionVo.class))
+                             .build();
             } catch (JsonProcessingException e) {
                 throw new RuntimeException(e);
             }
@@ -88,7 +88,7 @@ public class DictController {
     @SaCheckLogin
     public ResponseEntity<?> getWordsToReview(@PathVariable("id") Long dictId, @RequestParam @Nullable Long num) {
         Long userId = StpUtil.getLoginIdAsLong();
-        if(num==null)num=20L;
+        if (num == null) num = 20L;
         // Languages lang = dictService.getLanguageByDictId(dictId);
         List<WordToReviewVo> wordList = dictService.getWordsToReview(dictId, userId, num);
         return ResponseEntity.ok(wordList);

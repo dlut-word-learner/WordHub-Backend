@@ -1,17 +1,5 @@
 package cn.dlut.conspirer.wordhub.Handlers;
 
-import cn.dlut.conspirer.wordhub.Entities.Languages;
-import lombok.NoArgsConstructor;
-import org.apache.ibatis.type.BaseTypeHandler;
-import org.apache.ibatis.type.JdbcType;
-import org.apache.ibatis.type.MappedJdbcTypes;
-import org.apache.ibatis.type.MappedTypes;
-
-import java.sql.CallableStatement;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 /**
  * 实现 Languages类 与 WordHub数据库 Dict表 lang_id字段 之间的自动映射
  *

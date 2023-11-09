@@ -17,18 +17,22 @@ VALUES ( 1000001, 'test_1', '123456', '123@abc.cn', 'C:/Users/11131/WordHub/avat
        , 0, 0);
 
 INSERT INTO "word"
-VALUES (1000001, 'sing', 0, '{"name": "sing",
+VALUES (1000001, 'sing', 0, '{
+  "name": "sing",
   "usphone": "sɪŋ",
   "ukphone": "sɪŋ",
   "trans": [
     "唱歌"
-  ]}'),
-       (1000002, 'check', 0, '{"name": "check",
+  ]
+}'),
+       (1000002, 'check', 0, '{
+         "name": "check",
          "usphone": "tʃek",
          "ukphone": "tʃek",
          "trans": [
            "检查，核对"
-         ]}'),
+         ]
+       }'),
        (1000003, 'evening', 0, '{
          "name": "evening",
          "usphone": "ˈiːvnɪŋ",

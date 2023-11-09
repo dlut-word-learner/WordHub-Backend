@@ -20,8 +20,9 @@ import java.util.List;
 @Service
 public class CardServiceImpl implements CardService {
     CardMapper cardMapper;
+
     @Autowired
-    CardServiceImpl(CardMapper cardMapper){
+    CardServiceImpl(CardMapper cardMapper) {
         this.cardMapper = cardMapper;
     }
 
@@ -52,11 +53,11 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public void editCardContent(Long cardId, String content) {
-        cardMapper.editCardContent(cardId,content);
+        cardMapper.editCardContent(cardId, content);
     }
 
     @Override
     public void setPublic(Long cardId, boolean isPublic) {
-        cardMapper.setPublic(cardId,isPublic);
+        cardMapper.setPublic(cardId, isPublic);
     }
 }

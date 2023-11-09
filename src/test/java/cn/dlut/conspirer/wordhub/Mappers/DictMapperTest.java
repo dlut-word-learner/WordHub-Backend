@@ -9,7 +9,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.mockito.internal.matchers.Null;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -17,7 +16,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,10 +32,10 @@ class DictMapperTest {
 
     @Test
     @Sql("/data-testGetWordsByDictId.sql")
-    void testGetWordsByDictId(){
-         List<Word> wordList = dictMapper.getWordsByDictId(1001L);
-         assertFalse(wordList.isEmpty());
-         JsonNode extension;
+    void testGetWordsByDictId() {
+        List<Word> wordList = dictMapper.getWordsByDictId(1001L);
+        assertFalse(wordList.isEmpty());
+        JsonNode extension;
         try {
             extension = new ObjectMapper().readTree("{\"ukphone\": \"uk\", \"usphone\": \"us\", \"trans\": [\"trans1\",\"trans2\"]}");
             // log.info(extension.toString());
@@ -45,53 +43,53 @@ class DictMapperTest {
             throw new RuntimeException(e);
         }
         Word word1 = Word.builder().id(101L).name("word1").extension(extension).build();
-         assertThat(wordList).hasSize(6).contains(word1);
+        assertThat(wordList).hasSize(6).contains(word1);
     }
 
     @Test
     @Sql("/data-testGetLanguageByDictId.sql")
-    void testGetLanguageByDictId(){
+    void testGetLanguageByDictId() {
         Languages id = dictMapper.getLanguageByDictId(101L);
         Languages test = Languages.Test;
-        assertEquals(test,id);
+        assertEquals(test, id);
     }
 
     @Test
     @Sql("/data-testGetDictByName.sql")
-    void testGetDictByName(){
+    void testGetDictByName() {
         Dict dict = dictMapper.getDictByName("NameTest");
         Languages testLanguages = Languages.Test;
-        Dict test = new Dict(1003L,testLanguages,"NameTest");
-        assertEquals(test,dict);
+        Dict test = new Dict(1003L, testLanguages, "NameTest");
+        assertEquals(test, dict);
     }
 
 
     @Test
     @Sql("/data-testGetDictById.sql")
-    void testGetDictById(){
+    void testGetDictById() {
         Dict dict = dictMapper.getDictById(1002L);
         Languages testLanguages = Languages.Test;
         List<Word> wordListTest = null;
-        Dict test =  new Dict(1002L,testLanguages,"Test");
-        assertEquals(test,dict);
+        Dict test = new Dict(1002L, testLanguages, "Test");
+        assertEquals(test, dict);
 
     }
 
     @Test
     @Sql("/data-testGetDicts.sql")
-    void testGetDicts(){
+    void testGetDicts() {
         List<Dict> testDict = dictMapper.getDicts();
         assertNotNull(testDict);
         String DictName = "DictTest";
         Languages testLanguages = Languages.Test;
-        Dict dict = new Dict(1010L,testLanguages,DictName);
+        Dict dict = new Dict(1010L, testLanguages, DictName);
         assertThat(testDict).contains(dict);
     }
 
     @Test
     @Sql("/data-testGetWordsToLearn.sql")
-    void testGetWordsToLearn(){
-        List<Word > wordList = dictMapper.getWordsToLearn(1005L, 1L, 3L);
+    void testGetWordsToLearn() {
+        List<Word> wordList = dictMapper.getWordsToLearn(1005L, 1L, 3L);
         assertThat(wordList).extracting(Word::getName).containsExactlyInAnyOrder("word5", "word4");
         wordList = dictMapper.getWordsToLearn(1005L, 1L, 1L);
         assertThat(wordList).extracting(Word::getName).containsAnyOf("word5", "word4");

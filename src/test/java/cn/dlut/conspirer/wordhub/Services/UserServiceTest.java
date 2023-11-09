@@ -9,15 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.internal.matchers.Null;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -87,12 +81,13 @@ class UserServiceTest {
         // then
         verify(userMapper).updateUserProfile(user);
     }
+
     @Test
-    void updateUserPassword(){
+    void updateUserPassword() {
         long testId = 1L;
         String testPassWord = "testPass888";
-        userService.updateUserPassword(testId,testPassWord);
-        verify(userMapper).updateUserPassword(testId,testPassWord);
+        userService.updateUserPassword(testId, testPassWord);
+        verify(userMapper).updateUserPassword(testId, testPassWord);
     }
 
     /**   @Test

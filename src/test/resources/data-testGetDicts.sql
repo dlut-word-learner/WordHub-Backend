@@ -1,1 +1,2 @@
-INSERT INTO "dict" values (1010, 'Test', 'DictTest');
+INSERT INTO "dict"
+values (1010, 'Test', 'DictTest');

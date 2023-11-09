@@ -65,32 +65,32 @@ class UserMapperTest {
 
     @Test
     @Order(4)
-    void getUserByUsernameAndPassword(){
+    void getUserByUsernameAndPassword() {
         User testUser = getTestUser();
         userMapper.addUser(testUser);
-        User user = userMapper.getUserByUsernameAndPassword(testUser.getUsername(),testUser.getPassword());
-        assertEquals(user,testUser);
+        User user = userMapper.getUserByUsernameAndPassword(testUser.getUsername(), testUser.getPassword());
+        assertEquals(user, testUser);
     }
 
     @Test
     @Order(5)
-    void getUserByIdAndPassword(){
+    void getUserByIdAndPassword() {
         User testUser = getTestUser();
         userMapper.addUser(testUser);
         User user = userMapper.getUserByIdAndPassword(testUser.getId(), testUser.getPassword());
-        assertEquals(user,testUser);
+        assertEquals(user, testUser);
     }
 
     @Test
     @Order(6)
-    void updateUserPassword(){
+    void updateUserPassword() {
         User testUser = getTestUser();
         userMapper.addUser(testUser);
-        String testPass =  "test888";
+        String testPass = "test888";
         int lines = userMapper.updateUserPassword(testUser.getId(), testPass);
         testUser = userMapper.getUserById(testUser.getId());
-        assertEquals(1,lines);
-        assertEquals(testPass,testUser.getPassword());
+        assertEquals(1, lines);
+        assertEquals(testPass, testUser.getPassword());
     }
 
     @Test

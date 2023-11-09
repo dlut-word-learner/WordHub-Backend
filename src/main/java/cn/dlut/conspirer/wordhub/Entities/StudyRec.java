@@ -11,7 +11,6 @@ import java.sql.Timestamp;
  *
  * @author OuOu
  * @version 1.0
- *
  */
 @Data
 @NoArgsConstructor
@@ -20,12 +19,20 @@ public class StudyRec {
     Long id;
     Long wordId;
     Long userId;
-    /** 上次复习间隔，单位: 天 */
+    /**
+     * 上次复习间隔，单位: 天
+     */
     Long gap;
-    /** 难度系数 */
+    /**
+     * 难度系数
+     */
     Double ease;
-    /** dueTime 规划本次时间 */
+    /**
+     * dueTime 规划本次时间
+     */
     Timestamp dueTime;
-    /** 复习次数 */
+    /**
+     * 复习次数
+     */
     Long tick;
 }

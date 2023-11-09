@@ -4,7 +4,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Arrays;
 
 /**
@@ -18,8 +21,9 @@ public class FileUploadUtils {
     private static boolean extensionAllowed(String extension, String[] allowedExtension) {
         return Arrays.asList(allowedExtension).contains(extension);
     }
+
     public static String upload(byte[] file, String pathName, String extension) throws IOException {
-        File dest = new File(pathName+'.'+extension);
+        File dest = new File(pathName + '.' + extension);
         log.info(dest.toString());
         File fileParent = dest.getParentFile();
         if (!fileParent.exists()) {
@@ -34,9 +38,9 @@ public class FileUploadUtils {
     public static String upload(MultipartFile file, String pathName, String[] allowedExtension) throws IOException {
         log.info("OriginalName: {}, ArgName: {}, ContentType: {}", file.getOriginalFilename(), file.getName(), file.getContentType());
         String extension = StringUtils.getFilenameExtension(file.getOriginalFilename());
-        if(extension == null){
+        if (extension == null) {
             String type = file.getContentType();
-            if(type!=null)
+            if (type != null)
                 extension = switch (type) {
                     case "image/png" -> "png";
                     case "image/jpeg" -> "jpeg";
@@ -48,7 +52,7 @@ public class FileUploadUtils {
         if (allowedExtension != null && !extensionAllowed(extension, allowedExtension)) {
             return null;
         }
-        File dest = new File(pathName+'.'+extension);
+        File dest = new File(pathName + '.' + extension);
         File fileParent = dest.getParentFile();
         if (!fileParent.exists()) {
             fileParent.mkdirs();

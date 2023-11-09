@@ -6,8 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 /**
  * Word实体类包括id, name, 字典id，以及扩展信息
  * 扩展信息包括:

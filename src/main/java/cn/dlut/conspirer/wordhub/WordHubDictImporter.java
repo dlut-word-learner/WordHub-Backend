@@ -12,19 +12,19 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.embedded.EmbeddedWebServerFactoryCustomizerAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Scanner;
 
 /**
  * 用于向数据库导入json格式单词表的工具类
@@ -42,11 +42,13 @@ public class WordHubDictImporter implements CommandLineRunner {
     WordService wordService;
     @Autowired
     ObjectMapper objectMapper;
+
     public static void main(String[] args) {
         log.info("STARTING THE APPLICATION");
         new SpringApplicationBuilder(WordHubDictImporter.class).web(WebApplicationType.NONE).run(args);
         log.info("APPLICATION FINISHED");
     }
+
     @Override
     @Transactional
     public void run(String... args) throws Exception {
@@ -54,7 +56,7 @@ public class WordHubDictImporter implements CommandLineRunner {
         Arrays.stream(args).forEach(log::info);
         String filePath, dictName;
         Languages lang;
-        if(args.length<3){
+        if (args.length < 3) {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Input the language of the dict(English or Japanese): ");
             lang = Languages.valueOf(scanner.nextLine());
@@ -62,8 +64,7 @@ public class WordHubDictImporter implements CommandLineRunner {
             dictName = scanner.nextLine();
             System.out.println("Input the path of the dict: ");
             filePath = scanner.nextLine();
-        }
-        else {
+        } else {
             filePath = args[0];
             dictName = args[1];
             lang = Languages.valueOf(args[2]);
@@ -82,8 +83,8 @@ public class WordHubDictImporter implements CommandLineRunner {
                 Iterator<Map.Entry<String, JsonNode>> fieldsIterator = objectNode.fields();
                 while (fieldsIterator.hasNext()) {
                     Map.Entry<String, JsonNode> field = fieldsIterator.next();
-                    if(!field.getKey().equals("name")){
-                        if(field.getKey().equals("trans"))
+                    if (!field.getKey().equals("name")) {
+                        if (field.getKey().equals("trans"))
                             extension.put("meanings", field.getValue());
                         else extension.put(field.getKey(), field.getValue());
                         fieldsIterator.remove();

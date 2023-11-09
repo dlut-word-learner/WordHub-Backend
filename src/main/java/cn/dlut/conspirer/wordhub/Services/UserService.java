@@ -8,16 +8,15 @@ package cn.dlut.conspirer.wordhub.Services;
 
 import cn.dlut.conspirer.wordhub.Entities.User;
 import cn.dlut.conspirer.wordhub.Vos.UserRegisterVo;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 // 注解在实现类上
 // @Service
 public interface UserService {
     User checkLogin(String username, String password);
+
     User checkLogin(Long id, String password);
 
     /**
