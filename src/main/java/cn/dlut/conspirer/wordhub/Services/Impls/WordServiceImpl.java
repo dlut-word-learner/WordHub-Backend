@@ -12,8 +12,7 @@ import org.springframework.stereotype.Component;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
-import static cn.dlut.conspirer.wordhub.Utils.SM2AlgorithmUtil.calcGap;
-import static cn.dlut.conspirer.wordhub.Utils.SM2AlgorithmUtil.clampEase;
+import static cn.dlut.conspirer.wordhub.Utils.SM2AlgorithmUtil.*;
 
 /**
  * TODO
@@ -72,20 +71,7 @@ public class WordServiceImpl implements WordService {
         Timestamp now = new Timestamp(System.currentTimeMillis());
         long gap= calcGap(latest, rating, now);;
         if(latest.getGap()>=4){
-            switch (rating){
-                case Again -> {
-                    newEase-=0.2;
-                }
-                case Hard -> {
-                    newEase-=0.15;
-                }
-                case Good -> {
-
-                }
-                case Easy -> {
-                    newEase+=0.15;
-                }
-            }
+            newEase += EASE_CHANGE.get(rating);
             newEase = clampEase(newEase);
         }
         Calendar calendar = Calendar.getInstance();

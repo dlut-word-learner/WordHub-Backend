@@ -79,22 +79,8 @@ public class SM2AlgorithmUtil {
      */
     public static Long calcGap(StudyRec lastRec, SchedulingStates state, Timestamp now){
         if(lastRec.getGap()<4)return lastRec.getGap()*2;
-        Double coefficient = -1.;
-        switch (state){
-            case Again -> {
-                log.error("不应出现again");
-                return 0L;
-            }
-            case Hard -> {
-                coefficient = 1.2;
-            }
-            case Good -> {
-                coefficient = lastRec.getEase();
-            }
-            case Easy -> {
-                coefficient = lastRec.getEase() * EASY_REWARD;
-            }
-        }
-        return (long) (coefficient * (lastRec.getGap() + ChronoUnit.DAYS.between(lastRec.getDueTime().toLocalDateTime().toLocalDate(), now.toLocalDateTime().toLocalDate())));
+        Double coefficient = getExpFactor(state, lastRec.getEase());
+
+        return (long) (coefficient * (lastRec.getGap() + ChronoUnit.DAYS.between(lastRec.getDueTime().toLocalDateTime().toLocalDate(), now.toLocalDateTime().toLocalDate())/DIFFICULTY_CATE.get(state)));
     }
 }
