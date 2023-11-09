@@ -16,4 +16,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ReviewWordVo {
     SchedulingStates rating;
+    Long tick;
 }

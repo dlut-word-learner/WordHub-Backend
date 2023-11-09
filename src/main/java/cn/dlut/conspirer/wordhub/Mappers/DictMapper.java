@@ -49,6 +49,7 @@ public interface DictMapper {
     "where user_id = #{userId}) as sr " +
     "on word.word_id = sr.word_id " +
     "where word.dict_id = #{dictId} and sr.word_id is null " +
+    "order by rand(#{userId})" +
     "limit #{num}")
     @ResultMap("wordMap")
     List<Word> getWordsToLearn(Long dictId, Long userId, Long num);

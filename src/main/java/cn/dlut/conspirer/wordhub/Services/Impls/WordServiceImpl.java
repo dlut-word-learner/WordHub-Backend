@@ -1,6 +1,7 @@
 package cn.dlut.conspirer.wordhub.Services.Impls;
 
 import cn.dlut.conspirer.wordhub.Entities.SchedulingStates;
+import cn.dlut.conspirer.wordhub.Entities.StudyRec;
 import cn.dlut.conspirer.wordhub.Entities.Word;
 import cn.dlut.conspirer.wordhub.Mappers.WordMapper;
 import cn.dlut.conspirer.wordhub.Services.WordService;
@@ -29,13 +30,15 @@ public class WordServiceImpl implements WordService {
 
     /**
      * TODO
+     *
      * @param userId
      * @param wordId
      * @param familiar
+     * @return
      */
     @Override
-    public void learnWord(Long userId, Long wordId, boolean familiar) {
-
+    public boolean learnWord(Long userId, Long wordId, boolean familiar) {
+        return false;
     }
 
     /**
@@ -43,9 +46,12 @@ public class WordServiceImpl implements WordService {
      * @param userId
      * @param wordId
      * @param rating
+     * @param tick
      */
     @Override
-    public void reviewWord(Long userId, Long wordId, SchedulingStates rating){
-
+    public boolean reviewWord(Long userId, Long wordId, SchedulingStates rating, Long tick){
+        StudyRec latest = wordMapper.getLatestStudyRec(userId, wordId);
+        if(latest == null) return false;
+        return false;
     }
 }

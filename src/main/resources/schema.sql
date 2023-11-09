@@ -88,19 +88,24 @@ create table if not exists wordhub.card_tag
         foreign key (tag_name) references wordhub.tag (tag_name)
 );
 
-create table if not exists wordhub.study_rec
+-- auto-generated definition
+create table study_rec
 (
-    study_rec_id        int auto_increment
+    study_rec_id       int auto_increment
         primary key,
-    word_id             int                                not null,
-    user_id             int                                not null,
-    study_rec_gap int not null comment '间隔小时数',
-    study_rec_ease REAL not null comment '简单值',
-    study_rec_due_time datetime default CURRENT_TIMESTAMP not null comment '预计下次复习时间',
+    word_id            int                                not null,
+    user_id            int                                not null,
+    study_rec_gap      int                                not null comment '间隔天数',
+    study_rec_ease     double                             not null comment '简单值',
+    study_rec_due_time datetime                           not null comment '预计下次复习时间',
+    study_rec_tick     int                                not null comment '第几次学习',
+    constraint study_rec_pk
+        unique (user_id, word_id, study_rec_tick),
     constraint study_rec_user_user_id_fk
-        foreign key (user_id) references wordhub.user (user_id),
+        foreign key (user_id) references user (user_id),
     constraint study_rec_word_word_id_fk
-        foreign key (word_id) references wordhub.word (word_id)
+        foreign key (word_id) references word (word_id)
 )
     comment '用户对单词的学习记录';
+
 
