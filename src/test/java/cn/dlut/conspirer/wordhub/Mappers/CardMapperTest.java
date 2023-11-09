@@ -28,7 +28,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * org.springframework.dao.DataIntegrityViolationException:
  * there are something wrong??
  */
-
 public class CardMapperTest {
     @Autowired
     CardMapper cardMapper;

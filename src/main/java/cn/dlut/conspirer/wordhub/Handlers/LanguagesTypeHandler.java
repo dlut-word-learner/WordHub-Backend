@@ -1,11 +1,11 @@
 package cn.dlut.conspirer.wordhub.Handlers;
 
-/**
- * 实现 Languages类 与 WordHub数据库 Dict表 lang_id字段 之间的自动映射
- *
- * @author OuOu
- * @version 1.0
- */
+///**
+// * 实现 Languages类 与 WordHub数据库 Dict表 lang_id字段 之间的自动映射
+// *
+// * @author OuOu
+// * @version 1.0
+// */
 //@NoArgsConstructor
 //@MappedTypes(Languages.class)
 //@MappedJdbcTypes(value = JdbcType.INTEGER, includeNullJdbcType = true)

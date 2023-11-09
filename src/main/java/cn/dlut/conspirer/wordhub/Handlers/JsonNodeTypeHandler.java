@@ -1,12 +1,5 @@
 package cn.dlut.conspirer.wordhub.Handlers;
 
-/**
- * TODO: Inject ObjectMapper instead of new
- *
- * @author OuOu
- * @version 1.0
- */
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
@@ -21,6 +14,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * TODO: Inject ObjectMapper instead of new
+ *
+ * @author OuOu
+ * @version 1.0
+ */
 @MappedTypes(JsonNode.class)
 @Slf4j
 //@MappedJdbcTypes(value = JdbcType.LONGVARCHAR, includeNullJdbcType = true)
