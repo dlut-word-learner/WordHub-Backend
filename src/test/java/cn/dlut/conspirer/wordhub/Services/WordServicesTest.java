@@ -78,6 +78,12 @@ public class WordServicesTest {
         verify(wordMapper).insertStudyRec(eq(userId),eq(wordId),any(),any(),any(),any());
         assertTrue(result);
     }
+    @Test
+    void getLatestStudyRec(){
+        long userId = 1L,wordId = 101L;
+        wordService.getLatestStudyRec(userId,wordId);
+        verify(wordMapper).getLatestStudyRec(userId,wordId);
+    }
 
 
 
