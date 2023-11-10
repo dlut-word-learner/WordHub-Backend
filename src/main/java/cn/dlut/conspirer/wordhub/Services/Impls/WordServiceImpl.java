@@ -16,7 +16,7 @@ import java.util.List;
 import static cn.dlut.conspirer.wordhub.Utils.SM2AlgorithmUtil.*;
 
 /**
- * TODO
+ * Word Service的实现
  *
  * @author OuOu
  * @version 1.0

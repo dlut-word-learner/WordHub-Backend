@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * TODO
+ * 目前进度暂时用不到这个类
  *
  * @author OuOu
  * @version 1.0

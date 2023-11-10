@@ -1,5 +1,5 @@
 /**
- * TODO
+ * 用户管理相关JDBC逻辑
  *
  * @author OuOu
  * @version 1.0

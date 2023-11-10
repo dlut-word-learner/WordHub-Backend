@@ -6,7 +6,7 @@ import cn.dlut.conspirer.wordhub.Entities.CardResponse;
 import java.util.List;
 
 /**
- * TODO
+ * 目前进度用不到这个类
  *
  * @author OuOu
  * @version 1.0

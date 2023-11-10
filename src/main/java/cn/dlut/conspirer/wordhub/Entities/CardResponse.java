@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * TODO
+ * 目前进度用不到这个类
  *
  * @author OuOu
  * @version 1.0

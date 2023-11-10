@@ -1,5 +1,5 @@
 /**
- * TODO
+ * （单个）单词相关JDBC逻辑
  *
  * @author OuOu
  * @version 1.0

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * TODO
+ * 处理用户信息更改的Vo
  *
  * @author OuOu
  * @version 1.0

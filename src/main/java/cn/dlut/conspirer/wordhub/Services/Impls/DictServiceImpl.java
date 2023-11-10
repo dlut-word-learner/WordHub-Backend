@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * TODO
+ * Dict Service的实现
  *
  * @author OuOu
  * @version 1.0

@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * TODO
+ * 一个词典的示例，不包含里面的单词
  *
  * @author OuOu
  * @version 1.0

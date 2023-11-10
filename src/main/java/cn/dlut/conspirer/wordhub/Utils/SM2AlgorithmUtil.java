@@ -10,7 +10,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 
 /**
- * TODO
+ * 实现了 SM-2 间隔重复算法
  *
  * @author OuOu
  * @version 1.0

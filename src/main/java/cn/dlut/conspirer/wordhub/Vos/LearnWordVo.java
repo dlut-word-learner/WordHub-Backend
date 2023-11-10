@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * TODO
+ * 处理学习记录上传的Vo
  *
  * @author OuOu
  * @version 1.0

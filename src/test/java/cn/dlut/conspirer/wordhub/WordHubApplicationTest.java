@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
- * TODO
+ * 集成测试，测试上下文环境能否正常加载
  */
 @SpringBootTest(classes = WordHubApplication.class)
 class WordHubApplicationTest {

@@ -8,7 +8,7 @@ import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 
 /**
- * TODO
+ * 处理用户登录的Vo
  *
  * @author OuOu
  * @version 1.0

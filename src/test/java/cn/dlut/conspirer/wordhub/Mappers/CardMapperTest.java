@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ActiveProfiles("test")
 @Slf4j
 /**
- * TODO
+ * 目前进度用不到这个类
  * new file for test
  * org.springframework.dao.DataIntegrityViolationException:
  * there are something wrong??

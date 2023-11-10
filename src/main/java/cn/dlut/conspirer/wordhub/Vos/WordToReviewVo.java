@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 /**
- * TODO
+ * 返回要复习的单词的Vo
  *
  * @author OuOu
  * @version 1.0

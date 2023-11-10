@@ -1,5 +1,5 @@
 /**
- * TODO
+ * Dict以及从Dict里拿词相关的JDBC逻辑
  *
  * @author OuOu
  * @version 1.0

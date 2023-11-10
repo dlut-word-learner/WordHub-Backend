@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * TODO
+ * 处理用户注册的Vo
  *
  * @author OuOu
  * @version 1.0

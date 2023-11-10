@@ -17,7 +17,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
- * TODO
+ * 主要处理学习复习记录的上传入库，因为它们是以单词而不是词库为单位的
+ * 还加了一个预先GET获取选Hard Good Easy时下次复习时间的API
  *
  * @author OuOu
  * @version 1.0
@@ -34,7 +35,7 @@ public class WordController {
     }
 
     /**
-     * TODO
+     * 处理学习一个单词的逻辑
      *
      * @param wordId
      * @return
@@ -48,7 +49,7 @@ public class WordController {
     }
 
     /**
-     * TODO
+     * 处理复习一个单词的逻辑
      *
      * @param wordId
      * @return
