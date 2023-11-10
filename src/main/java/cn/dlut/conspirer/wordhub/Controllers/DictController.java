@@ -5,6 +5,7 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.dlut.conspirer.wordhub.Dtos.WordToReviewDTO;
 import cn.dlut.conspirer.wordhub.Entities.Dict;
 import cn.dlut.conspirer.wordhub.Entities.Languages;
+import cn.dlut.conspirer.wordhub.Entities.Task;
 import cn.dlut.conspirer.wordhub.Services.DictService;
 import cn.dlut.conspirer.wordhub.Vos.DictVo;
 import cn.dlut.conspirer.wordhub.Vos.WordExtensionVo;
@@ -117,5 +118,30 @@ public class DictController {
             }
         }).collect(Collectors.toList());
         return ResponseEntity.ok(wordList);
+    }
+
+    @GetMapping("/{id}/study-rec/{task}")
+    @SaCheckLogin
+    public ResponseEntity<?> getStudyRec(@PathVariable("id") Long dictId, @PathVariable("task")Task task) {
+        Long userId = StpUtil.getLoginIdAsLong();
+        switch(task) {
+            case Learn -> {
+
+            }
+            case Review -> {
+
+            }
+            case Qwerty -> {
+
+            }
+        }
+        return ResponseEntity.internalServerError().body("Unimplemented");
+    }
+
+    @GetMapping("/{id}/progress")
+    @SaCheckLogin
+    public ResponseEntity<?> getProgress(@PathVariable("id") Long dictId) {
+        Long userId = StpUtil.getLoginIdAsLong();
+        return ResponseEntity.internalServerError().body("Unimplemented");
     }
 }

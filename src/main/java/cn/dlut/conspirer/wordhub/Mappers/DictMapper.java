@@ -97,4 +97,47 @@ public interface DictMapper {
     @Select("select * from dict where lang_name = #{lang}")
     @ResultMap("dictMap")
     List<Dict> getDictsByLanguage(Languages lang);
+
+    @Select("SELECT count(*) " +
+            "FROM word " +
+            "JOIN ( " +
+            "    SELECT word_id, MAX(due_time) AS due_time " +
+            "    FROM study_rec " +
+            "    WHERE user_id = #{userId} " +
+            "    GROUP BY word_id " +
+            ") AS latest_study_rec " +
+            "ON word.word_id = latest_study_rec.word_id " +
+            "JOIN study_rec " +
+            "ON latest_study_rec.word_id = study_rec.word_id " +
+            "AND latest_study_rec.due_time = study_rec.due_time " +
+            "WHERE word.dict_id = #{dictId} " +
+            "AND DATE(study_rec.due_time) <= DATE_SUB(CURDATE(), INTERVAL 1 MONTH);")
+    Long getMasteredNum(Long dictId, Long userId);
+
+    @Select("SELECT count(*) " +
+            "FROM word " +
+            "JOIN ( " +
+            "    SELECT word_id, MAX(due_time) AS due_time " +
+            "    FROM study_rec " +
+            "    WHERE user_id = #{userId} " +
+            "    GROUP BY word_id " +
+            ") AS latest_study_rec " +
+            "ON word.word_id = latest_study_rec.word_id " +
+            "JOIN study_rec " +
+            "ON latest_study_rec.word_id = study_rec.word_id " +
+            "AND latest_study_rec.due_time = study_rec.due_time " +
+            "WHERE word.dict_id = #{dictId} " +
+            "AND DATE(study_rec.due_time) > DATE_SUB(CURDATE(), INTERVAL 1 MONTH);")
+    Long getNumUnmastered(Long dictId, Long userId);
+
+    @Select("SELECT count(*) FROM word " +
+            "WHERE word.dict_id = #{dictId};")
+    Long getWordNum(Long dictId);
+
+
+    Long getWordsLearntInPastNDays(Long dictId, Long userId, Long n);
+
+    Long getWordsReviewedInPastNDays(Long dictId, Long userId, Long n);
+
+    Long getWordsQwertiedInPastNDays(Long dictId, Long userId, Long n);
 }

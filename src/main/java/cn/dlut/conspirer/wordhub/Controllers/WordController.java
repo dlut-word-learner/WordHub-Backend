@@ -70,6 +70,11 @@ public class WordController {
         return ResponseEntity.ok().build();
     }
 
+    /**
+     * 获取如果点击Hard, Good, Easy分别会规划到多少天后复习
+     * @param wordId
+     * @return
+     */
     @GetMapping("/{wordId}/review")
     @SaCheckLogin
     public ResponseEntity<?> reviewWord(@PathVariable("wordId") Long wordId) {
