@@ -181,6 +181,10 @@
                         <exclude>cn/dlut/conspirer/wordhub/Dtos/**</exclude>
                         <exclude>cn/dlut/conspirer/wordhub/Vos/**</exclude>
                         <exclude>cn/dlut/conspirer/wordhub/Entities/**</exclude>
+                        <exclude>cn/dlut/conspirer/wordhub/WordHubApplication.class</exclude>
+                        <exclude>cn/dlut/conspirer/wordhub/WordHubDictImporter.class</exclude>
+                        <exclude>cn/dlut/conspirer/wordhub/Handlers/ValidatedExceptionHandler.class</exclude>
+
                     </excludes>
                 </configuration>
                 <executions>
