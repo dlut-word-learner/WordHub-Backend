@@ -50,7 +50,8 @@ public class WordServiceImpl implements WordService {
         calendar.setTimeInMillis(now.getTime());
         calendar.add(Calendar.DATE, Math.toIntExact(1L));
         Long gap = latest == null ? (familiar ? 4L : 1L) : latest.getTick() + 1;
-        return wordMapper.insertStudyRec(userId, wordId, gap, 1L, new Timestamp(calendar.getTimeInMillis()), SM2AlgorithmUtil.EASE_FACTOR_INITIAL) == 1;
+        return wordMapper.insertStudyRec(userId, wordId, gap, 1L, new Timestamp(calendar.getTimeInMillis()),
+                SM2AlgorithmUtil.EASE_FACTOR_INITIAL) == 1;
     }
 
     /**
