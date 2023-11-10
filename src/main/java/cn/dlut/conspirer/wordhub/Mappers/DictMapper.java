@@ -135,9 +135,47 @@ public interface DictMapper {
     Long getWordNum(Long dictId);
 
 
-    Long getWordsLearntInPastNDays(Long dictId, Long userId, Long n);
+    /**
+     * TODO
+     * 返回用户过去n天学习的单词数量
+     * sql大意：从StudyRec表中选出最早一次学习记录(tick=1)在n天之内的单词，count(*) group by date
+     * @param dictId
+     * @param userId
+     * @param n
+     * @return
+     */
+    Long getLearnTickInPastNDays(Long dictId, Long userId, Long n);
 
-    Long getWordsReviewedInPastNDays(Long dictId, Long userId, Long n);
+    /**
+     * TODO
+     * 返回用户过去n天复习单词次数
+     * sql大意：从StudyRec表中选出n天之内的学习记录，where tick!=1(排除学习)，count(*) group by date
+     * @param dictId
+     * @param userId
+     * @param n
+     * @return
+     */
+    Long getReviewTickInPastNDays(Long dictId, Long userId, Long n);
 
-    Long getWordsQwertiedInPastNDays(Long dictId, Long userId, Long n);
+    /**
+     * TODO
+     * 返回用户过去n天Qwerty单词次数
+     * 考虑建一个新表专门存Qwerty的历史记录，可以叫QwertyRec，因为这个记录和StudyRec的机制有很大差别
+     * @param dictId
+     * @param userId
+     * @param n
+     * @return
+     */
+    Long getQwertiyTickInPastNDays(Long dictId, Long userId, Long n);
+
+    /**
+     * TODO
+     * QwertyRec表中添加一条Qwerty记录，只需要插入本次Qwerty了多少个词，不需要存是哪一些词。QwertyRec表需要有id作为主键。一个userId与一个dictId在QwertyRec表可以有多个字段
+     * 前端完成Qwerty时一次上传即可
+     * @param dictId
+     * @param userId
+     * @param n 本次Qwerty完成的单词数量
+     * @return
+     */
+    Long insertQwertyRec(Long dictId, Long userId, Long n);
 }

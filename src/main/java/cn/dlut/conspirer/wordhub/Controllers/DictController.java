@@ -7,10 +7,7 @@ import cn.dlut.conspirer.wordhub.Entities.Dict;
 import cn.dlut.conspirer.wordhub.Entities.Languages;
 import cn.dlut.conspirer.wordhub.Entities.Task;
 import cn.dlut.conspirer.wordhub.Services.DictService;
-import cn.dlut.conspirer.wordhub.Vos.DictVo;
-import cn.dlut.conspirer.wordhub.Vos.WordExtensionVo;
-import cn.dlut.conspirer.wordhub.Vos.WordToReviewVo;
-import cn.dlut.conspirer.wordhub.Vos.WordVo;
+import cn.dlut.conspirer.wordhub.Vos.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -120,6 +117,14 @@ public class DictController {
         return ResponseEntity.ok(wordList);
     }
 
+    /**
+     * TODO
+     *
+     * 获取用户对此词典过去n天的学习/复习/Qwerty记录，返回 长度为n的整型数组
+     * @param dictId
+     * @param task
+     * @return
+     */
     @GetMapping("/{id}/study-rec/{task}")
     @SaCheckLogin
     public ResponseEntity<?> getStudyRec(@PathVariable("id") Long dictId, @PathVariable("task")Task task) {
@@ -138,6 +143,12 @@ public class DictController {
         return ResponseEntity.internalServerError().body("Unimplemented");
     }
 
+    /**
+     * TODO
+     * 获取用户对此词典的学习进度，返回 DictProgressVo
+     * @param dictId
+     * @return
+     */
     @GetMapping("/{id}/progress")
     @SaCheckLogin
     public ResponseEntity<?> getProgress(@PathVariable("id") Long dictId) {

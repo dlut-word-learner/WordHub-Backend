@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class DictProgress {
+public class DictProgressVo {
     Long sum;
     Long studies;
     Long mastered;
