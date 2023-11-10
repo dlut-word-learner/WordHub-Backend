@@ -72,6 +72,7 @@ public class SM2AlgorithmUtilTest {
      * 应为26
      */
     @Test
+    
     @Order(3)
     void testCalcGap_2(){
         StudyRec studyRec_2 = getStudyRec_2();
