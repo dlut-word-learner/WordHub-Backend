@@ -94,4 +94,28 @@ public class DictController {
         List<WordToReviewDTO> wordList = dictService.getWordsToReview(dictId, userId, num);
         return ResponseEntity.ok(wordList);
     }
+
+    /**
+     * Do not need to log in
+     * @param dictId
+     * @param num
+     * @return num words to learn
+     */
+    @GetMapping("/{id}/qwerty")
+    public ResponseEntity<?> getWordsToQwerty(@PathVariable("id") Long dictId, @RequestParam @Nullable Long num) {
+        if (num == null) num = 20L;
+        // Languages lang = dictService.getLanguageByDictId(dictId);
+        List<WordVo> wordList = dictService.getWordsToQwerty(dictId, num).stream().map(x -> {
+            try {
+                return WordVo.builder()
+                             .id(x.getId())
+                             .name(x.getName())
+                             .extension(objectMapper.treeToValue(x.getExtension(), WordExtensionVo.class))
+                             .build();
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+        }).collect(Collectors.toList());
+        return ResponseEntity.ok(wordList);
+    }
 }

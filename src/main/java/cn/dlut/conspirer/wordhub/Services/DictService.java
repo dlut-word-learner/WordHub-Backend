@@ -24,5 +24,7 @@ public interface DictService {
 
     List<WordToReviewDTO> getWordsToReview(Long dictId, Long userId, Long num);
 
+    List<Word> getWordsToQwerty(Long dictId, Long num);
+
     int addDict(Dict dict);
 }

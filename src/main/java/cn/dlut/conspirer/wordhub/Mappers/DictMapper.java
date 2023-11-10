@@ -83,6 +83,13 @@ public interface DictMapper {
     })
     List<WordToReviewDTO> getWordsToReview(Long dictId, Long userId, Long num);
 
+    @Select("select word.word_id, word_name, extension from word " +
+            "where word.dict_id = #{dictId} " +
+            "order by rand()" +
+            "limit #{num}")
+    @ResultMap("wordMap")
+    List<Word> getWordsToQwerty(Long dictId, Long num);
+
     @Insert("insert into dict(lang_name, dict_name) values(#{language}, #{name})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "dict_id")
     int addDict(Dict dict);
