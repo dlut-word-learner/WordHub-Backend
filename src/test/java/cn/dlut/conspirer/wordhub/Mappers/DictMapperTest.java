@@ -152,6 +152,10 @@ class DictMapperTest {
         assertEquals(6,WordNum);
     }
 
+    /**
+     * TODO
+     *
+     */
     @Test
     @Sql("/data-testGetLearnTickInPastNDays.sql")
     void testGetLearnTickInPastNDays(){
@@ -159,6 +163,31 @@ class DictMapperTest {
         long Num = dictMapper.getLearnTickInPastNDays(DictId,userID,n);
   //      assertEquals(2,Num);
     }
+
+    @Test
+    @Sql("/data-testGetReviewTickInPastNDays.sql")
+    void testGetReviewTickInPastNDays(){
+        long DictId = 1005 , userID = 1, n = 6;
+        long Num = dictMapper.getReviewTickInPastNDays(DictId,userID,n);
+        // assertEquals(5,Num);
+    }
+
+    /*
+
+    @Test
+    @Sql
+    void testGetQwertiyTickInPastNDays(){
+    }
+
+
+
+    @Test
+    @Sql
+    void testInsertQwertyRec(){
+    }
+
+
+     */
 
 
 
