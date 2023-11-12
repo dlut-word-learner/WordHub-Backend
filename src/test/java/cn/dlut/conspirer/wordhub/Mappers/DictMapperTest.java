@@ -152,6 +152,16 @@ class DictMapperTest {
         assertEquals(6,WordNum);
     }
 
+    @Test
+    @Sql("/data-testGetLearnTickInPastNDays.sql")
+    void testGetLearnTickInPastNDays(){
+        long DictId = 1005 , userID = 1, n = 3;
+        long Num = dictMapper.getLearnTickInPastNDays(DictId,userID,n);
+  //      assertEquals(2,Num);
+    }
+
+
+
 //    @Test
 //    void getWordsByDictId() {
 //        List<Word> wordList = dictMapper.getWordsByDictId(0L);
