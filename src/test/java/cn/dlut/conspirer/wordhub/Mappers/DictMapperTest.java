@@ -136,6 +136,13 @@ class DictMapperTest {
         assertEquals(4,Num);
     }
 
+    @Test
+    @Sql("/data-testGetMasteredNum.sql")
+    void testGetNumUnMastered(){
+        long testDictId = 1005 , testUserId = 1;
+        long Num = dictMapper.getNumUnmastered(testDictId,testUserId);
+        assertEquals(2,Num);
+    }
 
 //    @Test
 //    void getWordsByDictId() {
