@@ -128,6 +128,14 @@ class DictMapperTest {
 
     }
 
+    @Test
+    @Sql("/data-testGetMasteredNum.sql")
+    void testGetMasteredNum(){
+        long testDictId = 1005 , testUserId = 1;
+        long Num = dictMapper.getMasteredNum(testDictId,testUserId);
+        assertEquals(4,Num);
+    }
+
 
 //    @Test
 //    void getWordsByDictId() {
