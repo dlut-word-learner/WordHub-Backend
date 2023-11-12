@@ -144,6 +144,14 @@ class DictMapperTest {
         assertEquals(2,Num);
     }
 
+    @Test
+    @Sql("/data-testGetMasteredNum.sql")
+    void testGetWordNum(){
+        long testDictId = 1005;
+        long WordNum = dictMapper.getWordNum(testDictId);
+        assertEquals(6,WordNum);
+    }
+
 //    @Test
 //    void getWordsByDictId() {
 //        List<Word> wordList = dictMapper.getWordsByDictId(0L);
