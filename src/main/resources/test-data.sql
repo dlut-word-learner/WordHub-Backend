@@ -1,14 +1,3 @@
-INSERT INTO `language`
-VALUES ('English'),
-       ('Japanese');
-
-INSERT INTO `dict`
-VALUES (1, 'English', 'CET6'),
-       (2, 'Japanese', 'JLPT_N3');
-
-INSERT INTO `user`
-VALUES (1,'Dami', 123456, '123@456.com',0,0);
-
 INSERT INTO `study_rec`
 (word_id,user_id,study_rec_gap,study_rec_ease,study_rec_due_time,study_rec_tick)
 VALUES (1,1,2,2.0,date_add(CURRENT_DATE, interval -55 DAY),1),
