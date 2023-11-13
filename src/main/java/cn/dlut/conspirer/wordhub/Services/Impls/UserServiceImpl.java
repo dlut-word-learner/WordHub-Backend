@@ -122,6 +122,14 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    /**
+     * 获取过去n天（包括今天）的每天，用户对指定 task 的记录条数
+     * 按时间顺序给出，先给出 n-1 天前，最后给今天
+     * @param task 学习/复习/Qwerty
+     * @param userId 用户名
+     * @param n 总共多少天，即为返回的List的size
+     * @return
+     */
     @Override
     public List<Long> getStudyTickInPastNDays(Task task, Long userId, Long n){
         ArrayList<Long> ans = new ArrayList<>();

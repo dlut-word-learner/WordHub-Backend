@@ -67,6 +67,12 @@ public class DictServiceImpl implements DictService {
         return dictMapper.insertQwertyRec(dictId, userId, num) == 1L;
     }
 
+    /**
+     * 获取一个用户对一个词典的学习进度
+     * @param userId
+     * @param dictId
+     * @return
+     */
     @Override
     public DictProgressVo getProgress(Long userId, Long dictId){
         return DictProgressVo.builder().sum(dictMapper.getWordNum(dictId)).studies(dictMapper.getNumUnmastered(dictId, userId)).mastered(dictMapper.getNumMastered(dictId, userId)).build();
