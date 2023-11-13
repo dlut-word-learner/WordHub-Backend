@@ -54,7 +54,7 @@ public class WordServicesTest {
         long userId = 101L, wordId = 101L;
         boolean familiar = true;
         wordService.learnWord(userId,wordId,familiar);
-        verify(wordMapper).insertStudyRec(eq(userId),eq(wordId),any(),eq(1L),any(),any());
+        verify(wordMapper).insertStudyRec(eq(userId),eq(wordId),any(),eq(4L),any(),any());
     }
     @Test
     void reviewWord_1(){
