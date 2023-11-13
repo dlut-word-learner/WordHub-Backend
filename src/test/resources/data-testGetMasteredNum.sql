@@ -19,10 +19,12 @@ VALUES (101, 'word1', 1005, '{}'),
 
 INSERT INTO "study_rec"
 (study_rec_id ,word_id,user_id,study_rec_gap,study_rec_ease,study_rec_due_time,study_rec_tick)
-VALUES (1, 101, 1, 1, 1, CURRENT_DATE, 1),
-       (2, 101, 1, 1, 1, dateadd(DAY, -1, CURRENT_DATE), 2),
-       (3, 102, 1, 2, 1, dateadd(DAY, 1, CURRENT_DATE), 2),
-       (4, 103, 1, 3, 1, dateadd(DAY ,-1,CURRENT_DATE), 2),
-       (5, 104, 1, 4, 1, CURRENT_TIMESTAMP, 3)
+VALUES (1, 101, 1, 1, 1, dateadd(month , -1, CURRENT_DATE), 1),
+       (2, 101, 1, 1, 1, dateadd(month , 2, CURRENT_DATE), 2),
+       (3, 102, 1, 1, 1, dateadd(month, -1, CURRENT_DATE), 1),
+       (4, 102, 1, 1, 1, CURRENT_TIMESTAMP, 2),
+       (5, 102, 1, 1, 1, dateadd(day, 20, CURRENT_DATE), 3),
+       (6, 103, 1, 3, 1, dateadd(month,2,CURRENT_DATE), 1)
+
 ;
 

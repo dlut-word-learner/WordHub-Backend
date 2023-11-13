@@ -111,7 +111,7 @@ public interface DictMapper {
             "ON latest_study_rec.word_id = study_rec.word_id " +
             "AND latest_study_rec.due_time = study_rec.study_rec_due_time " +
             "WHERE word.dict_id = #{dictId} " +
-            "AND DATE(study_rec.study_rec_due_time) > DATE(timestampadd(month, -1, CURRENT_DATE));")
+            "AND DATE(study_rec.study_rec_due_time) >= DATE(timestampadd(month, 1, CURRENT_DATE));")
     Long getNumMastered(Long dictId, Long userId);
 
     @Select("SELECT count(*) " +
@@ -127,7 +127,7 @@ public interface DictMapper {
             "ON latest_study_rec.word_id = study_rec.word_id " +
             "AND latest_study_rec.due_time = study_rec.study_rec_due_time " +
             "WHERE word.dict_id = #{dictId} " +
-            "AND DATE(study_rec.study_rec_due_time) <= DATE(timestampadd(month, -1, CURRENT_DATE));")
+            "AND DATE(study_rec.study_rec_due_time) <= DATE(timestampadd(month, 1, CURRENT_DATE));")
     Long getNumUnmastered(Long dictId, Long userId);
 
     @Select("SELECT count(*) FROM word " +
