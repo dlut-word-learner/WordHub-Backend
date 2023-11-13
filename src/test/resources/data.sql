@@ -12,9 +12,8 @@ VALUES (0, 'Test', 'Test'),
        (6, 'English', 'TOEFL'),
        (7, 'English', 'TOEIC');
 
-INSERT INTO "user"
-VALUES ( 1000001, 'test_1', '123456', '123@abc.cn', 'C:/Users/11131/WordHub/avatars/test_1'
-       , 0, 0);
+INSERT INTO `user`
+VALUES ( 1000001, 'test_1', '123456', '123@abc.cn', 0, 0);
 
 INSERT INTO "word"
 VALUES (1000001, 'sing', 0, '{

@@ -2,11 +2,11 @@ INSERT INTO "dict"
 values (1005, 'Test', 'testDict');
 
 INSERT INTO "user"
-VALUES ( 1, 'user1', '123456', '1@abc.cn', ''
+VALUES ( 1, 'user1', '123456', '1@abc.cn'
        , 0, 0),
-       ( 2, 'user2', '123456', '2@abc.cn', ''
+       ( 2, 'user2', '123456', '2@abc.cn'
        , 0, 0),
-       ( 3, 'user3', '123456', '3@abc.cn', ''
+       ( 3, 'user3', '123456', '3@abc.cn'
        , 0, 0);
 
 INSERT INTO "word"

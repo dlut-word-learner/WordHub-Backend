@@ -1,8 +1,8 @@
 INSERT INTO "user"
-VALUES (1003, 'testCard', '123456', '234@abc.cn', null, 0, 0);
+VALUES (1003, 'testCard', '123456', '234@abc.cn', 0, 0);
 
 INSERT INTO "user"
-VALUES (1004, 'testCard2', '123456', '456@abc.cn', null, 0, 0);
+VALUES (1004, 'testCard2', '123456', '456@abc.cn', 0, 0);
 
 INSERT INTO "dict"
 values (1022, 'Test', 'test1');
