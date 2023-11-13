@@ -25,7 +25,6 @@ create table if not exists "user"
     user_name        varchar(30)       not null comment '用户名',
     user_password    char(60)          not null comment '存储Bcrypt加密后的密码',
     user_email       varchar(50)       not null,
-    user_avatar_path varchar(255)      null comment 'null时为默认头像',
     user_score       int     default 0 not null,
     user_role        tinyint default 0 not null comment '0 普通用户 1管理员 其它预留',
     constraint user_pk_email
