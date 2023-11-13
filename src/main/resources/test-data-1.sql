@@ -243,4 +243,103 @@ VALUES (1,1,2,2.0,date_add(CURRENT_DATE, interval -55 DAY),1),
 
 (51,1,2,2.15,date_add(CURRENT_DATE, interval -45 DAY),1),
 (51,1,4,1.85,date_add(CURRENT_DATE, interval -18 DAY),2),
-(51,1,6,2,date_add(CURRENT_DATE, interval -2 DAY),3);
+(51,1,6,2,date_add(CURRENT_DATE, interval -2 DAY),3),
+
+(52,1,2,2.0,date_add(CURRENT_DATE, interval -47 DAY),1),
+(52,1,3,2.15,date_add(CURRENT_DATE, interval -44 DAY),2),
+(52,1,5,1.85,date_add(CURRENT_DATE, interval -33 DAY),3),
+(52,1,7,1.70,date_add(CURRENT_DATE, interval -22 DAY),4),
+(52,1,9,2.0,date_add(CURRENT_DATE, interval -9 DAY),5),
+
+(53,1,2,2.0,date_add(CURRENT_DATE, interval -59 DAY),1),
+(53,1,3,2.15,date_add(CURRENT_DATE, interval -55 DAY),2),
+(53,1,5,1.85,date_add(CURRENT_DATE, interval -49 DAY),3),
+
+(54,1,2,2.0,date_add(CURRENT_DATE, interval -58 DAY),1),
+(54,1,3,2.15,date_add(CURRENT_DATE, interval -56 DAY),2),
+(54,1,5,1.85,date_add(CURRENT_DATE, interval -49 DAY),3),
+
+(55,1,2,2.0,date_add(CURRENT_DATE, interval -59 DAY),1),
+(55,1,3,2.15,date_add(CURRENT_DATE, interval -55 DAY),2),
+(55,1,5,1.85,date_add(CURRENT_DATE, interval -48 DAY),3),
+
+(56,1,2,2.0,date_add(CURRENT_DATE, interval -59 DAY),1),
+(56,1,3,2.15,date_add(CURRENT_DATE, interval -55 DAY),2),
+(56,1,5,1.85,date_add(CURRENT_DATE, interval -42 DAY),3),
+
+
+(57,1,2,2.0,date_add(CURRENT_DATE, interval -56 DAY),1),
+(57,1,3,2.15,date_add(CURRENT_DATE, interval -51 DAY),2),
+(57,1,5,1.85,date_add(CURRENT_DATE, interval -42 DAY),3),
+
+(58,1,2,2.0,date_add(CURRENT_DATE, interval -55 DAY),1),
+(58,1,3,2.15,date_add(CURRENT_DATE, interval -51 DAY),2),
+(58,1,5,1.85,date_add(CURRENT_DATE, interval -45 DAY),3),
+
+(59,1,2,2.0,date_add(CURRENT_DATE, interval -57 DAY),1),
+(59,1,3,2.15,date_add(CURRENT_DATE, interval -51 DAY),2),
+(59,1,5,1.85,date_add(CURRENT_DATE, interval -41 DAY),3),
+
+(60,1,2,2.0,date_add(CURRENT_DATE, interval -56 DAY),1),
+(60,1,3,2.15,date_add(CURRENT_DATE, interval -51 DAY),2),
+(60,1,5,1.85,date_add(CURRENT_DATE, interval -47 DAY),3),
+
+(61,1,2,2.0,date_add(CURRENT_DATE, interval -52 DAY),1),
+(61,1,3,2.15,date_add(CURRENT_DATE, interval -45 DAY),2),
+(61,1,5,1.85,date_add(CURRENT_DATE, interval -38 DAY),3),
+
+(62,1,2,2.0,date_add(CURRENT_DATE, interval -59 DAY),1),
+(62,1,3,2.15,date_add(CURRENT_DATE, interval -43 DAY),2),
+(62,1,5,1.85,date_add(CURRENT_DATE, interval -33 DAY),3),
+
+(63,1,2,2.0,date_add(CURRENT_DATE, interval -54 DAY),1),
+(63,1,3,2.15,date_add(CURRENT_DATE, interval -43 DAY),2),
+(63,1,5,1.85,date_add(CURRENT_DATE, interval -31 DAY),3),
+
+(64,1,2,2.0,date_add(CURRENT_DATE, interval -52 DAY),1),
+(64,1,3,2.15,date_add(CURRENT_DATE, interval -44 DAY),2),
+(64,1,5,1.85,date_add(CURRENT_DATE, interval -36 DAY),3),
+
+(65,1,2,2.0,date_add(CURRENT_DATE, interval -51 DAY),1),
+(65,1,3,2.15,date_add(CURRENT_DATE, interval -47 DAY),2),
+(65,1,5,1.85,date_add(CURRENT_DATE, interval -40 DAY),3),
+
+(66,1,2,2.0,date_add(CURRENT_DATE, interval -57 DAY),1),
+(66,1,3,2.15,date_add(CURRENT_DATE, interval -52 DAY),2),
+(66,1,5,1.85,date_add(CURRENT_DATE, interval -31 DAY),3),
+(66,1,7,1.70,date_add(CURRENT_DATE, interval -21 DAY),4),
+(66,1,9,2.0,date_add(CURRENT_DATE, interval -4 DAY),5),
+
+(67,1,2,2.0,date_add(CURRENT_DATE, interval -55 DAY),1),
+(67,1,3,2.15,date_add(CURRENT_DATE, interval -51 DAY),2),
+(67,1,5,1.85,date_add(CURRENT_DATE, interval -33 DAY),3),
+(67,1,7,1.70,date_add(CURRENT_DATE, interval -17 DAY),4),
+(67,1,9,2.0,date_add(CURRENT_DATE, interval -3 DAY),5),
+
+(67,1,2,2.0,date_add(CURRENT_DATE, interval -56 DAY),1),
+(67,1,3,2.15,date_add(CURRENT_DATE, interval -51 DAY),2),
+(67,1,5,1.85,date_add(CURRENT_DATE, interval -33 DAY),3),
+(67,1,7,1.70,date_add(CURRENT_DATE, interval -19 DAY),4),
+(67,1,9,2.0,date_add(CURRENT_DATE, interval -7 DAY),5),
+
+(68,1,2,2.0,date_add(CURRENT_DATE, interval -56 DAY),1),
+(68,1,3,2.15,date_add(CURRENT_DATE, interval -51 DAY),2),
+(68,1,5,1.85,date_add(CURRENT_DATE, interval -33 DAY),3),
+(68,1,7,1.70,date_add(CURRENT_DATE, interval -19 DAY),4),
+(68,1,9,2.0,date_add(CURRENT_DATE, interval -7 DAY),5),
+
+(69,1,2,2.0,date_add(CURRENT_DATE, interval -49 DAY),1),
+(69,1,3,2.15,date_add(CURRENT_DATE, interval -44 DAY),2),
+(69,1,5,1.85,date_add(CURRENT_DATE, interval -39 DAY),3),
+(69,1,7,1.70,date_add(CURRENT_DATE, interval -30 DAY),4),
+(69,1,9,2.0,date_add(CURRENT_DATE, interval -20 DAY),5),
+
+(70,1,2,2.0,date_add(CURRENT_DATE, interval -48 DAY),1),
+(70,1,3,2.15,date_add(CURRENT_DATE, interval -42 DAY),2),
+(70,1,5,1.85,date_add(CURRENT_DATE, interval -35 DAY),3),
+(70,1,7,1.70,date_add(CURRENT_DATE, interval -28 DAY),4),
+(70,1,9,2.0,date_add(CURRENT_DATE, interval -18 DAY),5);
+
+
+
+
