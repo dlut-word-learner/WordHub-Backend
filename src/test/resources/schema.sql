@@ -104,3 +104,17 @@ create table if not exists study_rec
         foreign key (word_id) references word (word_id)
 );
 
+create table if not exists qwerty_rec
+(
+    qwerty_rec_id   int auto_increment
+        primary key,
+    user_id         int      not null,
+    dict_id         int      not null,
+    qwerty_num      int      not null,
+    qwerty_rec_time datetime not null,
+    constraint qwerty_rec_dict_dict_id_fk
+        foreign key (dict_id) references dict (dict_id),
+    constraint qwerty_rec_user_user_id_fk
+        foreign key (user_id) references `user` (user_id)
+);
+

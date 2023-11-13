@@ -132,7 +132,7 @@ class DictMapperTest {
     @Sql("/data-testGetMasteredNum.sql")
     void testGetMasteredNum(){
         long testDictId = 1005 , testUserId = 1;
-        long Num = dictMapper.getMasteredNum(testDictId,testUserId);
+        long Num = dictMapper.getNumMastered(testDictId,testUserId);
         assertEquals(4,Num);
     }
 

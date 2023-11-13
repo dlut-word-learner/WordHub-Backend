@@ -109,3 +109,18 @@ create table wordhub.study_rec
     comment '用户对单词的学习记录';
 
 
+create table if not exists wordhub.qwerty_rec
+(
+    qwerty_rec_id   int auto_increment
+        primary key,
+    user_id         int      not null,
+    dict_id         int      not null,
+    qwerty_num      int      not null,
+    qwerty_rec_time datetime not null,
+    constraint qwerty_rec_dict_dict_id_fk
+        foreign key (dict_id) references wordhub.dict (dict_id),
+    constraint qwerty_rec_user_user_id_fk
+        foreign key (user_id) references wordhub.user (user_id)
+)
+    comment '存储Qwerty模式记录';
+

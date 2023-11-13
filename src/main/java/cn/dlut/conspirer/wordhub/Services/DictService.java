@@ -10,6 +10,7 @@ import cn.dlut.conspirer.wordhub.Dtos.WordToReviewDTO;
 import cn.dlut.conspirer.wordhub.Entities.Dict;
 import cn.dlut.conspirer.wordhub.Entities.Languages;
 import cn.dlut.conspirer.wordhub.Entities.Word;
+import cn.dlut.conspirer.wordhub.Vos.DictProgressVo;
 
 import java.util.List;
 
@@ -26,5 +27,9 @@ public interface DictService {
 
     List<Word> getWordsToQwerty(Long dictId, Long num);
 
-    int addDict(Dict dict);
+    boolean addDict(Dict dict);
+
+    boolean addQwertyRec(Long userId, Long dictId, Long num);
+
+    DictProgressVo getProgress(Long userId, Long dictId);
 }

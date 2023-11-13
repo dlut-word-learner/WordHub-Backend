@@ -6,7 +6,7 @@ import cn.dlut.conspirer.wordhub.Entities.Languages;
 import cn.dlut.conspirer.wordhub.Entities.Word;
 import cn.dlut.conspirer.wordhub.Mappers.DictMapper;
 import cn.dlut.conspirer.wordhub.Services.DictService;
-import cn.dlut.conspirer.wordhub.Vos.WordVo;
+import cn.dlut.conspirer.wordhub.Vos.DictProgressVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,7 +58,17 @@ public class DictServiceImpl implements DictService {
     }
 
     @Override
-    public int addDict(Dict dict) {
-        return dictMapper.addDict(dict);
+    public boolean addDict(Dict dict) {
+        return dictMapper.addDict(dict) == 1L;
+    }
+
+    @Override
+    public boolean addQwertyRec(Long userId, Long dictId, Long num){
+        return dictMapper.insertQwertyRec(dictId, userId, num) == 1L;
+    }
+
+    @Override
+    public DictProgressVo getProgress(Long userId, Long dictId){
+        return DictProgressVo.builder().sum(dictMapper.getWordNum(dictId)).studies(dictMapper.getNumUnmastered(dictId, userId)).mastered(dictMapper.getNumMastered(dictId, userId)).build();
     }
 }

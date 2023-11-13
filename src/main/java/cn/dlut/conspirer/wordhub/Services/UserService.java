@@ -6,6 +6,7 @@
  */
 package cn.dlut.conspirer.wordhub.Services;
 
+import cn.dlut.conspirer.wordhub.Entities.Task;
 import cn.dlut.conspirer.wordhub.Entities.User;
 import cn.dlut.conspirer.wordhub.Vos.UserRegisterVo;
 
@@ -41,6 +42,8 @@ public interface UserService {
     Long addExp(Long userId, Long expToAdd);
 
     byte[] getAvatarById(Long id) throws IOException;
+
+    List<Long> getStudyTickInPastNDays(Task task, Long userId, Long n);
 
 //    Boolean learnOrReviewWord(Long userId, Long wordId, Long studyCount);
 }

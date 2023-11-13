@@ -58,14 +58,45 @@ public interface UserMapper {
             "set user_password = #{password} " +
             "where user_id = #{id}")
     int updateUserPassword(Long id, String password);
+
     /**
-     * Add a study(learn or review) record.
-     *
-     * @param wordId     the word studied
-     * @param userId     the user who studied
-     * @param
-     * @return 1 if succeeded, 0 if failed
+     * 返回用户过去n天学习的单词数量
+     * sql大意：从StudyRec表中选出最早一次学习记录(tick=1)在n天之内的单词，count(*) group by date
+     * @param userId
+     * @param n
+     * @return
      */
-//    @Insert("insert into study_rec(word_id, user_id, study_rec_ease, study_rec_gap, study_rec_due_time) values (#{wordId}, #{userId}, #{ease}, #{gap}, #{dueTime})")
-//    int addStudyRecord(Long wordId, Long userId, Double ease, Long gap, LocalDateTime dueTime);
+    @Select("SELECT COUNT(*) " +
+            "FROM study_rec " +
+            "WHERE study_rec_tick = 1 " +
+            "AND user_id = #{userId} " +
+            "AND DATE(timestampadd(day, -study_rec_gap, study_rec_due_time)) = timestampadd(day, -#{n}, CURRENT_DATE);")
+    Long getLearnTickNDaysBefore(Long userId, Long n);
+
+    /**
+     * 返回用户过去n天复习单词次数
+     * sql大意：从StudyRec表中选出n天之内的学习记录，where tick!=1(排除学习)，count(*) group by date
+     * @param userId
+     * @param n
+     * @return
+     */
+    @Select("SELECT COUNT(*) " +
+            "FROM study_rec " +
+            "WHERE study_rec.study_rec_tick != 1 " +
+            "AND user_id = #{userId} " +
+            "AND DATE(timestampadd(day, -study_rec_gap, study_rec_due_time)) = timestampadd(day, -#{n}, CURRENT_DATE);")
+    Long getReviewTickNDaysBefore(Long userId, Long n);
+
+    /**
+     * 返回用户过去n天Qwerty单词次数
+     * 考虑建一个新表专门存Qwerty的历史记录，可以叫QwertyRec，因为这个记录和StudyRec的机制有很大差别
+     * @param userId
+     * @param n
+     * @return
+     */
+    @Select("SELECT COUNT(*) " +
+            "FROM qwerty_rec " +
+            "WHERE user_id = #{userId} " +
+            "AND DATE(qwerty_rec_time) = timestampadd(day, -#{n}, CURRENT_DATE);")
+    Long getQwertyTickNDaysBefore(Long userId, Long n);
 }

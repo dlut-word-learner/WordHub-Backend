@@ -71,7 +71,7 @@ public interface DictMapper {
             "              ON latest_study_rec.word_id = study_rec.word_id " +
             "                  AND latest_study_rec.tick = study_rec.study_rec_tick " +
             "WHERE word.dict_id = #{dictId} " +
-            "      AND DATE(study_rec.study_rec_due_time) <= CURDATE() " +
+            "      AND DATE(study_rec.study_rec_due_time) <= CURRENT_DATE " +
             "ORDER BY study_rec.study_rec_due_time ASC " +
             "LIMIT #{num};")
     @Results(id="wordToReviewMap",value = {
@@ -92,7 +92,7 @@ public interface DictMapper {
 
     @Insert("insert into dict(lang_name, dict_name) values(#{language}, #{name})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "dict_id")
-    int addDict(Dict dict);
+    Long addDict(Dict dict);
 
     @Select("select * from dict where lang_name = #{lang}")
     @ResultMap("dictMap")
@@ -101,7 +101,7 @@ public interface DictMapper {
     @Select("SELECT count(*) " +
             "FROM word " +
             "JOIN ( " +
-            "    SELECT word_id, MAX(due_time) AS due_time " +
+            "    SELECT word_id, MAX(study_rec_due_time) AS due_time " +
             "    FROM study_rec " +
             "    WHERE user_id = #{userId} " +
             "    GROUP BY word_id " +
@@ -109,15 +109,15 @@ public interface DictMapper {
             "ON word.word_id = latest_study_rec.word_id " +
             "JOIN study_rec " +
             "ON latest_study_rec.word_id = study_rec.word_id " +
-            "AND latest_study_rec.due_time = study_rec.due_time " +
+            "AND latest_study_rec.due_time = study_rec.study_rec_due_time " +
             "WHERE word.dict_id = #{dictId} " +
-            "AND DATE(study_rec.due_time) <= DATE_SUB(CURDATE(), INTERVAL 1 MONTH);")
-    Long getMasteredNum(Long dictId, Long userId);
+            "AND DATE(study_rec.study_rec_due_time) > DATE(timestampadd(month, -1, CURRENT_DATE));")
+    Long getNumMastered(Long dictId, Long userId);
 
     @Select("SELECT count(*) " +
             "FROM word " +
             "JOIN ( " +
-            "    SELECT word_id, MAX(due_time) AS due_time " +
+            "    SELECT word_id, MAX(study_rec_due_time) AS due_time " +
             "    FROM study_rec " +
             "    WHERE user_id = #{userId} " +
             "    GROUP BY word_id " +
@@ -125,57 +125,23 @@ public interface DictMapper {
             "ON word.word_id = latest_study_rec.word_id " +
             "JOIN study_rec " +
             "ON latest_study_rec.word_id = study_rec.word_id " +
-            "AND latest_study_rec.due_time = study_rec.due_time " +
+            "AND latest_study_rec.due_time = study_rec.study_rec_due_time " +
             "WHERE word.dict_id = #{dictId} " +
-            "AND DATE(study_rec.due_time) > DATE_SUB(CURDATE(), INTERVAL 1 MONTH);")
+            "AND DATE(study_rec.study_rec_due_time) <= DATE(timestampadd(month, -1, CURRENT_DATE));")
     Long getNumUnmastered(Long dictId, Long userId);
 
     @Select("SELECT count(*) FROM word " +
             "WHERE word.dict_id = #{dictId};")
     Long getWordNum(Long dictId);
 
-
     /**
-     * TODO
-     * 返回用户过去n天学习的单词数量
-     * sql大意：从StudyRec表中选出最早一次学习记录(tick=1)在n天之内的单词，count(*) group by date
-     * @param dictId
-     * @param userId
-     * @param n
-     * @return
-     */
-    Long getLearnTickInPastNDays(Long dictId, Long userId, Long n);
-
-    /**
-     * TODO
-     * 返回用户过去n天复习单词次数
-     * sql大意：从StudyRec表中选出n天之内的学习记录，where tick!=1(排除学习)，count(*) group by date
-     * @param dictId
-     * @param userId
-     * @param n
-     * @return
-     */
-    Long getReviewTickInPastNDays(Long dictId, Long userId, Long n);
-
-    /**
-     * TODO
-     * 返回用户过去n天Qwerty单词次数
-     * 考虑建一个新表专门存Qwerty的历史记录，可以叫QwertyRec，因为这个记录和StudyRec的机制有很大差别
-     * @param dictId
-     * @param userId
-     * @param n
-     * @return
-     */
-    Long getQwertiyTickInPastNDays(Long dictId, Long userId, Long n);
-
-    /**
-     * TODO
-     * QwertyRec表中添加一条Qwerty记录，只需要插入本次Qwerty了多少个词，不需要存是哪一些词。QwertyRec表需要有id作为主键。一个userId与一个dictId在QwertyRec表可以有多个字段
-     * 前端完成Qwerty时一次上传即可
+     * QwertyRec 表中添加一条 Qwerty 记录，只需要插入本次 Qwerty 了多少个词，不需要存是哪一些词。 QwertyRec 表需要有id作为主键。一个 userId 与一个 dictId 在 QwertyRec 表可以有多个字段
+     * 前端完成 Qwerty 时一次上传即可
      * @param dictId
      * @param userId
      * @param n 本次Qwerty完成的单词数量
      * @return
      */
+    @Insert("insert into qwerty_rec(qwerty_rec_time, user_id, dict_id, qwerty_num) values(current_timestamp, #{userId}, #{dictId}, #{n})")
     Long insertQwertyRec(Long dictId, Long userId, Long n);
 }

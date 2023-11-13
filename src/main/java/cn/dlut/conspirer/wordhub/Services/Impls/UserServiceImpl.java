@@ -1,5 +1,6 @@
 package cn.dlut.conspirer.wordhub.Services.Impls;
 
+import cn.dlut.conspirer.wordhub.Entities.Task;
 import cn.dlut.conspirer.wordhub.Entities.User;
 import cn.dlut.conspirer.wordhub.Mappers.UserMapper;
 import cn.dlut.conspirer.wordhub.Services.UserService;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -119,9 +121,24 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
-//    @Override
-//    public Boolean learnOrReviewWord(Long userId, Long wordId, Long studyCount) {
-//        int count = usermapper.addStudyRecord(wordId, userId, studyCount);
-//        return count == 1;
-//    }
+
+    @Override
+    public List<Long> getStudyTickInPastNDays(Task task, Long userId, Long n){
+        ArrayList<Long> ans = new ArrayList<>();
+        for(Long i=29L;i>=0L;i--){
+            switch (task) {
+                case Learn -> {
+                    ans.add(usermapper.getLearnTickNDaysBefore(userId, i));
+                }
+                case Review -> {
+                    ans.add(usermapper.getReviewTickNDaysBefore(userId, i));
+                }
+                case Qwerty -> {
+                    ans.add(usermapper.getQwertyTickNDaysBefore(userId, i));
+                }
+            }
+
+        }
+        return ans;
+    }
 }

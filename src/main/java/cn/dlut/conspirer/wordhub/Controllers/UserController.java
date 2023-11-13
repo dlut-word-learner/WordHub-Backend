@@ -3,6 +3,7 @@ package cn.dlut.conspirer.wordhub.Controllers;
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.dev33.satoken.annotation.SaIgnore;
 import cn.dev33.satoken.stp.StpUtil;
+import cn.dlut.conspirer.wordhub.Entities.Task;
 import cn.dlut.conspirer.wordhub.Entities.User;
 import cn.dlut.conspirer.wordhub.Services.UserService;
 import cn.dlut.conspirer.wordhub.Vos.UserProfileUpdateVo;
@@ -19,6 +20,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -137,5 +139,31 @@ public class UserController {
         Long exp = userService.addExp(id, expToAdd);
         if (exp != null) return ResponseEntity.ok(exp);
         else return ResponseEntity.badRequest().body("用户不存在");
+    }
+
+    /**
+     * 获取用户过去n天的 学习 / 复习 / Qwerty 记录，返回 长度为 n 的整型数组
+     * @param task
+     * @return
+     */
+    @GetMapping("/{id}/study-rec/{task}")
+    public ResponseEntity<?> getStudyRec(@PathVariable("id") Long id, @PathVariable("task") Task task, @RequestParam("duration") Long duration) {
+        return ResponseEntity.ok(userService.getStudyTickInPastNDays(task, id, duration));
+    }
+
+    /**
+     * 获取用户过去n天总记录，返回 长度为 n 的整型数组
+     * @return
+     */
+    @GetMapping("/{id}/study-rec")
+    public ResponseEntity<?> getStudyRec(@PathVariable("id") Long id, @RequestParam("duration") Long duration) {
+        List<Long> study = userService.getStudyTickInPastNDays(Task.Learn, id, duration);
+        List<Long> review = userService.getStudyTickInPastNDays(Task.Review, id, duration);
+        List<Long> qwerty = userService.getStudyTickInPastNDays(Task.Qwerty, id, duration);
+        ArrayList<Long> ans = new ArrayList<>(study);
+        for(int i=0; i < ans.size(); i++){
+            ans.set(i, review.get(i) + qwerty.get(i));
+        }
+        return ResponseEntity.ok(ans);
     }
 }

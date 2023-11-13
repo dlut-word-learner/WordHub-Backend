@@ -118,41 +118,13 @@ public class DictController {
     }
 
     /**
-     * TODO
-     *
-     * 获取用户对此词典过去n天的学习/复习/Qwerty记录，返回 长度为n的整型数组
-     * @param dictId
-     * @param task
-     * @return
-     */
-    @GetMapping("/{id}/study-rec/{task}")
-    @SaCheckLogin
-    public ResponseEntity<?> getStudyRec(@PathVariable("id") Long dictId, @PathVariable("task")Task task) {
-        Long userId = StpUtil.getLoginIdAsLong();
-        switch(task) {
-            case Learn -> {
-
-            }
-            case Review -> {
-
-            }
-            case Qwerty -> {
-
-            }
-        }
-        return ResponseEntity.internalServerError().body("Unimplemented");
-    }
-
-    /**
-     * TODO
      * 获取用户对此词典的学习进度，返回 DictProgressVo
      * @param dictId
      * @return
      */
     @GetMapping("/{id}/progress")
-    @SaCheckLogin
     public ResponseEntity<?> getProgress(@PathVariable("id") Long dictId) {
         Long userId = StpUtil.getLoginIdAsLong();
-        return ResponseEntity.internalServerError().body("Unimplemented");
+        return ResponseEntity.ok(dictService.getProgress(userId, dictId));
     }
 }
