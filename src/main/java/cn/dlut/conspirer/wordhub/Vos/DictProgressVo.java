@@ -17,6 +17,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class DictProgressVo {
     Long sum;
-    Long studies;
+    Long studied;
     Long mastered;
 }
