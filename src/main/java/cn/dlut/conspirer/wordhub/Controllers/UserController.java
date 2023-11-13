@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -147,7 +148,10 @@ public class UserController {
      * @return
      */
     @GetMapping("/{id}/study-rec/{task}")
-    public ResponseEntity<?> getStudyRec(@PathVariable("id") Long id, @PathVariable("task") Task task, @RequestParam("duration") Long duration) {
+    public ResponseEntity<?> getStudyRec(@PathVariable("id") Long id, @PathVariable("task") Task task, @RequestParam("duration") @Nullable Long duration) {
+        if(duration==null){
+            duration = 30L;
+        }
         return ResponseEntity.ok(userService.getStudyTickInPastNDays(task, id, duration));
     }
 
@@ -156,10 +160,13 @@ public class UserController {
      * @return
      */
     @GetMapping("/{id}/study-rec")
-    public ResponseEntity<?> getStudyRec(@PathVariable("id") Long id, @RequestParam("duration") Long duration) {
+    public ResponseEntity<?> getStudyRec(@PathVariable("id") Long id, @RequestParam("duration") @Nullable Long duration) {
+        if(duration==null){
+            duration = 90L;
+        }
         List<Long> study = userService.getStudyTickInPastNDays(Task.Learn, id, duration);
         List<Long> review = userService.getStudyTickInPastNDays(Task.Review, id, duration);
-        List<Long> qwerty = userService.getStudyTickInPastNDays(Task.Qwerty, id, duration);
+        List<Long> qwerty = userService.getStudyTickInPastNDays(Task.QwertyMode, id, duration);
         ArrayList<Long> ans = new ArrayList<>(study);
         for(int i=0; i < ans.size(); i++){
             ans.set(i, review.get(i) + qwerty.get(i));
