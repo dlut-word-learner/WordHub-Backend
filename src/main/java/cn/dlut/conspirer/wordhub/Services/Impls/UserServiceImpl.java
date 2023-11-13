@@ -141,7 +141,7 @@ public class UserServiceImpl implements UserService {
                 case Review -> {
                     ans.add(usermapper.getReviewTickNDaysBefore(userId, i));
                 }
-                case Qwerty -> {
+                case QwertyMode -> {
                     ans.add(usermapper.getQwertyTickNDaysBefore(userId, i));
                 }
             }
