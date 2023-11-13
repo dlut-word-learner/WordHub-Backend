@@ -133,7 +133,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Long> getStudyTickInPastNDays(Task task, Long userId, Long n){
         ArrayList<Long> ans = new ArrayList<>();
-        for(Long i=29L;i>=0L;i--){
+        for(Long i= n-1 ;i>=0L;i--){
             switch (task) {
                 case Learn -> {
                     ans.add(usermapper.getLearnTickNDaysBefore(userId, i));
