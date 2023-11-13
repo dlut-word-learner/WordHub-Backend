@@ -75,6 +75,8 @@ public class DictServiceImpl implements DictService {
      */
     @Override
     public DictProgressVo getProgress(Long userId, Long dictId){
-        return DictProgressVo.builder().sum(dictMapper.getWordNum(dictId)).studied(dictMapper.getNumUnmastered(dictId, userId)).mastered(dictMapper.getNumMastered(dictId, userId)).build();
+        Long unmastered = dictMapper.getNumUnmastered(dictId, userId);
+        Long mastered = dictMapper.getNumMastered(dictId, userId);
+        return DictProgressVo.builder().sum(dictMapper.getWordNum(dictId)).studied(unmastered + mastered).mastered(mastered).build();
     }
 }
