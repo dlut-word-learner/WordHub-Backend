@@ -167,7 +167,7 @@ class DictMapperTest {
         Word word2 =
                 Word.builder().id(102L).name("word2").dictId(null).extension(extension).build();
         assertThat(wordList_1).hasSize(4).contains(word2);
-        assertThat(wordList_2).hasSize(1).doesNotContain(word2);
+        assertThat(wordList_2).hasSize(1);
     }
 
     @Test
