@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
@@ -167,4 +168,32 @@ class UserMapperTest {
         users = userMapper.getAll();
         Assertions.assertThat(users).doesNotContain(user_created);
     }
+
+    @Test
+    @Sql("/data-testGetLearnTickNDaysBefore.sql")
+    void testGetLearnTickNDaysBefore(){
+        long userId = 1,n = 3;
+        long Num = userMapper.getLearnTickNDaysBefore(userId,n);
+        assertEquals(1L,Num);
+    }
+
+
+    @Test
+    @Sql("/data-testGetLearnTickNDaysBefore.sql")
+    void testGetReviewTickNDaysBefore(){
+        long userId = 1,n = 3;
+        long Num = userMapper.getReviewTickNDaysBefore(userId,n);
+        assertEquals(1L,Num);
+    }
+
+    @Test
+    @Sql("/data-testGetQwertyTickNDaysBefore.sql")
+    void testGetQwertyTickNDaysBefore(){
+        long userId = 1,n = 3;
+        long Num = userMapper.getQwertyTickNDaysBefore(userId,n);
+        assertEquals(2L,Num);
+    }
+
+
+
 }
