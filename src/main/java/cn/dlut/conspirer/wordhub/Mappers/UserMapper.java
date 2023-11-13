@@ -70,7 +70,8 @@ public interface UserMapper {
             "FROM study_rec " +
             "WHERE study_rec_tick = 1 " +
             "AND user_id = #{userId} " +
-            "AND DATE(timestampadd(day, -study_rec_gap, study_rec_due_time)) = timestampadd(day, -#{n}, CURRENT_DATE);")
+            "AND DATE(timestampadd(day, -study_rec_gap, study_rec_due_time)) = timestampadd(day, -#{n}, " +
+            "CURRENT_DATE);")
     Long getLearnTickNDaysBefore(Long userId, Long n);
 
     /**
@@ -84,7 +85,8 @@ public interface UserMapper {
             "FROM study_rec " +
             "WHERE study_rec.study_rec_tick != 1 " +
             "AND user_id = #{userId} " +
-            "AND DATE(timestampadd(day, -study_rec_gap, study_rec_due_time)) = timestampadd(day, -#{n}, CURRENT_DATE);")
+            "AND DATE(timestampadd(day, -study_rec_gap, study_rec_due_time)) = timestampadd(day, -#{n}, " +
+            "CURRENT_DATE);")
     Long getReviewTickNDaysBefore(Long userId, Long n);
 
     /**

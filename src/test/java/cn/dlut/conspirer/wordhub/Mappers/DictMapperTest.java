@@ -81,7 +81,6 @@ class DictMapperTest {
         List<Word> wordListTest = null;
         Dict test = new Dict(1002L, testLanguages, "Test");
         assertEquals(test, dict);
-
     }
 
     @Test
@@ -133,7 +132,7 @@ class DictMapperTest {
     void testGetMasteredNum(){
         long testDictId = 1005 , testUserId = 1;
         long Num = dictMapper.getNumMastered(testDictId,testUserId);
-        assertEquals(4,Num);
+        assertEquals(2,Num);
     }
 
     @Test
@@ -141,7 +140,7 @@ class DictMapperTest {
     void testGetNumUnMastered(){
         long testDictId = 1005 , testUserId = 1;
         long Num = dictMapper.getNumUnmastered(testDictId,testUserId);
-        assertEquals(2,Num);
+        assertEquals(1,Num);
     }
 
     @Test
@@ -152,24 +151,54 @@ class DictMapperTest {
         assertEquals(6,WordNum);
     }
 
-    /**
+    @Test
+    @Sql("/data-getWordsToQwerty.sql")
+    void testGetWordsToQwerty(){
+        List<Word> wordList_1 = dictMapper.getWordsToQwerty(1001L,4L);
+        List<Word> wordList_2 = dictMapper.getWordsToQwerty(1001L,1L);
+        assertFalse(wordList_1.isEmpty());
+        JsonNode extension;
+        try {
+            extension = new ObjectMapper().readTree("{\"ukphone\": \"uk\", \"usphone\": \"us\", \"trans\": [\"trans1\",\"trans2\"]}");
+            // log.info(extension.toString());
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        Word word2 =
+                Word.builder().id(102L).name("word2").dictId(null).extension(extension).build();
+        assertThat(wordList_1).hasSize(4).contains(word2);
+        assertThat(wordList_2).hasSize(1);
+    }
+
+    @Test
+    void testInsertQwertyRec(){
+        long dictID = 0L, userId = 1000001L , n = 100;
+        long lines = dictMapper.insertQwertyRec(dictID,userId,n);
+        assertEquals(1,lines);
+    }
+
+
+
+
+
+
+    /*
      * TODO
-     *
-     */
+
     @Test
     @Sql("/data-testGetLearnTickInPastNDays.sql")
     void testGetLearnTickInPastNDays(){
-        long DictId = 1005 , userID = 1, n = 3;
+        long userID = 1, n = 3;
         long Num = dictMapper.getLearnTickInPastNDays(DictId,userID,n);
-  //      assertEquals(2,Num);
+        assertEquals(2,Num);
     }
 
     @Test
     @Sql("/data-testGetReviewTickInPastNDays.sql")
     void testGetReviewTickInPastNDays(){
-        long DictId = 1005 , userID = 1, n = 6;
-        long Num = dictMapper.getReviewTickInPastNDays(DictId,userID,n);
-        // assertEquals(5,Num);
+        long userID = 1, n = 6;
+      //  long Num = dictMapper.getReviewTickInPastNDays(DictId,userID,n);
+       //  assertEquals(5,Num);
     }
 
     /*

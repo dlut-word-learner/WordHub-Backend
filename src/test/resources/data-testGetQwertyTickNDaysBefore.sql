@@ -17,14 +17,13 @@ VALUES (101, 'word1', 1005, '{}'),
        (105, 'word5', 1005, '{}'),
        (106, 'word6', 1005, '{}');
 
-INSERT INTO "study_rec"
-(study_rec_id ,word_id,user_id,study_rec_gap,study_rec_ease,study_rec_due_time,study_rec_tick)
-VALUES (1, 101, 1, 1, 1, dateadd(month , -1, CURRENT_DATE), 1),
-       (2, 101, 1, 1, 1, dateadd(month , 2, CURRENT_DATE), 2),
-       (3, 102, 1, 1, 1, dateadd(month, -1, CURRENT_DATE), 1),
-       (4, 102, 1, 1, 1, CURRENT_TIMESTAMP, 2),
-       (5, 102, 1, 1, 1, dateadd(day, 20, CURRENT_DATE), 3),
-       (6, 103, 1, 3, 1, dateadd(month,2,CURRENT_DATE), 1)
-
+INSERT INTO "qwerty_rec"
+(qwerty_rec_id,user_id,dict_id,qwerty_num,qwerty_rec_time)
+VALUES
+    (1,1, 1005, 5,  dateadd(DAY, 0, CURRENT_DATE)),
+    (2,1, 1005, 5,  dateadd(DAY, -1, CURRENT_DATE)),
+    (3,1, 1005, 5,  dateadd(DAY, -1, CURRENT_DATE)),
+    (4,1, 1005, 5,  dateadd(DAY, -3, CURRENT_DATE)),
+    (5,1, 1005, 5,  dateadd(DAY, -3, CURRENT_DATE)),
+    (6,1, 1005, 5,  dateadd(DAY, -4, CURRENT_DATE))
 ;
-
