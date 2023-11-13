@@ -249,4 +249,8 @@ VALUES
 
 (50,1,2,2.15,dateadd(DAY, -34, CURRENT_DATE),1),
 (50,1,4,1.85,dateadd(DAY, -16, CURRENT_DATE),2),
-(50,1,6,2,dateadd(DAY, -1, CURRENT_DATE),3);
+(50,1,6,2,dateadd(DAY, -1, CURRENT_DATE),3),
+
+(51,1,2,2.15,dateadd(DAY, -45, CURRENT_DATE),1),
+(51,1,4,1.85,dateadd(DAY, -18, CURRENT_DATE),2),
+(51,1,6,2,dateadd(DAY, -2, CURRENT_DATE),3);
