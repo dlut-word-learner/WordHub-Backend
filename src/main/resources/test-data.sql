@@ -316,12 +316,6 @@ VALUES (1,1,2,2.0,date_add(CURRENT_DATE, interval -55 DAY),1),
 (67,1,7,1.70,date_add(CURRENT_DATE, interval -17 DAY),4),
 (67,1,9,2.0,date_add(CURRENT_DATE, interval -3 DAY),5),
 
-(67,1,2,2.0,date_add(CURRENT_DATE, interval -56 DAY),1),
-(67,1,3,2.15,date_add(CURRENT_DATE, interval -51 DAY),2),
-(67,1,5,1.85,date_add(CURRENT_DATE, interval -33 DAY),3),
-(67,1,7,1.70,date_add(CURRENT_DATE, interval -19 DAY),4),
-(67,1,9,2.0,date_add(CURRENT_DATE, interval -7 DAY),5),
-
 (68,1,2,2.0,date_add(CURRENT_DATE, interval -56 DAY),1),
 (68,1,3,2.15,date_add(CURRENT_DATE, interval -51 DAY),2),
 (68,1,5,1.85,date_add(CURRENT_DATE, interval -33 DAY),3),
