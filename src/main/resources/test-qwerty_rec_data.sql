@@ -1,4 +1,4 @@
-INSERT INTO 'qwerty_rec'
+INSERT INTO `qwerty_rec`
     (user_id, dict_id, qwerty_num, qwerty_rec_time)
 VALUES (1, 1, 20, date_add(CURRENT_DATE, interval -60 DAY)),
        (1, 1, 30, date_add(CURRENT_DATE, interval -59 DAY)),

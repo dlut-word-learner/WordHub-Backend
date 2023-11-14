@@ -553,13 +553,13 @@ VALUES (1,1,2,2.0,date_add(CURRENT_DATE, interval -55 DAY),1),
 (114,1,5,1.85,date_add(CURRENT_DATE, interval -16 DAY),2),
 (114,1,10,2,date_add(CURRENT_DATE, interval -7 DAY),3),
 (114,1,18,1.85,date_add(CURRENT_DATE, interval 16 DAY),4),
-(114,1,25,2.1,date_add(CURRENT_DATE, interval 48 DAY),4),
+(114,1,25,2.1,date_add(CURRENT_DATE, interval 48 DAY),5),
 
 (115,1,2,2.15,date_add(CURRENT_DATE, interval -23 DAY),1),
 (115,1,5,1.85,date_add(CURRENT_DATE, interval -16 DAY),2),
 (115,1,10,2,date_add(CURRENT_DATE, interval -7 DAY),3),
 (115,1,18,1.85,date_add(CURRENT_DATE, interval 17 DAY),4),
-(115,1,25,2.1,date_add(CURRENT_DATE, interval 51 DAY),4),
+(115,1,25,2.1,date_add(CURRENT_DATE, interval 51 DAY),5),
 
 (116,1,3,2.0,date_add(CURRENT_DATE, interval -11 DAY),1),
 (116,1,6,2.15,date_add(CURRENT_DATE, interval -5 DAY),2),
@@ -571,23 +571,23 @@ VALUES (1,1,2,2.0,date_add(CURRENT_DATE, interval -55 DAY),1),
 (117,1,5,1.85,date_add(CURRENT_DATE, interval -16 DAY),2),
 (117,1,10,2,date_add(CURRENT_DATE, interval -7 DAY),3),
 (117,1,18,1.85,date_add(CURRENT_DATE, interval 16 DAY),4),
-(117,1,25,2.1,date_add(CURRENT_DATE, interval 48 DAY),4),
+(117,1,25,2.1,date_add(CURRENT_DATE, interval 48 DAY),5),
 
 (118,1,2,2.15,date_add(CURRENT_DATE, interval -23 DAY),1),
 (118,1,5,1.85,date_add(CURRENT_DATE, interval -16 DAY),2),
 (118,1,10,2,date_add(CURRENT_DATE, interval -7 DAY),3),
 (118,1,18,1.85,date_add(CURRENT_DATE, interval 17 DAY),4),
-(118,1,25,2.1,date_add(CURRENT_DATE, interval 51 DAY),4),
+(118,1,25,2.1,date_add(CURRENT_DATE, interval 51 DAY),5),
 
 (119,1,2,2.15,date_add(CURRENT_DATE, interval -28 DAY),1),
 (119,1,5,1.85,date_add(CURRENT_DATE, interval -24 DAY),2),
 (119,1,10,2,date_add(CURRENT_DATE, interval -11 DAY),3),
 (119,1,18,1.85,date_add(CURRENT_DATE, interval 8 DAY),4),
-(119,1,25,2.1,date_add(CURRENT_DATE, interval 36 DAY),4),
+(119,1,25,2.1,date_add(CURRENT_DATE, interval 36 DAY),5),
 
 (120,1,2,2.15,date_add(CURRENT_DATE, interval -28 DAY),1),
 (120,1,5,1.85,date_add(CURRENT_DATE, interval -24 DAY),2),
 (120,1,10,2,date_add(CURRENT_DATE, interval -11 DAY),3),
 (120,1,18,1.85,date_add(CURRENT_DATE, interval 8 DAY),4),
-(120,1,25,2.1,date_add(CURRENT_DATE, interval 36 DAY),4);
+(120,1,25,2.1,date_add(CURRENT_DATE, interval 36 DAY),5);
 
