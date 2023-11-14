@@ -1,6 +1,6 @@
 create table if not exists wordhub.language
 (
-    lang_name varchar(20) primary key
+    lang_name varchar(30) primary key
 )
     comment '语言';
 
@@ -8,8 +8,8 @@ create table if not exists wordhub.dict
 (
     dict_id   int auto_increment
         primary key,
-    lang_name varchar(20) not null,
-    dict_name varchar(20) not null,
+    lang_name varchar(30) not null,
+    dict_name varchar(30) not null,
     constraint dict_language_lang_name_fk
         foreign key (lang_name) references wordhub.language (lang_name)
 )
@@ -26,7 +26,7 @@ create table if not exists wordhub.user
     user_id       int auto_increment
         primary key,
     user_name     varchar(30)       not null comment '用户名',
-    user_password char(60)          not null comment '存储Bcrypt加密后的密码',
+    user_password char(255)          not null comment '存储Bcrypt加密后的密码',
     user_email    varchar(50)       not null,
     user_score    int     default 0 not null,
     user_role     tinyint default 0 not null comment '0 普通用户 1管理员 其它预留',
@@ -41,7 +41,7 @@ create table if not exists wordhub.word
 (
     word_id   int auto_increment
         primary key,
-    word_name varchar(20) not null comment '"日语则为罗马音"',
+    word_name varchar(30) not null comment '"日语则为罗马音"',
     dict_id   int         not null,
     extension json,
     constraint word_dict_dict_id_fk

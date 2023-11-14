@@ -21,10 +21,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * 用于向数据库导入json格式单词表的工具类
@@ -34,6 +31,7 @@ import java.util.Scanner;
  */
 @Slf4j
 @SpringBootApplication(exclude = {WebMvcAutoConfiguration.class, EmbeddedWebServerFactoryCustomizerAutoConfiguration.class})
+// 注释下一行以启用importer
 @Profile("cli")
 public class WordHubDictImporter implements CommandLineRunner {
     @Autowired
@@ -53,50 +51,55 @@ public class WordHubDictImporter implements CommandLineRunner {
     @Transactional
     public void run(String... args) throws Exception {
         log.info("WordHubDictImporter启动");
-        Arrays.stream(args).forEach(log::info);
-        String filePath, dictName;
-        Languages lang;
-        if (args.length < 3) {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Input the language of the dict(English or Japanese): ");
-            lang = Languages.valueOf(scanner.nextLine());
-            System.out.println("Input the name of the dict: ");
-            dictName = scanner.nextLine();
-            System.out.println("Input the path of the dict: ");
-            filePath = scanner.nextLine();
-        } else {
-            filePath = args[0];
-            dictName = args[1];
-            lang = Languages.valueOf(args[2]);
-        }
-
-        File dictFile = new File(filePath);
-        JsonNode words = objectMapper.readTree(dictFile);
-
-        Dict dict = new Dict(lang, dictName);
-        dictService.addDict(dict);
-        words.elements().forEachRemaining(x -> {
+        while(true) {
             try {
-                ObjectNode objectNode = (ObjectNode) x;
-                log.info("ori:" + objectNode.toString());
-                ObjectNode extension = objectMapper.createObjectNode();
-                Iterator<Map.Entry<String, JsonNode>> fieldsIterator = objectNode.fields();
-                while (fieldsIterator.hasNext()) {
-                    Map.Entry<String, JsonNode> field = fieldsIterator.next();
-                    if (!field.getKey().equals("name")) {
-                        if (field.getKey().equals("trans"))
-                            extension.put("meanings", field.getValue());
-                        else extension.put(field.getKey(), field.getValue());
-                        fieldsIterator.remove();
+                String filePath, dictName;
+                Languages lang;
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Input the language of the dict(English or Japanese): (or input q or quit to quit)");
+                String opo = scanner.nextLine();
+                if (opo.trim().isEmpty()) continue;
+                if (opo.equals("q") || opo.equals("quit")) break;
+
+                lang = Languages.valueOf(opo);
+                System.out.println("Input the name of the dict: ");
+                dictName = scanner.nextLine();
+                System.out.println("Input the path of the dict: ");
+                filePath = scanner.nextLine();
+
+                File dictFile = new File(filePath);
+                JsonNode words = objectMapper.readTree(dictFile);
+
+                Dict dict = new Dict(lang, dictName);
+                dictService.addDict(dict);
+                words.elements().forEachRemaining(x -> {
+                    try {
+                        ObjectNode objectNode = (ObjectNode) x;
+                        log.info("ori:" + objectNode.toString());
+                        ObjectNode extension = objectMapper.createObjectNode();
+                        Iterator<Map.Entry<String, JsonNode>> fieldsIterator = objectNode.fields();
+                        while (fieldsIterator.hasNext()) {
+                            Map.Entry<String, JsonNode> field = fieldsIterator.next();
+                            if (!field.getKey().equals("name")) {
+                                if (field.getKey().equals("trans"))
+                                    extension.put("meanings", field.getValue());
+                                else extension.put(field.getKey(), field.getValue());
+                                fieldsIterator.remove();
+                            }
+                        }
+                        objectNode.put("extension", extension);
+                        log.info("After: " + objectNode.toString());
+                        Word word = objectMapper.treeToValue(objectNode, Word.class);
+                        wordService.addWordToDict(dict.getId(), word);
+                    } catch (JsonProcessingException e) {
+                        throw new RuntimeException(e);
                     }
-                }
-                objectNode.put("extension", extension);
-                log.info("After: " + objectNode.toString());
-                Word word = objectMapper.treeToValue(objectNode, Word.class);
-                wordService.addWordToDict(dict.getId(), word);
-            } catch (JsonProcessingException e) {
-                throw new RuntimeException(e);
+                });
             }
-        });
+            catch(Exception e){
+                log.error(e.toString());
+                continue;
+            }
+        }
     }
 }
