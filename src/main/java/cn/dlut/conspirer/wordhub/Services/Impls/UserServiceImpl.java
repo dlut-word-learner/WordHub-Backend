@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
         int id = usermapper.addUser(u);
         log.info("User created, id: " + u.getId());
         if (user.getAvatar() != null) {
-            FileUploadUtils.upload(user.getAvatar(), avatarPath + u.getId(), "png");
+            FileUploadUtils.upload(user.getAvatar().getBytes(), avatarPath + u.getId(), "png");
         }
         return usermapper.getUserById(u.getId());
     }
