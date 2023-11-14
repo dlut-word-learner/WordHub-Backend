@@ -8,6 +8,7 @@ import cn.dlut.conspirer.wordhub.Services.WordService;
 import cn.dlut.conspirer.wordhub.Utils.SM2AlgorithmUtil;
 import cn.dlut.conspirer.wordhub.Vos.LearnWordVo;
 import cn.dlut.conspirer.wordhub.Vos.ReviewWordVo;
+import cn.dlut.conspirer.wordhub.Vos.WordReviewPeekVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -78,9 +79,9 @@ public class WordController {
      */
     @GetMapping("/{wordId}/review")
     @SaCheckLogin
-    public ResponseEntity<?> reviewWord(@PathVariable("wordId") Long wordId) {
+    public ResponseEntity<?> reviewWordPeek(@PathVariable("wordId") Long wordId) {
         Long userId = StpUtil.getLoginIdAsLong();
-        ArrayList<Long> arr = new ArrayList<>();
+
         StudyRec latest = wordService.getLatestStudyRec(userId, wordId);
         Timestamp now = new Timestamp(System.currentTimeMillis());
         if (latest == null) {
@@ -88,9 +89,12 @@ public class WordController {
         } else if (latest.getDueTime().toLocalDateTime().toLocalDate().isAfter(now.toLocalDateTime().toLocalDate())) {
             return ResponseEntity.badRequest().body("还没到复习时间，无法推算");
         }
-        arr.add(SM2AlgorithmUtil.calcGap(latest, SchedulingStates.Hard, now));
-        arr.add(SM2AlgorithmUtil.calcGap(latest, SchedulingStates.Good, now));
-        arr.add(SM2AlgorithmUtil.calcGap(latest, SchedulingStates.Easy, now));
-        return ResponseEntity.ok(arr);
+        WordReviewPeekVo wordReviewPeekVo =
+            WordReviewPeekVo.builder()
+                .hard(SM2AlgorithmUtil.calcGap(latest, SchedulingStates.Hard, now))
+                .good(SM2AlgorithmUtil.calcGap(latest, SchedulingStates.Good, now))
+                .easy(SM2AlgorithmUtil.calcGap(latest, SchedulingStates.Easy, now))
+                .build();
+        return ResponseEntity.ok(wordReviewPeekVo);
     }
 }
