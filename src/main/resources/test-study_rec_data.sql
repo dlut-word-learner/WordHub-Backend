@@ -1,16 +1,16 @@
 INSERT INTO `study_rec`
 (word_id,user_id,study_rec_gap,study_rec_ease,study_rec_due_time,study_rec_tick)
 VALUES (1,1,2,2.0,date_add(CURRENT_DATE, interval -55 DAY),1),
-   (1,1,3,2.15,date_add(CURRENT_DATE, interval -50 DAY),2),
-   (1,1,5,1.85,date_add(CURRENT_DATE, interval -40 DAY),3),
-   (1,1,7,1.70,date_add(CURRENT_DATE, interval -25 DAY),4),
-   (1,1,9,2.0,date_add(CURRENT_DATE, interval -5 DAY),5),
+(1,1,3,2.15,date_add(CURRENT_DATE, interval -50 DAY),2),
+(1,1,5,1.85,date_add(CURRENT_DATE, interval -40 DAY),3),
+(1,1,7,1.70,date_add(CURRENT_DATE, interval -25 DAY),4),
+(1,1,9,2.0,date_add(CURRENT_DATE, interval -5 DAY),5),
 
-   (2,1,2,2.0,date_add(CURRENT_DATE, interval -55 DAY),1),
-   (2,1,3,2.15,date_add(CURRENT_DATE, interval -50 DAY),2),
-   (2,1,5,1.85,date_add(CURRENT_DATE, interval -40 DAY),3),
-   (2,1,7,1.70,date_add(CURRENT_DATE, interval -25 DAY),4),
-   (2,1,9,2.0,date_add(CURRENT_DATE, interval -5 DAY),5),
+(2,1,2,2.0,date_add(CURRENT_DATE, interval -55 DAY),1),
+(2,1,3,2.15,date_add(CURRENT_DATE, interval -50 DAY),2),
+(2,1,5,1.85,date_add(CURRENT_DATE, interval -40 DAY),3),
+(2,1,7,1.70,date_add(CURRENT_DATE, interval -25 DAY),4),
+(2,1,9,2.0,date_add(CURRENT_DATE, interval -5 DAY),5),
 
 (3,1,2,2.0,date_add(CURRENT_DATE, interval -55 DAY),1),
 (3,1,3,2.15,date_add(CURRENT_DATE, interval -50 DAY),2),
