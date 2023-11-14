@@ -35,23 +35,23 @@ public class FileUploadUtils {
         return dest.getAbsolutePath();
     }
 
-    public static String upload(MultipartFile file, String pathName, String[] allowedExtension) throws IOException {
-        log.info("OriginalName: {}, ArgName: {}, ContentType: {}", file.getOriginalFilename(), file.getName(), file.getContentType());
-        String extension = StringUtils.getFilenameExtension(file.getOriginalFilename());
-        if (extension == null) {
-            String type = file.getContentType();
-            if (type != null)
-                extension = switch (type) {
-                    case "image/png" -> "png";
-                    case "image/jpeg" -> "jpeg";
-                    case "image/jpg" -> "jpg";
-                    case "image/gif" -> "gif";
-                    default -> extension;
-                };
-        }
-        if (allowedExtension != null && !extensionAllowed(extension, allowedExtension)) {
-            return null;
-        }
+    public static String upload(MultipartFile file, String pathName, String extension) throws IOException {
+        log.info("File Upload: [ OriginalName: {}, ArgName: {}, ContentType: {}, pathName: {} ]", file.getOriginalFilename(), file.getName(), file.getContentType(), pathName);
+//        String extension = StringUtils.getFilenameExtension(file.getOriginalFilename());
+//        if (extension == null) {
+//            String type = file.getContentType();
+//            if (type != null)
+//                extension = switch (type) {
+//                    case "image/png" -> "png";
+//                    case "image/jpeg" -> "jpeg";
+//                    case "image/jpg" -> "jpg";
+//                    case "image/gif" -> "gif";
+//                    default -> extension;
+//                };
+//        }
+//        if (allowedExtension != null && !extensionAllowed(extension, allowedExtension)) {
+//            return null;
+//        }
         File dest = new File(pathName + '.' + extension);
         File fileParent = dest.getParentFile();
         if (!fileParent.exists()) {

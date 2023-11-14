@@ -55,7 +55,7 @@ public interface UserMapper {
     int updateUserProfile(User user);
 
     @Update("update `user` " +
-            "set user_password = #{password} " +
+            "set user_password = ${password} " +
             "where user_id = #{id}")
     int updateUserPassword(Long id, String password);
 

@@ -105,6 +105,26 @@ public class UserController {
         } else return ResponseEntity.badRequest().body("用户不存在");
     }
 
+    @PutMapping("/{id}/profile/password")
+    // 登录校验--只有登录之后才能进入该方法。
+    @SaCheckLogin
+    public ResponseEntity<?> updateUserPassword(@PathVariable("id") Long id, @RequestBody String password) {
+        // 只能修改自己的信息，不能修改别人的
+        if (StpUtil.getLoginIdAsLong() != id) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("无权修改该用户的信息");
+        }
+
+        User user = userService.getUserById(id);
+        if (user != null) {
+            user.setPassword(password);
+            userService.updateUserPassword(user.getId(), password);
+            UserVo userVo1 = new UserVo();
+            user = userService.getUserById(id);
+            BeanUtils.copyProperties(user, userVo1);
+            return ResponseEntity.ok(userVo1);
+        } else return ResponseEntity.badRequest().body("用户不存在");
+    }
+
     @GetMapping("/{id}/profile/avatar")
     @SaIgnore
     public ResponseEntity<?> getAvatar(@PathVariable("id") Long id) {
@@ -116,7 +136,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/{id}/profile/avatar")
+    @PutMapping("/{id}/profile/avatar")
     @SaCheckLogin
     public ResponseEntity<?> updateAvatar(@PathVariable("id") Long id, @NotNull @RequestBody byte[] avatar) {
         if (StpUtil.getLoginIdAsLong() != id) {

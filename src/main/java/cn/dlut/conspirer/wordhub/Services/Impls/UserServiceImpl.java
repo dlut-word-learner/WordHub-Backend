@@ -40,13 +40,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Autowired
-    public void setUserMapper(UserMapper u) {
-        usermapper = u;
+    public void setAvatarPath(@Value("${urls.avatar}") String avatarPath){
+        this.avatarPath = avatarPath;
     }
 
     @Autowired
-    public void setUserMapper(@Value("${urls.avatar}") String path) {
-        avatarPath = path;
+    public void setUserMapper(UserMapper u) {
+        usermapper = u;
     }
 
     @Override
@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
         int id = usermapper.addUser(u);
         log.info("User created, id: " + u.getId());
         if (user.getAvatar() != null) {
-            FileUploadUtils.upload(user.getAvatar(), avatarPath + u.getId(), new String[]{"png"});
+            FileUploadUtils.upload(user.getAvatar(), avatarPath + u.getId(), "png");
         }
         return usermapper.getUserById(u.getId());
     }
