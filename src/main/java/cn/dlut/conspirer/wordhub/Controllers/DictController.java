@@ -135,6 +135,7 @@ public class DictController {
     @GetMapping("/{id}/progress")
     public ResponseEntity<?> getProgress(@PathVariable("id") Long dictId) {
         Long userId = StpUtil.getLoginIdAsLong();
+        if(dictId<0)return ResponseEntity.ok(DictProgressVo.builder().sum(0L).studied(0L).mastered(0L));
         return ResponseEntity.ok(dictService.getProgress(userId, dictId));
     }
 }
