@@ -48,6 +48,11 @@ public class DictServiceImpl implements DictService {
     }
 
     @Override
+    public Long getWordsNumToReview(Long dictId, Long userId) {
+        return dictMapper.getWordNumToReview(dictId, userId) ;
+    }
+
+    @Override
     public List<WordToReviewDTO> getWordsToReview(Long dictId, Long userId, Long num) {
         return dictMapper.getWordsToReview(dictId, userId, num);
     }

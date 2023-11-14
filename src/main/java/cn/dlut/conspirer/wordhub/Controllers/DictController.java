@@ -94,6 +94,16 @@ public class DictController {
     }
 
     /**
+     * 返回当前需要复习的单词数
+     */
+    @GetMapping("/{id}/review/num")
+    @SaCheckLogin
+    public ResponseEntity<?> getWordNumToReview(@PathVariable("id") Long dictId) {
+        Long userId = StpUtil.getLoginIdAsLong();
+        return ResponseEntity.ok(dictService.getWordsNumToReview(dictId, userId));
+    }
+
+    /**
      * Do not need to log in
      * @param dictId
      * @param num

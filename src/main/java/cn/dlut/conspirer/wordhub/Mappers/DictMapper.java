@@ -58,9 +58,8 @@ public interface DictMapper {
     @ResultMap("wordMap")
     List<Word> getWordsToLearn(Long dictId, Long userId, Long num);
 
-    @Select("SELECT word.word_id, word.word_name, word.extension, study_rec.study_rec_tick " +
-            "FROM word " +
-            "         JOIN ( " +
+    @Select("SELECT word.word_id, word.word_name, word.extension, study_rec.study_rec_tick FROM word " +
+            "JOIN ( " +
             "    SELECT word_id, MAX(study_rec_tick) AS tick " +
             "    FROM study_rec " +
             "    WHERE user_id = #{userId} " +
@@ -69,7 +68,7 @@ public interface DictMapper {
             "              ON word.word_id = latest_study_rec.word_id " +
             "         JOIN study_rec " +
             "              ON latest_study_rec.word_id = study_rec.word_id " +
-            "                  AND latest_study_rec.tick = study_rec.study_rec_tick " +
+            "              AND latest_study_rec.tick = study_rec.study_rec_tick " +
             "WHERE word.dict_id = #{dictId} " +
             "      AND DATE(study_rec.study_rec_due_time) <= CURRENT_DATE " +
             "ORDER BY study_rec.study_rec_due_time ASC " +
@@ -82,6 +81,21 @@ public interface DictMapper {
             @Result(property = "tick", column = "study_rec_tick"),
     })
     List<WordToReviewDTO> getWordsToReview(Long dictId, Long userId, Long num);
+
+    @Select("SELECT count(*) FROM word " +
+            "JOIN ( " +
+            "    SELECT word_id, MAX(study_rec_tick) AS tick " +
+            "    FROM study_rec " +
+            "    WHERE user_id = #{userId} " +
+            "    GROUP BY word_id " +
+            ") AS latest_study_rec " +
+            "              ON word.word_id = latest_study_rec.word_id " +
+            "         JOIN study_rec " +
+            "              ON latest_study_rec.word_id = study_rec.word_id " +
+            "              AND latest_study_rec.tick = study_rec.study_rec_tick " +
+            "WHERE word.dict_id = #{dictId} " +
+            "      AND DATE(study_rec.study_rec_due_time) <= CURRENT_DATE;")
+    Long getWordNumToReview(Long dictId, Long userId);
 
     @Select("select word.word_id, word_name, extension from word " +
             "where word.dict_id = #{dictId} " +

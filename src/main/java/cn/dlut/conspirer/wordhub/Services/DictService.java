@@ -23,6 +23,8 @@ public interface DictService {
 
     List<Word> getWordsToLearn(Long dictId, Long userId, Long num);
 
+    Long getWordsNumToReview(Long dictId, Long userId);
+
     List<WordToReviewDTO> getWordsToReview(Long dictId, Long userId, Long num);
 
     List<Word> getWordsToQwerty(Long dictId, Long num);
