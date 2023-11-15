@@ -138,4 +138,12 @@ public class DictController {
         if(dictId<0)return ResponseEntity.ok(DictProgressVo.builder().sum(0L).studied(0L).mastered(0L));
         return ResponseEntity.ok(dictService.getProgress(userId, dictId));
     }
+
+    @PostMapping("/{id}/qwerty")
+    @SaCheckLogin
+    public ResponseEntity<?> addQwertyRec(@PathVariable("id") Long dictId, @RequestBody QwertyVo qwertyVo){
+        Long userId = StpUtil.getLoginIdAsLong();
+        log.info("Qwerty: User {}, Dict {}, num: {}", userId, dictId, qwertyVo.getNum());
+        return ResponseEntity.ok(dictService.addQwertyRec(userId, dictId, qwertyVo.getNum()));
+    }
 }
