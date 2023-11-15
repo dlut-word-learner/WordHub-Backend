@@ -191,7 +191,7 @@ class UserMapperTest {
     void testGetQwertyTickNDaysBefore(){
         long userId = 1,n = 3;
         long Num = userMapper.getQwertyTickNDaysBefore(userId,n);
-        assertEquals(2L,Num);
+        assertEquals(10L,Num);
     }
 
 

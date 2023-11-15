@@ -86,8 +86,8 @@ public interface UserMapper {
             "FROM study_rec " +
             "WHERE study_rec.study_rec_tick != 1 " +
             "AND user_id = #{userId} " +
-            "AND DATE(timestampadd(day, -study_rec_gap, study_rec_due_time)) = timestampadd(day, -#{n}, " +
-            "CURRENT_DATE);")
+            "AND DATE(timestampadd(day, -study_rec_gap, study_rec_due_time)) = DATE(timestampadd(day, -#{n}, " +
+            "CURRENT_DATE));")
     Long getReviewTickNDaysBefore(Long userId, Long n);
 
     /**
@@ -97,7 +97,7 @@ public interface UserMapper {
      * @param n
      * @return
      */
-    @Select("SELECT COUNT(*) " +
+    @Select("SELECT SUM(qwerty_num) " +
             "FROM qwerty_rec " +
             "WHERE user_id = #{userId} " +
             "AND DATE(qwerty_rec_time) = timestampadd(day, -#{n}, CURRENT_DATE);")
