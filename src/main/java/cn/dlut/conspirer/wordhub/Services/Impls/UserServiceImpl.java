@@ -142,7 +142,8 @@ public class UserServiceImpl implements UserService {
                     ans.add(usermapper.getReviewTickNDaysBefore(userId, i));
                 }
                 case QwertyMode -> {
-                    ans.add(usermapper.getQwertyTickNDaysBefore(userId, i));
+                    Long num = usermapper.getQwertyTickNDaysBefore(userId, i);
+                    ans.add(num!=null ? num: 0);
                 }
             }
 
