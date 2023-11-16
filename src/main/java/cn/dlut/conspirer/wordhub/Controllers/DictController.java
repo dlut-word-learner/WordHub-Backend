@@ -50,6 +50,21 @@ public class DictController {
         }).collect(Collectors.toList()));
     }
 
+    /**
+     * 获取最近常用词典
+     */
+    @GetMapping("/recently-used")
+    @SaCheckLogin
+    public ResponseEntity<List<DictVo>> getRecentlyUsedDictionaries(@RequestParam @Nullable Long num) {
+        if(num==null)num = 4L;
+        Long userId = StpUtil.getLoginIdAsLong();
+        return ResponseEntity.ok((dictService.getRecentlyUsedDicts(userId, num)).stream().map(x -> {
+            DictVo dictVo = new DictVo();
+            BeanUtils.copyProperties(x, dictVo);
+            return dictVo;
+        }).collect(Collectors.toList()));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<DictVo> getDictionary(@PathVariable("id") Long dictId) {
         Dict dict = dictService.getDictionaryById(dictId);

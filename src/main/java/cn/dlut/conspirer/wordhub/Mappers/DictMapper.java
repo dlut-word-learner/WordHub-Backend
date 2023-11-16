@@ -158,4 +158,25 @@ public interface DictMapper {
      */
     @Insert("insert into qwerty_rec(qwerty_rec_time, user_id, dict_id, qwerty_num) values(current_timestamp, #{userId}, #{dictId}, #{n})")
     Long insertQwertyRec(Long dictId, Long userId, Long n);
+
+    /**
+     * 获取用户最近(一年内)有学习/复习记录的n个词库
+     * @param userId
+     * @param n
+     * @return
+     */
+    @Select("SELECT DISTINCT dict.dict_id, dict.lang_name, dict.dict_name " +
+            "FROM dict " +
+            "JOIN ( " +
+            "    SELECT DISTINCT dict_id, timestampadd(day, -study_rec_gap, study_rec_due_time) " +
+            "    FROM study_rec " +
+            "    JOIN word ON word.word_id = study_rec.word_id " +
+            "    WHERE user_id = #{userId} " +
+            "    AND timestampadd(day, -study_rec_gap, study_rec_due_time) >= timestampadd(day, -365, current_date) " +
+            "    ORDER BY timestampadd(day, -study_rec_gap, study_rec_due_time) DESC " +
+            ") AS latest_dicts " +
+            "ON dict.dict_id = latest_dicts.dict_id " +
+            "LIMIT #{n};")
+    @ResultMap("dictMap")
+    List<Dict> getRecentlyUsedDicts(Long userId, Long n);
 }

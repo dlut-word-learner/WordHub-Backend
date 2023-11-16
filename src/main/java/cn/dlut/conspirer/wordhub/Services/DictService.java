@@ -34,4 +34,6 @@ public interface DictService {
     boolean addQwertyRec(Long userId, Long dictId, Long num);
 
     DictProgressVo getProgress(Long userId, Long dictId);
+
+    List<Dict> getRecentlyUsedDicts(Long userId, Long n);
 }

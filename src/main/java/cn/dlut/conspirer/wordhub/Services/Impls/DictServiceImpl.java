@@ -84,4 +84,10 @@ public class DictServiceImpl implements DictService {
         Long mastered = dictMapper.getNumMastered(dictId, userId);
         return DictProgressVo.builder().sum(dictMapper.getWordNum(dictId)).studied(unmastered + mastered).mastered(mastered).build();
     }
+
+
+    @Override
+    public List<Dict> getRecentlyUsedDicts(Long userId, Long n){
+        return dictMapper.getRecentlyUsedDicts(userId, n);
+    }
 }
