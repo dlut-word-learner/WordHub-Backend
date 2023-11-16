@@ -171,6 +171,7 @@ class UserMapperTest {
 
     @Test
     @Sql("/data-testGetLearnTickNDaysBefore.sql")
+    @Deprecated
     void testGetLearnTickNDaysBefore(){
         long userId = 1,n = 3;
         long Num = userMapper.getLearnTickNDaysBefore(userId,n);
@@ -180,6 +181,7 @@ class UserMapperTest {
 
     @Test
     @Sql("/data-testGetLearnTickNDaysBefore.sql")
+    @Deprecated
     void testGetReviewTickNDaysBefore(){
         long userId = 1,n = 3;
         long Num = userMapper.getReviewTickNDaysBefore(userId,n);
@@ -187,6 +189,7 @@ class UserMapperTest {
     }
 
     @Test
+    @Deprecated
     @Sql("/data-testGetQwertyTickNDaysBefore.sql")
     void testGetQwertyTickNDaysBefore(){
         long userId = 1,n = 3;

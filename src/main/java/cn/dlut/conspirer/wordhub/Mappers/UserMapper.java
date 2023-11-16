@@ -6,10 +6,13 @@
  */
 package cn.dlut.conspirer.wordhub.Mappers;
 
+import cn.dlut.conspirer.wordhub.Dtos.StudyTickDTO;
 import cn.dlut.conspirer.wordhub.Entities.User;
 import org.apache.ibatis.annotations.*;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface UserMapper {
@@ -61,7 +64,7 @@ public interface UserMapper {
     int updateUserPassword(Long id, String password);
 
     /**
-     * 返回用户过去n天学习的单词数量
+     * 返回用户n天前学习的单词数量
      * sql大意：从StudyRec表中选出最早一次学习记录(tick=1)在n天之内的单词，count(*) group by date
      * @param userId
      * @param n
@@ -73,10 +76,31 @@ public interface UserMapper {
             "AND user_id = #{userId} " +
             "AND DATE(timestampadd(day, -study_rec_gap, study_rec_due_time)) = timestampadd(day, -#{n}, " +
             "CURRENT_DATE);")
+    @Deprecated
     Long getLearnTickNDaysBefore(Long userId, Long n);
 
     /**
-     * 返回用户过去n天复习单词次数
+     * 返回用户过去n天分别的学习单词数量
+     * sql大意：从StudyRec表中选出最早一次学习记录(tick=1)在n天之内的单词，count(*) group by date
+     * @param userId
+     * @param n
+     * @return
+     */
+    @Select("SELECT DATE(timestampadd(day, -study_rec_gap, study_rec_due_time)) as rec_date, COUNT(*) as count " +
+            "FROM study_rec " +
+            "WHERE study_rec_tick = 1 " +
+            "AND user_id = #{userId} " +
+            "AND DATE(timestampadd(day, -study_rec_gap, study_rec_due_time)) between date(timestampadd(day, 1-#{n}, CURRENT_DATE)) and CURRENT_DATE " +
+            "group by rec_date " +
+            "order by rec_date;")
+    @Results(id = "studyTickMap", value= {
+            @Result(column = "count", property = "num"),
+            @Result(column = "rec_date", property = "date"),
+    })
+    List<StudyTickDTO> getLearnTickInNDays(Long userId, Long n);
+
+    /**
+     * 返回用户n天前复习单词次数
      * sql大意：从StudyRec表中选出n天之内的学习记录，where tick!=1(排除学习)，count(*) group by date
      * @param userId
      * @param n
@@ -88,10 +112,28 @@ public interface UserMapper {
             "AND user_id = #{userId} " +
             "AND DATE(timestampadd(day, -study_rec_gap, study_rec_due_time)) = DATE(timestampadd(day, -#{n}, " +
             "CURRENT_DATE));")
+    @Deprecated
     Long getReviewTickNDaysBefore(Long userId, Long n);
 
     /**
-     * 返回用户过去n天Qwerty单词次数
+     * 返回用户过去n天分别的学习单词数量
+     * sql大意：从StudyRec表中选出最早一次学习记录(tick=1)在n天之内的单词，count(*) group by date
+     * @param userId
+     * @param n
+     * @return
+     */
+    @Select("SELECT DATE(timestampadd(day, -study_rec_gap, study_rec_due_time)) as rec_date, COUNT(*) as count " +
+            "FROM study_rec " +
+            "WHERE study_rec_tick != 1 " +
+            "AND user_id = #{userId} " +
+            "AND DATE(timestampadd(day, -study_rec_gap, study_rec_due_time)) between date(timestampadd(day, 1-#{n}, CURRENT_DATE)) and CURRENT_DATE " +
+            "group by rec_date " +
+            "order by rec_date;")
+    @ResultMap("studyTickMap")
+    List<StudyTickDTO> getReviewTickInNDays(Long userId, Long n);
+
+    /**
+     * 返回用户n天前Qwerty单词次数
      * 考虑建一个新表专门存Qwerty的历史记录，可以叫QwertyRec，因为这个记录和StudyRec的机制有很大差别
      * @param userId
      * @param n
@@ -101,5 +143,22 @@ public interface UserMapper {
             "FROM qwerty_rec " +
             "WHERE user_id = #{userId} " +
             "AND DATE(qwerty_rec_time) = timestampadd(day, -#{n}, CURRENT_DATE);")
+    @Deprecated
     Long getQwertyTickNDaysBefore(Long userId, Long n);
+
+    /**
+     * 返回用户过去n天Qwerty单词次数
+     * 考虑建一个新表专门存Qwerty的历史记录，可以叫QwertyRec，因为这个记录和StudyRec的机制有很大差别
+     * @param userId
+     * @param n
+     * @return
+     */
+    @Select("SELECT DATE(qwerty_rec_time) as rec_date, SUM(qwerty_num) as count " +
+            "FROM qwerty_rec " +
+            "WHERE user_id = #{userId} " +
+            "AND DATE(qwerty_rec_time) between date(timestampadd(day, 1-#{n}, CURRENT_DATE)) and CURRENT_DATE " +
+            "group by rec_date " +
+            "order by rec_date;")
+    @ResultMap("studyTickMap")
+    List<StudyTickDTO> getQwertyTickInNDays(Long userId, Long n);
 }

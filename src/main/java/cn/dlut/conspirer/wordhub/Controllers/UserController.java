@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -172,7 +173,7 @@ public class UserController {
         if(duration==null){
             duration = 30L;
         }
-        return ResponseEntity.ok(userService.getStudyTickInPastNDays(task, id, duration));
+        return ResponseEntity.ok(userService.getStudyTickInPastNDaysFast(task, id, duration));
     }
 
     /**
@@ -184,12 +185,13 @@ public class UserController {
         if(duration==null){
             duration = 90L;
         }
-        List<Long> study = userService.getStudyTickInPastNDays(Task.Learn, id, duration);
-        List<Long> review = userService.getStudyTickInPastNDays(Task.Review, id, duration);
-        List<Long> qwerty = userService.getStudyTickInPastNDays(Task.QwertyMode, id, duration);
-        ArrayList<Long> ans = new ArrayList<>(study);
+
+        List<Long> study = userService.getStudyTickInPastNDaysFast(Task.Learn, id, duration);
+        List<Long> review = userService.getStudyTickInPastNDaysFast(Task.Review, id, duration);
+        List<Long> qwerty = userService.getStudyTickInPastNDaysFast(Task.QwertyMode, id, duration);
+        ArrayList<Long> ans = new ArrayList<>(Collections.nCopies(Math.toIntExact(duration), 0L));
         for(int i=0; i < ans.size(); i++){
-            ans.set(i, review.get(i) + qwerty.get(i));
+            ans.set(i, study.get(i) + review.get(i) + qwerty.get(i));
         }
         return ResponseEntity.ok(ans);
     }

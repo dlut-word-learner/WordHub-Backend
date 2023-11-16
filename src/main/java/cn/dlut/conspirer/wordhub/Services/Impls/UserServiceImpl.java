@@ -1,5 +1,6 @@
 package cn.dlut.conspirer.wordhub.Services.Impls;
 
+import cn.dlut.conspirer.wordhub.Dtos.StudyTickDTO;
 import cn.dlut.conspirer.wordhub.Entities.Task;
 import cn.dlut.conspirer.wordhub.Entities.User;
 import cn.dlut.conspirer.wordhub.Mappers.UserMapper;
@@ -14,8 +15,11 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /**
  * User Service的实现
@@ -131,6 +135,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
+    @Deprecated
     public List<Long> getStudyTickInPastNDays(Task task, Long userId, Long n){
         ArrayList<Long> ans = new ArrayList<>();
         for(Long i= n-1 ;i>=0L;i--){
@@ -148,6 +153,45 @@ public class UserServiceImpl implements UserService {
             }
 
         }
+        return ans;
+    }
+
+    /**
+     * getStudyTickInPastNDays faster reimplementation
+     * 获取过去n天（包括今天）的每天，用户对指定 task 的记录条数
+     * 按时间顺序给出，先给出 n-1 天前，最后给今天
+     * @param task 学习/复习/Qwerty
+     * @param userId 用户名
+     * @param n 总共多少天，即为返回的List的size
+     * @return
+     */
+    @Override
+    public List<Long> getStudyTickInPastNDaysFast(Task task, Long userId, Long n){
+        List<Long> ans = new ArrayList<>(Collections.nCopies(Math.toIntExact(n), 0L));
+        LocalDate now = LocalDate.now();
+//        log.info("Today: {}", now.toString());
+        List<StudyTickDTO> map = null;
+        switch (task) {
+            case Learn -> {
+                map = usermapper.getLearnTickInNDays(userId, n);
+            }
+            case Review -> {
+                map = usermapper.getReviewTickInNDays(userId, n);
+            }
+            case QwertyMode -> {
+                map = usermapper.getQwertyTickInNDays(userId, n);
+            }
+        }
+        map.forEach((x)->{
+            long ago = now.toEpochDay()-x.getDate().toEpochDay();
+//            log.info("date: {}: {} days ago, num: {}", x.getDate().toString(), ago, x.getNum());
+            if(n-1-ago<0||n-1-ago>=n){
+                log.error("Error: time: {}, {} dags ago", ago, x.getDate());
+            }
+            else {
+                ans.set((int) (n-1-ago), x.getNum());
+            }
+        });
         return ans;
     }
 }

@@ -45,5 +45,7 @@ public interface UserService {
 
     List<Long> getStudyTickInPastNDays(Task task, Long userId, Long n);
 
+    List<Long> getStudyTickInPastNDaysFast(Task task, Long userId, Long n);
+
 //    Boolean learnOrReviewWord(Long userId, Long wordId, Long studyCount);
 }
