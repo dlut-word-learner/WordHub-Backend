@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 /**
- * TODO
+ * 用来存储Mapper层中的(日期，学习次数)值对
  *
  * @author OuOu
  * @version 1.0
