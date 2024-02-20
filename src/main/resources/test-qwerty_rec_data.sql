@@ -1,3 +1,7 @@
+-- SPDX-FileCopyrightText: 2024 WordHub <integral@member.fsf.org>
+--
+-- SPDX-License-Identifier: AGPL-3.0-or-later
+
 INSERT INTO `qwerty_rec`
     (user_id, dict_id, qwerty_num, qwerty_rec_time)
 VALUES (1, 1, 20, date_add(CURRENT_DATE, interval -60 DAY)),

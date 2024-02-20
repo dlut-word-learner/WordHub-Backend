@@ -1,3 +1,7 @@
+-- SPDX-FileCopyrightText: 2024 WordHub <integral@member.fsf.org>
+--
+-- SPDX-License-Identifier: AGPL-3.0-or-later
+
 INSERT INTO "user"
 VALUES (1003, 'testCard', '123456', '234@abc.cn', 0, 0);
 

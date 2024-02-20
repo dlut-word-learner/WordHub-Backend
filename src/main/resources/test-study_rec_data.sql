@@ -1,3 +1,7 @@
+-- SPDX-FileCopyrightText: 2024 WordHub <integral@member.fsf.org>
+--
+-- SPDX-License-Identifier: AGPL-3.0-or-later
+
 INSERT INTO `study_rec`
 (word_id,user_id,study_rec_gap,study_rec_ease,study_rec_due_time,study_rec_tick)
 VALUES (1,1,2,2.0,date_add(CURRENT_DATE, interval -55 DAY),1),

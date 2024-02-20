@@ -1,3 +1,7 @@
+-- SPDX-FileCopyrightText: 2024 WordHub <integral@member.fsf.org>
+--
+-- SPDX-License-Identifier: AGPL-3.0-or-later
+
 create table if not exists wordhub.language
 (
     lang_name varchar(30) primary key
